@@ -4,27 +4,17 @@
     "href": "setup.html",
     "title": "Setup",
     "section": "",
-    "text": "If something fails, email me the error before the first session. Still stuck on day 1? Use R in the browser, https://webr.sh (no login), and finish the setup before session 2.",
+    "text": "Install R and Rstudio: install R and Rstudio on your personal laptop! For a guide, see for example this tutorial (Sections 1.1-1.3) and get familiar with Rstudio interface. If you prefer a video tutorial, check it here.",
     "crumbs": [
       "Setup"
     ]
   },
   {
-    "objectID": "setup.html#r-4.5-or-later",
-    "href": "setup.html#r-4.5-or-later",
+    "objectID": "setup.html#r-and-rstudio",
+    "href": "setup.html#r-and-rstudio",
     "title": "Setup",
-    "section": "1. R 4.5 or later",
-    "text": "1. R 4.5 or later\nhttps://cran.r-project.org. Check an existing installation with R.version.string.",
-    "crumbs": [
-      "Setup"
-    ]
-  },
-  {
-    "objectID": "setup.html#rstudio",
-    "href": "setup.html#rstudio",
-    "title": "Setup",
-    "section": "2. RStudio",
-    "text": "2. RStudio\nhttps://posit.co/download/rstudio-desktop/ (or Positron). Quarto is included.",
+    "section": "",
+    "text": "Install R and Rstudio: install R and Rstudio on your personal laptop! For a guide, see for example this tutorial (Sections 1.1-1.3) and get familiar with Rstudio interface. If you prefer a video tutorial, check it here.",
     "crumbs": [
       "Setup"
     ]
@@ -33,28 +23,18 @@
     "objectID": "setup.html#packages",
     "href": "setup.html#packages",
     "title": "Setup",
-    "section": "3. Packages",
-    "text": "3. Packages\nIn the RStudio console:\npkgs &lt;- c(\"tidyverse\", \"here\", \"janitor\", \"patchwork\", \"broom\",\n          \"rmarkdown\")\ninstall.packages(setdiff(pkgs, rownames(installed.packages())))",
+    "section": "Packages",
+    "text": "Packages\nIn the RStudio console:\npkgs &lt;- c(\"tidyverse\", \"here\", \"janitor\", \"patchwork\", \"broom\",\n          \"rmarkdown\")\ninstall.packages(setdiff(pkgs, rownames(installed.packages())))",
     "crumbs": [
       "Setup"
     ]
   },
   {
-    "objectID": "setup.html#course-project",
-    "href": "setup.html#course-project",
+    "objectID": "setup.html#optional-git-and-github",
+    "href": "setup.html#optional-git-and-github",
     "title": "Setup",
-    "section": "4. Course project",
-    "text": "4. Course project\nFile &gt; New Project &gt; New Directory &gt; New Project, name it s4ns-A. From now on, always open it with s4ns-A.Rproj.\nIn the Files pane, create a folder data inside the project.\nEach session: read the exercises on the schedule, download the datasets linked at the top into data, answer in a new Quarto document (File &gt; New File &gt; Quarto Document) saved in the project.",
-    "crumbs": [
-      "Setup"
-    ]
-  },
-  {
-    "objectID": "setup.html#check",
-    "href": "setup.html#check",
-    "title": "Setup",
-    "section": "5. Check",
-    "text": "5. Check\nIn the console. It should print All good!:\nstopifnot(getRversion() &gt;= \"4.5.0\")\nfor (p in c(\"tidyverse\", \"here\", \"janitor\", \"patchwork\", \"broom\", \"rmarkdown\"))\n  stopifnot(requireNamespace(p, quietly = TRUE))\nstopifnot(dir.exists(here::here(\"data\")))\ncat(\"All good!\\n\")\nThen create a new Quarto document and click Render.\n\n\n\n\n\n\nOptional: Git and GitHub\n\n\n\n\n\nNot required here, but very useful for your PhD: see Happy Git with R, ch. 4–12.",
+    "section": "Optional: Git and GitHub",
+    "text": "Optional: Git and GitHub\nNot required here, but very useful for your PhD. See Happy Git with R.",
     "crumbs": [
       "Setup"
     ]
@@ -160,9 +140,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Statistics for Neuroscience A",
+    "title": "Statistics for Neuroscience - Level A",
     "section": "",
-    "text": "R and Quarto for reproducible analyses, and the intuition behind the core statistical tools, mostly through simulation.\nEach session: slides and live code, then exercises, then solutions together. Material appears here session by session.\n\n\n\n#\nDate\nTime\nTopic\nSlides\nExercises\nSolutions\n\n\n\n\n1\nMon 23/11\n10:30–12:30\nWhy statistics? Introduction to R and Quarto\nSlides\nExercises\n\n\n\n2\nThu 26/11\n10:30–12:30\nData manipulation\n\n\n\n\n\n3\nMon 30/11\n10:30–12:30\nVisualisation and EDA\n\n\n\n\n\n4\nWed 02/12\n14:30–16:30\nProbability and sampling\n\n\n\n\n\n5\nThu 17/12\n10:30–12:30\nEstimation and confidence intervals\n\n\n\n\n\n6\nMon 21/12\n10:30–12:30\nHypothesis testing\n\n\n\n\n\n7\nWed 13/01\n14:30–17:30\nLinear models and final project\n\n\n\n\n\n\n\nBefore the first session\nFollow the setup.\n\n\nDatasets\nAll in data/. Each exercise page links the ones it uses: save them in the data folder of your project. Sources and licences: data README.\n\n\nAcknowledgements\nBuilds on previous editions by Angela Andreella (angeella/PNC) and Giovanni Saraceno (giovsaraceno/Statistics_for_Neuroscience).",
+    "text": "#\nDate\nTime\nTopic\nSlides\nExercises\nSolutions\n\n\n\n\n1\nMon 23/11\n10:30–12:30\nIntroduction to R and Quarto\nSlides\nExercises\n\n\n\n2\nThu 26/11\n10:30–12:30\nData manipulation\n\n\n\n\n\n3\nMon 30/11\n10:30–12:30\nVisualisation and EDA\n\n\n\n\n\n4\nWed 02/12\n14:30–16:30\nProbability and sampling\n\n\n\n\n\n5\nThu 17/12\n10:30–12:30\nEstimation and confidence intervals\n\n\n\n\n\n6\nMon 21/12\n10:30–12:30\nHypothesis testing\n\n\n\n\n\n7\nWed 13/01\n14:30–17:30\nLinear models\n\n\n\n\n\n\n\nBefore the first session\nFollow the setup.\n\n\nDatasets\nAll in data/. Each exercise page links the ones it uses: save them in the data folder of your project.\n\n\nAcknowledgements\nBuilds on previous editions Giovanni Saraceno (giovsaraceno/Statistics_for_Neuroscience) and Angela Andreella (angeella/PNC).",
     "crumbs": [
       "Schedule"
     ]
@@ -238,163 +218,156 @@
     ]
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#this-course",
-    "href": "sessions/01-reproducibility/slides.html#this-course",
-    "title": "Why statistics? Introduction to R and Quarto",
-    "section": "This course",
-    "text": "This course\n\n\n\n#\nDate\nTopic\n\n\n\n\n1\n23/11\nWhy statistics? Introduction to R and Quarto\n\n\n2\n26/11\nData manipulation\n\n\n3\n30/11\nVisualisation and EDA\n\n\n4\n02/12\nProbability and sampling\n\n\n5\n17/12\nEstimation and confidence intervals\n\n\n6\n21/12\nHypothesis testing\n\n\n7\n13/01\nLinear models and final project (3h)\n\n\n\nEach session: slides and live code, then exercises, then solutions together."
-  },
-  {
     "objectID": "sessions/01-reproducibility/slides.html#from-a-sample-to-general-conclusions",
     "href": "sessions/01-reproducibility/slides.html#from-a-sample-to-general-conclusions",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "From a sample to general conclusions",
     "text": "From a sample to general conclusions\nWe observe a tiny portion of the world: a few subjects, sessions, trials.\nWe want conclusions that hold in general.\n\nStatistics quantifies how much we can generalise despite\n\nmeasurement noise (scanner, electrodes, questionnaires);\nvariability between and within subjects;\nfactors we did not measure."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#fishers-three-ideas-in-neuroscience",
     "href": "sessions/01-reproducibility/slides.html#fishers-three-ideas-in-neuroscience",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Fisher’s three ideas, in neuroscience",
     "text": "Fisher’s three ideas, in neuroscience\nStudy of populations\n\n100 subjects scanned once: population across individuals.\n1 subject scanned daily for a year: population across time.\n\n\nStudy of variation\n\nVariability between subjects, across time, across space (voxels, channels).\n\n\n\nData reduction\n\nFrom millions of numbers per subject to summaries (means, components, features).\n\nFisher (1925), Statistical Methods for Research Workers, ch. 1"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#a-warning-we-will-carry-along",
     "href": "sessions/01-reproducibility/slides.html#a-warning-we-will-carry-along",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "A warning we will carry along",
     "text": "A warning we will carry along\nClassical tools (t-test, ANOVA, regression) assume independent observations.\n\nNeuroscience data often are not:\n\n10 trials from one subject are more alike than 10 trials from 10 subjects;\nthe same questionnaire filled in 6 times by one participant gives correlated scores.\n\n\n\nIgnoring this leads to overconfidence (standard errors too small) and too many false positives.\nIn this course we keep it simple: one value per subject, or paired tests. The proper tool is mixed models (see Resources)."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#the-reproducibility-crisis",
     "href": "sessions/01-reproducibility/slides.html#the-reproducibility-crisis",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "The reproducibility crisis",
     "text": "The reproducibility crisis\n\nReproducibility: same data and same analysis give the same results.\nReplication: new data on the same question give consistent results.\n\nNational Academies (2019)\n\n\nSurvey of 1,576 researchers: more than 70% failed to replicate another scientist’s experiment, more than half their own (Baker, 2016).\n70 teams analysed the same fMRI data to test the same 9 hypotheses. No two teams used the same workflow, and their results varied considerably (Botvinik-Nezer et al., 2020).\n\n\n\nCommon threats: low statistical power, trying analyses until something is significant (p-hacking), hypotheses made up after seeing the results, unpublished null results, no shared data or code (Munafò et al., 2017)."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#what-we-can-do-about-it",
     "href": "sessions/01-reproducibility/slides.html#what-we-can-do-about-it",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "What we can do about it",
     "text": "What we can do about it\n\nState the hypothesis before looking at the data.\nShare raw data and commented code: every number in the paper comes from a script.\nWrite reports where text, code and results live together (Quarto, today).\n\n\n\nThis is why we analyse data with code."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#the-data-analysis-pipeline",
     "href": "sessions/01-reproducibility/slides.html#the-data-analysis-pipeline",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "The data analysis pipeline",
     "text": "The data analysis pipeline\n\nImport, tidy, transform: S2. Visualise: S3. Model: S4 to S7. Communicate: Quarto, today.\nFigure from Wickham, Çetinkaya-Rundel and Grolemund, R for Data Science, 2nd ed."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#rstudio",
     "href": "sessions/01-reproducibility/slides.html#rstudio",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "RStudio",
     "text": "RStudio\n\nPanel 1, Editor: scripts and Quarto documents. Panel 2, Console: where code runs. Panel 3, Environment: your objects. Panel 4: Files, Plots, Help."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#basic-r-grammar",
     "href": "sessions/01-reproducibility/slides.html#basic-r-grammar",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Basic R grammar",
     "text": "Basic R grammar\nRun a line: Ctrl+Enter (Windows) / Cmd+Enter (Mac).\n\na &lt;- 1                    # assign 1 to a (numeric value)\nb &lt;- 2\nlabel &lt;- \"control\"        # character value\na + b\n\n[1] 3\n\n\n\nVectors:\n\nrt &lt;- c(512, 430, 601, 488, 550)  # reaction times (ms)\ntrials &lt;- 1:5                     # sequence 1 to 5\nseq(0, 1, by = 0.25)              # regular sequence\n\n[1] 0.00 0.25 0.50 0.75 1.00"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#working-with-vectors",
     "href": "sessions/01-reproducibility/slides.html#working-with-vectors",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Working with vectors",
     "text": "Working with vectors\n\nrt[1]            # first element\n\n[1] 512\n\nrt[2:4]          # elements 2 to 4\n\n[1] 430 601 488\n\nrt[c(1, 5)]      # elements 1 and 5\n\n[1] 512 550\n\n\n\nOperations are element-wise:\n\nrt / 1000        # convert to seconds\n\n[1] 0.512 0.430 0.601 0.488 0.550\n\nrt - mean(rt)    # centre around the mean\n\n[1]  -4.2 -86.2  84.8 -28.2  33.8\n\n\n\n\n\nmean(rt); sd(rt); length(rt); range(rt)\n\n[1] 516.2\n\n\n[1] 64.37546\n\n\n[1] 5\n\n\n[1] 430 601"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#rstudio-tips-and-help",
     "href": "sessions/01-reproducibility/slides.html#rstudio-tips-and-help",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "RStudio tips and help",
     "text": "RStudio tips and help\n\nTab: autocomplete names.\nAlt + - / Option + -: insert &lt;-.\nEnvironment pane: the objects you created.\nWrite code in a file, not the console.\n\n\n\n?mean\n\nRead Arguments and Examples. E.g. to ignore NAs in mean(), use na.rm = TRUE."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#missing-values",
     "href": "sessions/01-reproducibility/slides.html#missing-values",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Missing values",
     "text": "Missing values\nNo response on a trial: NA.\n\nrt &lt;- c(512, 430, NA, 488, 550)\nmean(rt)\n\n[1] NA\n\nmean(rt, na.rm = TRUE)\n\n[1] 495\n\n\n\n\nis.na(rt)\n\n[1] FALSE FALSE  TRUE FALSE FALSE\n\nsum(is.na(rt))\n\n[1] 1\n\nwhich(is.na(rt))\n\n[1] 3"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#common-mistakes",
     "href": "sessions/01-reproducibility/slides.html#common-mistakes",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Common mistakes",
     "text": "Common mistakes\nR is case-sensitive: RT and rt are different objects. Pick one style (snake_case: mean_rt).\n\n\nmean(c(1, 2, 3)\n\nMissing ): R shows + and waits. Press Esc.\n\n\n\nmaen(rt)\n\nError in maen(rt) : could not find function \"maen\"\n\n\n\nRT\n\nError: object 'RT' not found"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#logical-values-and-comparisons",
     "href": "sessions/01-reproducibility/slides.html#logical-values-and-comparisons",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Logical values and comparisons",
     "text": "Logical values and comparisons\n\n\n\nOperator\nMeaning\nExample\n\n\n\n\n==, !=\nequal, not equal\n3 == 3 is TRUE\n\n\n&lt;, &gt;, &lt;=, &gt;=\ncomparisons\n5 &gt; 2 is TRUE\n\n\n%in%\nelement in a set\n\"a\" %in% c(\"a\",\"b\") is TRUE\n\n\n&, \\|, !\nand, or, not\nTRUE & FALSE is FALSE\n\n\n\n\n\nrt &lt;- c(512, 430, 1601, 488, 150)\ntoo_fast_or_slow &lt;- rt &lt; 200 | rt &gt; 1500   # flag implausible trials\nrt[!too_fast_or_slow]                       # keep valid trials\n\n[1] 512 430 488"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#factors",
     "href": "sessions/01-reproducibility/slides.html#factors",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Factors",
     "text": "Factors\nCategorical variables with fixed levels:\n\ngroup &lt;- factor(c(\"patient\", \"control\", \"control\", \"patient\", \"control\"))\nlevels(group)\n\n[1] \"control\" \"patient\"\n\ntable(group)\n\ngroup\ncontrol patient \n      3       2 \n\n\n\nOrdered categories (a Likert item):\n\nanswer &lt;- c(\"never\", \"always\", \"often\", \"never\")\nfactor(answer, levels = c(\"never\", \"often\", \"always\"), ordered = TRUE)\n\n[1] never  always often  never \nLevels: never &lt; often &lt; always"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#data-frames",
     "href": "sessions/01-reproducibility/slides.html#data-frames",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Data frames",
     "text": "Data frames\nOne row per observation, one column per variable. Columns can have different types.\n\nsubjects &lt;- data.frame(\n  id    = c(\"S01\", \"S02\", \"S03\", \"S04\"),\n  group = factor(c(\"patient\", \"control\", \"patient\", \"control\")),\n  age   = c(64, 58, 71, 60),\n  mmse  = c(22, 29, 19, 28)\n)\nsubjects\n\n   id   group age mmse\n1 S01 patient  64   22\n2 S02 control  58   29\n3 S03 patient  71   19\n4 S04 control  60   28"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#data-frames-access",
     "href": "sessions/01-reproducibility/slides.html#data-frames-access",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Data frames: access",
     "text": "Data frames: access\n\ndim(subjects)\n\n[1] 4 4\n\nstr(subjects)\n\n'data.frame':   4 obs. of  4 variables:\n $ id   : chr  \"S01\" \"S02\" \"S03\" \"S04\"\n $ group: Factor w/ 2 levels \"control\",\"patient\": 2 1 2 1\n $ age  : num  64 58 71 60\n $ mmse : num  22 29 19 28\n\n\n\n\nsubjects$age                                       # a column\n\n[1] 64 58 71 60\n\nsubjects[2, ]                                      # a row\n\n   id   group age mmse\n2 S02 control  58   29\n\nsubjects[subjects$age &gt; 60 & subjects$mmse &lt; 25, ] # rows: over 60 and MMSE below 25\n\n   id   group age mmse\n1 S01 patient  64   22\n3 S03 patient  71   19"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#functions",
     "href": "sessions/01-reproducibility/slides.html#functions",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Functions",
     "text": "Functions\n\nname &lt;- function(arg1, arg2 = default) {\n  # body\n  result          # last value is returned\n}\n\n\nThe standard error of the mean, \\(s / \\sqrt{n}\\):\n\nse &lt;- function(x) {\n  sd(x) / sqrt(length(x))\n}\nse(c(512, 430, 601, 488, 550))\n\n[1] 28.78958"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#packages",
     "href": "sessions/01-reproducibility/slides.html#packages",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Packages",
     "text": "Packages\n\ninstall.packages(\"tidyverse\")   # once, in the console\nlibrary(tidyverse)              # at the top of every file that uses it\nhere::here(\"data\")              # package::function(): one function, no library()\n\n\nEnd every report with sessionInfo(): R and package versions."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#why-reports-from-code",
     "href": "sessions/01-reproducibility/slides.html#why-reports-from-code",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Why reports from code?",
     "text": "Why reports from code?\nThe copy-paste workflow:\n\nrun the script;\ncopy numbers into Word, paste plots;\na reviewer asks to exclude 3 subjects… redo it all by hand.\n\n\nA Quarto document (.qmd) holds text, code and (after rendering) results:\n\nevery number is computed when the document is created;\nnew data? Click Render and everything updates."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#anatomy-of-a-.qmd-file",
     "href": "sessions/01-reproducibility/slides.html#anatomy-of-a-.qmd-file",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Anatomy of a .qmd file",
     "text": "Anatomy of a .qmd file\n---\ntitle: \"Sleep deprivation: first look\"\nauthor: \"Your Name\"\nformat: html\n---\n\n## Data\n\n```{r}\n#| echo: false\nsleepstudy &lt;- read.csv(here::here(\"data\", \"sleepstudy.csv\"))\n```\n\nThe dataset contains `{r} nrow(sleepstudy)` measurements.\n\nYAML header between ---: title, author, format (html, docx, typst).\nMarkdown text: ## Section, **bold**, *italic*, - lists, $\\bar x$.\nCode chunks: run at render; options start with #|.\nInline code: numbers inside sentences, never typed by hand."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#rendering-and-chunk-options",
     "href": "sessions/01-reproducibility/slides.html#rendering-and-chunk-options",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Rendering and chunk options",
     "text": "Rendering and chunk options\nRender: Ctrl/Cmd + Shift + K. The file runs from scratch: it must load its own packages and data.\n\n\n\n\n\n\n\n\nOption\nEffect\n\n\n\n\n#\\| echo: false\nhide code, show results\n\n\n#\\| eval: false\nshow code, don’t run it\n\n\n#\\| include: false\nrun, show nothing\n\n\n#\\| label: fig-rt and #\\| fig-cap: \"...\"\nnumbered figure, cite with @fig-rt\n\n\n\n\n\nFrom now on, do all exercises inside a .qmd."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#practice",
     "href": "sessions/01-reproducibility/slides.html#practice",
-    "title": "Why statistics? Introduction to R and Quarto",
+    "title": "Introduction to R and Quarto",
     "section": "Practice",
     "text": "Practice\n\nExercises: on the website (Schedule). Download sleepstudy.csv into data/.\nAnswer in a new Quarto document in your course project, Render after every exercise.\nNo R yet? webr.sh, R in the browser, no login (see the exercises page)."
   }
