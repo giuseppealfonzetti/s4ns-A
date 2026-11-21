@@ -1,0 +1,163 @@
+---
+title: "Session 1: Exercises"
+subtitle: "R basics and your first Quarto report"
+author: "Your name"
+date: today
+format:
+  html:
+    toc: true
+---
+
+New Quarto document in your course project: copy the code you need from here, answer below it. **Render** after every exercise.
+
+**Data** (save into `data/` in your project): [sleepstudy.csv](../../data/sleepstudy.csv){download="sleepstudy.csv"}
+
+::: {.callout-warning collapse="true"}
+## No R on your laptop yet?
+Use R in the browser, no login needed: **<https://webr.sh>**. Copy the code from this page into its editor.
+
+- Exercises 3 to 9 work as they are. Ex. 10: the boxplot only.
+- Ex. 11: read the data from the web instead: `read.csv("https://raw.githubusercontent.com/giuseppealfonzetti/s4ns-A/main/data/sleepstudy.csv")`
+- Ex. 1, 2 and 12 (Quarto) need RStudio: pair with a neighbour.
+
+Install R and RStudio ([setup](../../setup.qmd)) **before session 2**: webR is not enough from then on.
+:::
+
+## 1. Render it
+
+1. *File > New File > Quarto Document*, your name as author. Save it in the project. Render.
+2. Add `toc-location: left` under `html:` and render again. What changed?
+
+## 2. Markdown
+
+In your document, describe your PhD project with a `###` heading, one **bold** and one *italic* word, a 3-item list and a link to your lab.
+
+## 3. Vectors
+
+Stroop task, one participant, RT in ms:
+
+```{r}
+rt <- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)
+condition <- c("cong", "incong", "incong", "cong", "incong",
+               "cong", "incong", "incong", "cong", "cong")
+```
+
+1. Number of trials; mean, median, min, max RT.
+2. Find the suspicious trial (`which.max()`). Why do mean and median differ?
+3. Create `rt_clean` without trials over 2000 ms. Recompute the mean.
+4. Mean RT for `"cong"` and `"incong"` trials, without the slow one. *Hint:* drop it from both vectors.
+5. Convert `rt` to seconds (`rt_s`).
+
+## 4. Missing values and comparisons
+
+A second participant missed two trials:
+
+```{r}
+rt2 <- c(523, NA, 487, 150, 601, 455, 2310, NA, 512, 498)
+```
+
+1. How many `NA`s? In which trials?
+2. Mean RT, ignoring them.
+3. Flag implausible trials: faster than 200 ms or slower than 1500 ms. How many? What proportion of the non-missing trials? *Hint:* the mean of a logical vector is a proportion.
+4. Print `rt2[rt2 > 200]`. What went wrong? Keep only the trials that are both non-missing and plausible.
+
+## 5. Spot the bugs
+
+This code has five mistakes. Copy it, fix it, run it. One mistake gives no error, only a wrong answer: which one?
+
+```{r}
+#| eval: false
+scores <- c(12, 15, 9, 20, 17)
+group <- c("a", "b", "a", "b", "a")
+mean(scores[group = "a"]
+maen(scores[group == "b"])
+Mean(scores)
+summary(Scores)
+```
+
+## 6. Factors: a Likert item
+
+"How often do you have trouble sleeping?"
+
+```{r}
+answers <- c("often", "never", "sometimes", "always", "often", "rarely",
+             "sometimes", "often", "never", "always", "sometimes", "often")
+```
+
+1. `table(answers)`. Is the order sensible?
+2. Make `answers_f`, an ordered factor with levels from `"never"` to `"always"`. `table()` again.
+3. Scores 1 to 5: `as.numeric(answers_f)`. Mean score?
+4. A new participant answers `"Often"`. Add it, rebuild the factor. What happens, and why?
+
+## 7. A data frame by hand
+
+| id | group | age | mmse |
+|---|---|---|---|
+| P01 | patient | 72 | 21 |
+| P02 | control | 65 | 29 |
+| P03 | patient | 68 | 23 |
+| P04 | control | 70 | 28 |
+| P05 | patient | 61 | 25 |
+| P06 | control | 74 | 27 |
+
+1. Build it as `participants` (`group` as a factor). Check with `str()`.
+2. Add a column `impaired`: `TRUE` if `mmse` is below 24.
+3. Patients older than 65.
+4. Mean `mmse` per group (`tapply()`).
+5. Sort the rows by age (`order()`).
+
+## 8. Your first function
+
+1. Write `se()`, the standard error of the mean, $s/\sqrt{n}$. Use it on `rt_clean`.
+2. Make it ignore `NA`s, and try it on `rt2`. *Hint:* `sd(x, na.rm = TRUE)`, `sum(!is.na(x))`.
+3. Write `n_outliers(x, low = 200, high = 1500)`: the number of values below `low` or above `high`, ignoring `NA`s. Try `n_outliers(rt2)` and `n_outliers(rt2, high = 600)`.
+
+## 9. A data frame: `sleep`
+
+Built into R: extra hours of sleep (`extra`) for 10 patients (`ID`) under two drugs (`group`).
+
+1. `str()`, `head()`, `summary()`. Rows and columns?
+2. Mean `extra` per drug (`tapply()`, or subset twice).
+3. Every patient took both drugs. Per patient, compute `drug 2 - drug 1`. How many are positive?
+4. Write this sentence in your document, with inline code in place of the dots:
+
+```markdown
+On average, drug 2 increased sleep by `{{r}} ...` hours more than drug 1,
+and `{{r}} ...` out of 10 patients slept more with drug 2.
+```
+
+## 10. A figure with a caption
+
+1. `boxplot(extra ~ group, data = sleep)`.
+2. Add `#| label: fig-...` and `#| fig-cap:`. Reference it in the text with `@fig-...`. Render.
+3. Add `#| echo: false`. What changes?
+
+## 11. Read data from the project
+
+`sleepstudy` ([Belenky et al., 2003](https://doi.org/10.1046/j.1365-2869.2003.00337.x)): mean reaction time per day for 18 subjects. Days 0 and 1 were training, day 2 is the baseline. After day 2, subjects spent only 3 hours in bed per night.
+
+1. `read.csv(here::here("data", "sleepstudy.csv"))`.
+2. How many subjects? (`unique()`, `length()`)
+3. Mean reaction time at baseline (day 2) and on day 9?
+4. Per subject, the change from day 2 to day 9. *Hint:* keep the rows of day 2 and of day 9 in two data frames; check that `Subject` is in the same order; subtract.
+5. How many subjects slowed down? Who slowed down the most?
+6. `hist()` of the changes, with a figure caption.
+7. One sentence with the mean change and the number of subjects who slowed down, all with inline code.
+
+## 12. Does it render from scratch?
+
+1. In the **console**, type `x <- 42`. In your document, add a chunk with `x * 2`. Render. What happens, and why?
+2. *Session > Restart R*, then render again. Everything still works?
+3. Add a last chunk with `sessionInfo()`.
+
+## Bonus: Other formats
+
+Render with
+
+```yaml
+format:
+  html: default
+  typst: default
+```
+
+You get a PDF, no LaTeX needed. Does anything break?

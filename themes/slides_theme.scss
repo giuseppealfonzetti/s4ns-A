@@ -1,0 +1,57 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap');
+$theme-red: #FA5F5C;
+$theme-red: #9B0014;
+$body-bg: #ffffff !default;
+$link-color: $theme-red !default;
+$accent: $theme-red !default;
+$font-family-sans-serif: "Noto Sans", sans-serif !default;
+$body-color: #333 !default;
+// $presentation-h1-font-size: 3em !default;
+// $presentation-h2-font-size: 2.4em !default;
+// $presentation-h3-font-size: 2em !default;
+// $presentation-h4-font-size: 1.1em !default;
+$presentation-h1-font-size: 2em !default;
+$presentation-h2-font-size: 1.6em !default;
+$presentation-h3-font-size: 1.3em !default;
+$presentation-h4-font-size: 0.9em !default;
+$presentation-heading-font: "Roboto Slab", sans-serif !default;
+$presentation-heading-color: $theme-red !default;
+// $presentation-heading-font-weight: 1000 !default;
+// $presentation-heading-text-shadow: 500 !default;
+/*-- scss:rules --*/
+// Left-align title slide
+#title-slide {
+  text-align: left;
+
+  .quarto-title-authors {
+    justify-content: left;
+  
+    .quarto-title-author { // optional, test it for yourself
+      padding-left: 0;
+      padding-right: 0;
+      width: 100%;
+    }
+  }
+}
+
+
+
+.reveal section.title-slide h1.title {
+  background-color: $theme-red !important;
+  color: white !important;
+  padding: 0.5em 1em;
+  margin-bottom: 0.5em;
+}
+
+.reveal section.title-slide p.subtitle {
+  background-color: $theme-red !important;
+  color: white !important;
+  padding: 0.5em 1em;
+  margin-bottom: 0.5em;
+}
+
+// kable() tables inherit the slide text size: shrink them to match code output
+.reveal .small-table table {
+  font-size: 0.6em;
+}

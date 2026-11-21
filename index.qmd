@@ -1,0 +1,31 @@
+---
+title: "Statistics for Neuroscience A"
+subtitle: "PhD in Neuroscience, 15 hours, November 2026 to January 2027"
+toc: false
+---
+
+R and Quarto for reproducible analyses, and the intuition behind the core statistical tools, mostly through simulation.
+
+Each session: slides and live code, then exercises, then solutions together. Material appears here session by session.
+
+| # | Date | Time | Topic | Slides | Exercises | Solutions |
+|---|------|------|-------|:--:|:--:|:--:|
+| 1 | Mon 23/11 | 10:30–12:30 | Why statistics? Introduction to R and Quarto | [Slides](sessions/01-reproducibility/slides.qmd) | [Exercises](sessions/01-reproducibility/exercises.qmd) | |
+| 2 | Thu 26/11 | 10:30–12:30 | Data manipulation | | | |
+| 3 | Mon 30/11 | 10:30–12:30 | Visualisation and EDA | | | |
+| 4 | Wed 02/12 | 14:30–16:30 | Probability and sampling | | | |
+| 5 | Thu 17/12 | 10:30–12:30 | Estimation and confidence intervals | | | |
+| 6 | Mon 21/12 | 10:30–12:30 | Hypothesis testing | | | |
+| 7 | Wed 13/01 | 14:30–17:30 | Linear models and final project | | | |
+
+### Before the first session
+
+Follow the [setup](setup.qmd).
+
+### Datasets
+
+All in [`data/`](https://github.com/giuseppealfonzetti/s4ns-A/tree/main/data). Each exercise page links the ones it uses: save them in the `data` folder of your project. Sources and licences: [data README](https://github.com/giuseppealfonzetti/s4ns-A/blob/main/data/README.md).
+
+### Acknowledgements
+
+Builds on previous editions by Angela Andreella ([angeella/PNC](https://github.com/angeella/PNC)) and Giovanni Saraceno ([giovsaraceno/Statistics_for_Neuroscience](https://github.com/giovsaraceno/Statistics_for_Neuroscience)).

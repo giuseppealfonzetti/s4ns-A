@@ -1,0 +1,44 @@
+project:
+  type: website
+  render:              # _drafts/ is never rendered: release = move a file into sessions/
+    - "*.qmd"
+    - "sessions/**/*.qmd"
+  resources:
+    - data/
+
+execute:
+  freeze: auto
+  warning: false
+  message: false
+
+website:
+  title: "Statistics for Neuroscience A"
+  page-navigation: true
+  repo-url: https://github.com/giuseppealfonzetti/s4ns-A
+  repo-actions: [source]
+  sidebar:
+    background: "#9B0014"
+    pinned: true
+    align: center
+    style: docked
+    contents:
+      - href: index.qmd
+        text: Schedule
+      - setup.qmd
+      - resources.qmd
+  page-footer:
+    background: "#9B0014"
+    left: "PhD in Neuroscience, 2026/27. Made with [Quarto](https://quarto.org)"
+    right:
+      - icon: github
+        href: https://github.com/giuseppealfonzetti/s4ns-A
+
+format:
+  html:
+    theme:
+      - cosmo
+      - themes/site_theme.scss
+    css: styles.css
+    toc: true
+    code-copy: true
+    code-overflow: wrap
