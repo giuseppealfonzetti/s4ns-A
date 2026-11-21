@@ -2,6 +2,7 @@ project:
   type: website
   render:              # _drafts/ is never rendered: release = move a file into sessions/
     - "*.qmd"
+    - "!README.qmd"
     - "sessions/**/*.qmd"
   resources:
     - data/

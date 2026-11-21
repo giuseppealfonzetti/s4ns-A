@@ -1,0 +1,9 @@
+---
+format:
+  gfm:
+    wrap: preserve
+---
+
+# Statistics for Neuroscience - Level A
+
+Course website for Statistics for Neuroscience - Level A
