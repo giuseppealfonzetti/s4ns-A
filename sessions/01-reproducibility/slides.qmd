@@ -395,6 +395,6 @@ The dataset contains `{{r}} nrow(sleepstudy)` measurements.
 
 ## Practice
 
-- Exercises: on the website (Schedule). Download `sleepstudy.csv` into `data/`.
-- Answer in a new Quarto document in your course project, **Render** after every exercise.
-- No R yet? [webr.sh](https://webr.sh), R in the browser, no login (see the exercises page).
+- Connect to [https://giuseppealfonzetti.github.io/s4ns-A/](https://giuseppealfonzetti.github.io/s4ns-A/)
+
+- Click on the ["Exercises" link](sessions/01-reproducibility/exercises.qmd) corresponding to today class.

@@ -1,7 +1,7 @@
 ---
 title: "Session 1: Exercises"
-subtitle: "R basics and your first Quarto report"
-author: "Your name"
+subtitle: "R and Quarto basics"
+author: "Giuseppe"
 date: today
 format:
   html:
