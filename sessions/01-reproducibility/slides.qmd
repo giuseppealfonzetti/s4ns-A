@@ -372,7 +372,7 @@ sleepstudy <- read.csv(here::here("data", "sleepstudy.csv"))
 The dataset contains `{{r}} nrow(sleepstudy)` measurements.
 ````
 
-1. **YAML header** between `---`: title, author, format (`html`, `docx`, `typst`).
+1. **YAML header** between `---`: title, author, format (`html`, `pdf`, `docx`).
 2. **Markdown** text: `## Section`, `**bold**`, `*italic*`, `- lists`, `$\bar x$`.
 3. **Code chunks**: run at render; options start with `#|`.
 4. **Inline code**: numbers inside sentences, never typed by hand.

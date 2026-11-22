@@ -8,33 +8,27 @@ format:
     toc: true
 ---
 
-New Quarto document in your course project: copy the code you need from here, answer below it. **Render** after every exercise.
+Part 1 is plain R, in a script. In Part 2 you turn your analysis into a Quarto report.
 
 **Data** (save into `data/` in your project): [sleepstudy.csv](../../data/sleepstudy.csv){download="sleepstudy.csv"}
 
 ::: {.callout-warning collapse="true"}
 ## No R on your laptop yet?
-Use R in the browser, no login needed: **<https://webr.sh>**. Copy the code from this page into its editor.
+Use R in the browser, no login needed: **<https://webr.sh>**.
 
-- Exercises 3 to 9 work as they are. Ex. 10: the boxplot only.
-- Ex. 11: read the data from the web instead: `read.csv("https://raw.githubusercontent.com/giuseppealfonzetti/s4ns-A/main/data/sleepstudy.csv")`
-- Ex. 1, 2 and 12 (Quarto) need RStudio: pair with a neighbour.
+- Part 1 works there. In exercise 8, read the data from the web: `read.csv("https://raw.githubusercontent.com/giuseppealfonzetti/s4ns-A/main/data/sleepstudy.csv")`
+- Part 2 needs RStudio: pair with a neighbour.
 
-Install R and RStudio ([setup](../../setup.qmd)) **before session 2**: webR is not enough from then on.
+Install R and RStudio ([setup](../../setup.qmd)) **before session 2**.
 :::
 
-## 1. Render it
+# Part 1: R
 
-1. *File > New File > Quarto Document*, your name as author. Save it in the project. Render.
-2. Add `toc-location: left` under `html:` and render again. What changed?
+Open your course project, then *File > New File > R Script* and save it as `session1.R`. Run a line with Ctrl+Enter (Cmd+Enter on a Mac).
 
-## 2. Markdown
+## 1. Reaction times
 
-In your document, describe your PhD project with a `###` heading, one **bold** and one *italic* word, a 3-item list and a link to your lab.
-
-## 3. Vectors
-
-Stroop task, one participant, RT in ms:
+One participant, ten trials of a Stroop task, reaction times in ms:
 
 ```{r}
 rt <- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)
@@ -42,13 +36,13 @@ condition <- c("cong", "incong", "incong", "cong", "incong",
                "cong", "incong", "incong", "cong", "cong")
 ```
 
-1. Number of trials; mean, median, min, max RT.
-2. Find the suspicious trial (`which.max()`). Why do mean and median differ?
-3. Create `rt_clean` without trials over 2000 ms. Recompute the mean.
-4. Mean RT for `"cong"` and `"incong"` trials, without the slow one. *Hint:* drop it from both vectors.
-5. Convert `rt` to seconds (`rt_s`).
+1. How many trials? What are the mean, median, min and max?
+2. One trial looks odd. Which one? Use `which.max()`. Why are the mean and the median so different?
+3. Make `rt_clean`, without trials over 2000 ms. What is the mean now?
+4. What is the mean for `"cong"` and for `"incong"` trials, without the odd one? Drop it from both vectors, so they stay aligned.
+5. Convert `rt` to seconds.
 
-## 4. Missing values and comparisons
+## 2. Missing trials
 
 A second participant missed two trials:
 
@@ -56,14 +50,14 @@ A second participant missed two trials:
 rt2 <- c(523, NA, 487, 150, 601, 455, 2310, NA, 512, 498)
 ```
 
-1. How many `NA`s? In which trials?
-2. Mean RT, ignoring them.
-3. Flag implausible trials: faster than 200 ms or slower than 1500 ms. How many? What proportion of the non-missing trials? *Hint:* the mean of a logical vector is a proportion.
-4. Print `rt2[rt2 > 200]`. What went wrong? Keep only the trials that are both non-missing and plausible.
+1. How many trials are missing, and which ones?
+2. What is the mean without them?
+3. Trials faster than 200 ms or slower than 1500 ms are implausible. How many are there? What proportion of the non-missing trials? The mean of `TRUE`/`FALSE` values is a proportion.
+4. Try `rt2[rt2 > 200]`. Why do `NA`s appear? Keep only the trials that are present and plausible.
 
-## 5. Spot the bugs
+## 3. Spot the bugs
 
-This code has five mistakes. Copy it, fix it, run it. One mistake gives no error, only a wrong answer: which one?
+This code has five mistakes. Fix them. One gives no error, just a wrong answer: which one?
 
 ```{r}
 #| eval: false
@@ -75,21 +69,21 @@ Mean(scores)
 summary(Scores)
 ```
 
-## 6. Factors: a Likert item
+## 4. A Likert item
 
-"How often do you have trouble sleeping?"
+Twelve answers to "How often do you have trouble sleeping?":
 
 ```{r}
 answers <- c("often", "never", "sometimes", "always", "often", "rarely",
              "sometimes", "often", "never", "always", "sometimes", "often")
 ```
 
-1. `table(answers)`. Is the order sensible?
-2. Make `answers_f`, an ordered factor with levels from `"never"` to `"always"`. `table()` again.
-3. Scores 1 to 5: `as.numeric(answers_f)`. Mean score?
-4. A new participant answers `"Often"`. Add it, rebuild the factor. What happens, and why?
+1. Run `table(answers)`. Does the order make sense?
+2. Make `answers_f`, an ordered factor from `"never"` to `"always"`. Run `table()` again.
+3. `as.numeric(answers_f)` turns the answers into scores from 1 to 5. What is the mean score?
+4. Someone answers `"Often"`. Add it and rebuild the factor. What happens?
 
-## 7. A data frame by hand
+## 5. A data frame by hand
 
 | id | group | age | mmse |
 |---|---|---|---|
@@ -100,64 +94,87 @@ answers <- c("often", "never", "sometimes", "always", "often", "rarely",
 | P05 | patient | 61 | 25 |
 | P06 | control | 74 | 27 |
 
-1. Build it as `participants` (`group` as a factor). Check with `str()`.
-2. Add a column `impaired`: `TRUE` if `mmse` is below 24.
-3. Patients older than 65.
-4. Mean `mmse` per group (`tapply()`).
-5. Sort the rows by age (`order()`).
+1. Type it in as `participants`, with `group` as a factor. Check it with `str()`.
+2. Add a column `impaired`: `TRUE` when `mmse` is below 24.
+3. Which patients are older than 65?
+4. What is the mean `mmse` in each group? Try `tapply()`.
+5. Sort the rows by age with `order()`.
 
-## 8. Your first function
+## 6. Your first functions
 
-1. Write `se()`, the standard error of the mean, $s/\sqrt{n}$. Use it on `rt_clean`.
-2. Make it ignore `NA`s, and try it on `rt2`. *Hint:* `sd(x, na.rm = TRUE)`, `sum(!is.na(x))`.
-3. Write `n_outliers(x, low = 200, high = 1500)`: the number of values below `low` or above `high`, ignoring `NA`s. Try `n_outliers(rt2)` and `n_outliers(rt2, high = 600)`.
+1. Write `se()`, the standard error of the mean, $s/\sqrt{n}$. Try it on `rt_clean`.
+2. Now try it on `rt2`. Make it ignore `NA`s: `sd(x, na.rm = TRUE)` and `sum(!is.na(x))` help.
+3. Write `n_outliers(x, low = 200, high = 1500)`, which counts the values below `low` or above `high`. Try `n_outliers(rt2)`, then `n_outliers(rt2, high = 600)`.
 
-## 9. A data frame: `sleep`
+## 7. A drug trial: `sleep`
 
-Built into R: extra hours of sleep (`extra`) for 10 patients (`ID`) under two drugs (`group`).
+`sleep` comes with R: extra hours of sleep (`extra`) for 10 patients (`ID`) under two drugs (`group`).
 
-1. `str()`, `head()`, `summary()`. Rows and columns?
-2. Mean `extra` per drug (`tapply()`, or subset twice).
-3. Every patient took both drugs. Per patient, compute `drug 2 - drug 1`. How many are positive?
-4. Write this sentence in your document, with inline code in place of the dots:
+1. Look at it with `str()`, `head()` and `summary()`. How many rows and columns?
+2. What is the mean `extra` for each drug?
+3. Every patient took both drugs. For each patient, compute drug 2 minus drug 1. How many slept more with drug 2?
 
-```markdown
-On average, drug 2 increased sleep by `{{r}} ...` hours more than drug 1,
-and `{{r}} ...` out of 10 patients slept more with drug 2.
-```
+## 8. Sleep deprivation: `sleepstudy`
 
-## 10. A figure with a caption
+Reaction times of 18 subjects, one mean per day ([Belenky et al., 2003](https://doi.org/10.1046/j.1365-2869.2003.00337.x)). Days 0 and 1 were training and day 2 is the baseline. After day 2, subjects spent only 3 hours in bed per night.
 
-1. `boxplot(extra ~ group, data = sleep)`.
-2. Add `#| label: fig-...` and `#| fig-cap:`. Reference it in the text with `@fig-...`. Render.
-3. Add `#| echo: false`. What changes?
-
-## 11. Read data from the project
-
-`sleepstudy` ([Belenky et al., 2003](https://doi.org/10.1046/j.1365-2869.2003.00337.x)): mean reaction time per day for 18 subjects. Days 0 and 1 were training, day 2 is the baseline. After day 2, subjects spent only 3 hours in bed per night.
-
-1. `read.csv(here::here("data", "sleepstudy.csv"))`.
-2. How many subjects? (`unique()`, `length()`)
-3. Mean reaction time at baseline (day 2) and on day 9?
-4. Per subject, the change from day 2 to day 9. *Hint:* keep the rows of day 2 and of day 9 in two data frames; check that `Subject` is in the same order; subtract.
+1. Read it: `sleepstudy <- read.csv(here::here("data", "sleepstudy.csv"))`.
+2. How many subjects are there?
+3. What is the mean reaction time on day 2, and on day 9?
+4. For each subject, compute the change from day 2 to day 9. Put the two days in two data frames, check that `Subject` is in the same order, then subtract.
 5. How many subjects slowed down? Who slowed down the most?
-6. `hist()` of the changes, with a figure caption.
-7. One sentence with the mean change and the number of subjects who slowed down, all with inline code.
+6. Draw a `hist()` of the changes.
 
-## 12. Does it render from scratch?
+# Part 2: Quarto
 
-1. In the **console**, type `x <- 42`. In your document, add a chunk with `x * 2`. Render. What happens, and why?
-2. *Session > Restart R*, then render again. Everything still works?
-3. Add a last chunk with `sessionInfo()`.
+## 9. Your first report
 
-## Bonus: Other formats
-
-Render with
+1. *File > New File > Quarto Document*. Put your name as author, save it as `session1-report.qmd` and click **Render**.
+2. In the header, replace `format: html` with the lines below and render again. What changed?
 
 ```yaml
 format:
-  html: default
-  typst: default
+  html:
+    toc: true
+    toc-location: left
 ```
 
-You get a PDF, no LaTeX needed. Does anything break?
+3. Write a few lines: a `###` heading, one **bold** and one *italic* word, a short list and a link to a website.
+
+## 10. Bring in your analysis
+
+1. Copy your exercise 8 code into chunks in the report. Render.
+2. Give the histogram chunk a label and a caption (`#| label: fig-change`, `#| fig-cap: "..."`). Refer to it in the text with `@fig-change`.
+3. Add `#| echo: false` to the chunk that reads the data. What changes?
+
+## 11. Numbers in the text
+
+1. Write one sentence with the mean change and the number of subjects who slowed down. Use inline code, as in `` `{{r}} round(mean(change))` ``, never typed numbers.
+2. Copy your `sleep` code from exercise 7 into the report and complete this sentence:
+
+```markdown
+On average, patients slept `{{r}} ...` hours more with drug 2 than with drug 1,
+and `{{r}} ...` out of 10 slept more with drug 2.
+```
+
+## 12. Does it render from scratch?
+
+1. In the **console**, type `x <- 42`. In the report, add a chunk with `x * 2`. Render. What happens, and why?
+2. Delete that chunk, then *Session > Restart R* and render again. Does everything still work?
+3. Add a last chunk with `sessionInfo()`.
+
+## Bonus: PDF and Word
+
+1. A PDF needs LaTeX. Install TinyTeX once, in the RStudio **Terminal** (not the Console): `quarto install tinytex`.
+2. Add two formats to the header:
+
+```yaml
+format:
+  html:
+    toc: true
+    toc-location: left
+  pdf: default
+  docx: default
+```
+
+3. Render all three in the Terminal: `quarto render session1-report.qmd`. Open the PDF and the Word file. What differs from the HTML?
