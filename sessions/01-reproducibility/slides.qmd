@@ -397,4 +397,4 @@ The dataset contains `{{r}} nrow(sleepstudy)` measurements.
 
 - Connect to [https://giuseppealfonzetti.github.io/s4ns-A/](https://giuseppealfonzetti.github.io/s4ns-A/)
 
-- Click on the ["Exercises" link](sessions/01-reproducibility/exercises.qmd) corresponding to today class.
+- Click on the ["Exercises" link](exercises.qmd) corresponding to today class.
