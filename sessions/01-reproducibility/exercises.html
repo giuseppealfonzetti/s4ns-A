@@ -199,19 +199,25 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#render-it" id="toc-render-it" class="nav-link active" data-scroll-target="#render-it">1. Render it</a></li>
-  <li><a href="#markdown" id="toc-markdown" class="nav-link" data-scroll-target="#markdown">2. Markdown</a></li>
-  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">3. Vectors</a></li>
-  <li><a href="#missing-values-and-comparisons" id="toc-missing-values-and-comparisons" class="nav-link" data-scroll-target="#missing-values-and-comparisons">4. Missing values and comparisons</a></li>
-  <li><a href="#spot-the-bugs" id="toc-spot-the-bugs" class="nav-link" data-scroll-target="#spot-the-bugs">5. Spot the bugs</a></li>
-  <li><a href="#factors-a-likert-item" id="toc-factors-a-likert-item" class="nav-link" data-scroll-target="#factors-a-likert-item">6. Factors: a Likert item</a></li>
-  <li><a href="#a-data-frame-by-hand" id="toc-a-data-frame-by-hand" class="nav-link" data-scroll-target="#a-data-frame-by-hand">7. A data frame by hand</a></li>
-  <li><a href="#your-first-function" id="toc-your-first-function" class="nav-link" data-scroll-target="#your-first-function">8. Your first function</a></li>
-  <li><a href="#a-data-frame-sleep" id="toc-a-data-frame-sleep" class="nav-link" data-scroll-target="#a-data-frame-sleep">9. A data frame: <code>sleep</code></a></li>
-  <li><a href="#a-figure-with-a-caption" id="toc-a-figure-with-a-caption" class="nav-link" data-scroll-target="#a-figure-with-a-caption">10. A figure with a caption</a></li>
-  <li><a href="#read-data-from-the-project" id="toc-read-data-from-the-project" class="nav-link" data-scroll-target="#read-data-from-the-project">11. Read data from the project</a></li>
+  <li><a href="#part-1-r" id="toc-part-1-r" class="nav-link active" data-scroll-target="#part-1-r">Part 1: R</a>
+  <ul class="collapse">
+  <li><a href="#reaction-times" id="toc-reaction-times" class="nav-link" data-scroll-target="#reaction-times">1. Reaction times</a></li>
+  <li><a href="#missing-trials" id="toc-missing-trials" class="nav-link" data-scroll-target="#missing-trials">2. Missing trials</a></li>
+  <li><a href="#spot-the-bugs" id="toc-spot-the-bugs" class="nav-link" data-scroll-target="#spot-the-bugs">3. Spot the bugs</a></li>
+  <li><a href="#a-likert-item" id="toc-a-likert-item" class="nav-link" data-scroll-target="#a-likert-item">4. A Likert item</a></li>
+  <li><a href="#a-data-frame-by-hand" id="toc-a-data-frame-by-hand" class="nav-link" data-scroll-target="#a-data-frame-by-hand">5. A data frame by hand</a></li>
+  <li><a href="#your-first-functions" id="toc-your-first-functions" class="nav-link" data-scroll-target="#your-first-functions">6. Your first functions</a></li>
+  <li><a href="#a-drug-trial-sleep" id="toc-a-drug-trial-sleep" class="nav-link" data-scroll-target="#a-drug-trial-sleep">7. A drug trial: <code>sleep</code></a></li>
+  <li><a href="#sleep-deprivation-sleepstudy" id="toc-sleep-deprivation-sleepstudy" class="nav-link" data-scroll-target="#sleep-deprivation-sleepstudy">8. Sleep deprivation: <code>sleepstudy</code></a></li>
+  </ul></li>
+  <li><a href="#part-2-quarto" id="toc-part-2-quarto" class="nav-link" data-scroll-target="#part-2-quarto">Part 2: Quarto</a>
+  <ul class="collapse">
+  <li><a href="#your-first-report" id="toc-your-first-report" class="nav-link" data-scroll-target="#your-first-report">9. Your first report</a></li>
+  <li><a href="#bring-in-your-analysis" id="toc-bring-in-your-analysis" class="nav-link" data-scroll-target="#bring-in-your-analysis">10. Bring in your analysis</a></li>
+  <li><a href="#numbers-in-the-text" id="toc-numbers-in-the-text" class="nav-link" data-scroll-target="#numbers-in-the-text">11. Numbers in the text</a></li>
   <li><a href="#does-it-render-from-scratch" id="toc-does-it-render-from-scratch" class="nav-link" data-scroll-target="#does-it-render-from-scratch">12. Does it render from scratch?</a></li>
-  <li><a href="#bonus-other-formats" id="toc-bonus-other-formats" class="nav-link" data-scroll-target="#bonus-other-formats">Bonus: Other formats</a></li>
+  <li><a href="#bonus-pdf-and-word" id="toc-bonus-pdf-and-word" class="nav-link" data-scroll-target="#bonus-pdf-and-word">Bonus: PDF and Word</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/giuseppealfonzetti/s4ns-A/blob/main/sessions/01-reproducibility/exercises.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -250,7 +256,7 @@ window.Quarto = {
 </header>
 
 
-<p>New Quarto document in your course project: copy the code you need from here, answer below it. <strong>Render</strong> after every exercise.</p>
+<p>Part 1 is plain R, in a script. In Part 2 you turn your analysis into a Quarto report.</p>
 <p><strong>Data</strong> (save into <code>data/</code> in your project): <a href="../../data/sleepstudy.csv" download="sleepstudy.csv">sleepstudy.csv</a></p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -264,59 +270,50 @@ No R on your laptop yet?
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Use R in the browser, no login needed: <strong><a href="https://webr.sh" class="uri">https://webr.sh</a></strong>. Copy the code from this page into its editor.</p>
+<p>Use R in the browser, no login needed: <strong><a href="https://webr.sh" class="uri">https://webr.sh</a></strong>.</p>
 <ul>
-<li>Exercises 3 to 9 work as they are. Ex. 10: the boxplot only.</li>
-<li>Ex. 11: read the data from the web instead: <code>read.csv("https://raw.githubusercontent.com/giuseppealfonzetti/s4ns-A/main/data/sleepstudy.csv")</code></li>
-<li>Ex. 1, 2 and 12 (Quarto) need RStudio: pair with a neighbour.</li>
+<li>Part 1 works there. In exercise 8, read the data from the web: <code>read.csv("https://raw.githubusercontent.com/giuseppealfonzetti/s4ns-A/main/data/sleepstudy.csv")</code></li>
+<li>Part 2 needs RStudio: pair with a neighbour.</li>
 </ul>
-<p>Install R and RStudio (<a href="../../setup.html">setup</a>) <strong>before session 2</strong>: webR is not enough from then on.</p>
+<p>Install R and RStudio (<a href="../../setup.html">setup</a>) <strong>before session 2</strong>.</p>
 </div>
 </div>
 </div>
-<section id="render-it" class="level2">
-<h2 class="anchored" data-anchor-id="render-it">1. Render it</h2>
-<ol type="1">
-<li><em>File &gt; New File &gt; Quarto Document</em>, your name as author. Save it in the project. Render.</li>
-<li>Add <code>toc-location: left</code> under <code>html:</code> and render again. What changed?</li>
-</ol>
-</section>
-<section id="markdown" class="level2">
-<h2 class="anchored" data-anchor-id="markdown">2. Markdown</h2>
-<p>In your document, describe your PhD project with a <code>###</code> heading, one <strong>bold</strong> and one <em>italic</em> word, a 3-item list and a link to your lab.</p>
-</section>
-<section id="vectors" class="level2">
-<h2 class="anchored" data-anchor-id="vectors">3. Vectors</h2>
-<p>Stroop task, one participant, RT in ms:</p>
+<section id="part-1-r" class="level1">
+<h1>Part 1: R</h1>
+<p>Open your course project, then <em>File &gt; New File &gt; R Script</em> and save it as <code>session1.R</code>. Run a line with Ctrl+Enter (Cmd+Enter on a Mac).</p>
+<section id="reaction-times" class="level2">
+<h2 class="anchored" data-anchor-id="reaction-times">1. Reaction times</h2>
+<p>One participant, ten trials of a Stroop task, reaction times in ms:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rt <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">523</span>, <span class="dv">487</span>, <span class="dv">601</span>, <span class="dv">455</span>, <span class="dv">2310</span>, <span class="dv">512</span>, <span class="dv">498</span>, <span class="dv">577</span>, <span class="dv">466</span>, <span class="dv">540</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>condition <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"cong"</span>, <span class="st">"incong"</span>, <span class="st">"incong"</span>, <span class="st">"cong"</span>, <span class="st">"incong"</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"cong"</span>, <span class="st">"incong"</span>, <span class="st">"incong"</span>, <span class="st">"cong"</span>, <span class="st">"cong"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
-<li>Number of trials; mean, median, min, max RT.</li>
-<li>Find the suspicious trial (<code>which.max()</code>). Why do mean and median differ?</li>
-<li>Create <code>rt_clean</code> without trials over 2000 ms. Recompute the mean.</li>
-<li>Mean RT for <code>"cong"</code> and <code>"incong"</code> trials, without the slow one. <em>Hint:</em> drop it from both vectors.</li>
-<li>Convert <code>rt</code> to seconds (<code>rt_s</code>).</li>
+<li>How many trials? What are the mean, median, min and max?</li>
+<li>One trial looks odd. Which one? Use <code>which.max()</code>. Why are the mean and the median so different?</li>
+<li>Make <code>rt_clean</code>, without trials over 2000 ms. What is the mean now?</li>
+<li>What is the mean for <code>"cong"</code> and for <code>"incong"</code> trials, without the odd one? Drop it from both vectors, so they stay aligned.</li>
+<li>Convert <code>rt</code> to seconds.</li>
 </ol>
 </section>
-<section id="missing-values-and-comparisons" class="level2">
-<h2 class="anchored" data-anchor-id="missing-values-and-comparisons">4. Missing values and comparisons</h2>
+<section id="missing-trials" class="level2">
+<h2 class="anchored" data-anchor-id="missing-trials">2. Missing trials</h2>
 <p>A second participant missed two trials:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rt2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">523</span>, <span class="cn">NA</span>, <span class="dv">487</span>, <span class="dv">150</span>, <span class="dv">601</span>, <span class="dv">455</span>, <span class="dv">2310</span>, <span class="cn">NA</span>, <span class="dv">512</span>, <span class="dv">498</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
-<li>How many <code>NA</code>s? In which trials?</li>
-<li>Mean RT, ignoring them.</li>
-<li>Flag implausible trials: faster than 200 ms or slower than 1500 ms. How many? What proportion of the non-missing trials? <em>Hint:</em> the mean of a logical vector is a proportion.</li>
-<li>Print <code>rt2[rt2 &gt; 200]</code>. What went wrong? Keep only the trials that are both non-missing and plausible.</li>
+<li>How many trials are missing, and which ones?</li>
+<li>What is the mean without them?</li>
+<li>Trials faster than 200 ms or slower than 1500 ms are implausible. How many are there? What proportion of the non-missing trials? The mean of <code>TRUE</code>/<code>FALSE</code> values is a proportion.</li>
+<li>Try <code>rt2[rt2 &gt; 200]</code>. Why do <code>NA</code>s appear? Keep only the trials that are present and plausible.</li>
 </ol>
 </section>
 <section id="spot-the-bugs" class="level2">
-<h2 class="anchored" data-anchor-id="spot-the-bugs">5. Spot the bugs</h2>
-<p>This code has five mistakes. Copy it, fix it, run it. One mistake gives no error, only a wrong answer: which one?</p>
+<h2 class="anchored" data-anchor-id="spot-the-bugs">3. Spot the bugs</h2>
+<p>This code has five mistakes. Fix them. One gives no error, just a wrong answer: which one?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">9</span>, <span class="dv">20</span>, <span class="dv">17</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>)</span>
@@ -326,22 +323,22 @@ No R on your laptop yet?
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="factors-a-likert-item" class="level2">
-<h2 class="anchored" data-anchor-id="factors-a-likert-item">6. Factors: a Likert item</h2>
-<p>“How often do you have trouble sleeping?”</p>
+<section id="a-likert-item" class="level2">
+<h2 class="anchored" data-anchor-id="a-likert-item">4. A Likert item</h2>
+<p>Twelve answers to “How often do you have trouble sleeping?”:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>answers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"often"</span>, <span class="st">"never"</span>, <span class="st">"sometimes"</span>, <span class="st">"always"</span>, <span class="st">"often"</span>, <span class="st">"rarely"</span>,</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">"sometimes"</span>, <span class="st">"often"</span>, <span class="st">"never"</span>, <span class="st">"always"</span>, <span class="st">"sometimes"</span>, <span class="st">"often"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
-<li><code>table(answers)</code>. Is the order sensible?</li>
-<li>Make <code>answers_f</code>, an ordered factor with levels from <code>"never"</code> to <code>"always"</code>. <code>table()</code> again.</li>
-<li>Scores 1 to 5: <code>as.numeric(answers_f)</code>. Mean score?</li>
-<li>A new participant answers <code>"Often"</code>. Add it, rebuild the factor. What happens, and why?</li>
+<li>Run <code>table(answers)</code>. Does the order make sense?</li>
+<li>Make <code>answers_f</code>, an ordered factor from <code>"never"</code> to <code>"always"</code>. Run <code>table()</code> again.</li>
+<li><code>as.numeric(answers_f)</code> turns the answers into scores from 1 to 5. What is the mean score?</li>
+<li>Someone answers <code>"Often"</code>. Add it and rebuild the factor. What happens?</li>
 </ol>
 </section>
 <section id="a-data-frame-by-hand" class="level2">
-<h2 class="anchored" data-anchor-id="a-data-frame-by-hand">7. A data frame by hand</h2>
+<h2 class="anchored" data-anchor-id="a-data-frame-by-hand">5. A data frame by hand</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -391,71 +388,102 @@ No R on your laptop yet?
 </tbody>
 </table>
 <ol type="1">
-<li>Build it as <code>participants</code> (<code>group</code> as a factor). Check with <code>str()</code>.</li>
-<li>Add a column <code>impaired</code>: <code>TRUE</code> if <code>mmse</code> is below 24.</li>
-<li>Patients older than 65.</li>
-<li>Mean <code>mmse</code> per group (<code>tapply()</code>).</li>
-<li>Sort the rows by age (<code>order()</code>).</li>
+<li>Type it in as <code>participants</code>, with <code>group</code> as a factor. Check it with <code>str()</code>.</li>
+<li>Add a column <code>impaired</code>: <code>TRUE</code> when <code>mmse</code> is below 24.</li>
+<li>Which patients are older than 65?</li>
+<li>What is the mean <code>mmse</code> in each group? Try <code>tapply()</code>.</li>
+<li>Sort the rows by age with <code>order()</code>.</li>
 </ol>
 </section>
-<section id="your-first-function" class="level2">
-<h2 class="anchored" data-anchor-id="your-first-function">8. Your first function</h2>
+<section id="your-first-functions" class="level2">
+<h2 class="anchored" data-anchor-id="your-first-functions">6. Your first functions</h2>
 <ol type="1">
-<li>Write <code>se()</code>, the standard error of the mean, <span class="math inline">\(s/\sqrt{n}\)</span>. Use it on <code>rt_clean</code>.</li>
-<li>Make it ignore <code>NA</code>s, and try it on <code>rt2</code>. <em>Hint:</em> <code>sd(x, na.rm = TRUE)</code>, <code>sum(!is.na(x))</code>.</li>
-<li>Write <code>n_outliers(x, low = 200, high = 1500)</code>: the number of values below <code>low</code> or above <code>high</code>, ignoring <code>NA</code>s. Try <code>n_outliers(rt2)</code> and <code>n_outliers(rt2, high = 600)</code>.</li>
+<li>Write <code>se()</code>, the standard error of the mean, <span class="math inline">\(s/\sqrt{n}\)</span>. Try it on <code>rt_clean</code>.</li>
+<li>Now try it on <code>rt2</code>. Make it ignore <code>NA</code>s: <code>sd(x, na.rm = TRUE)</code> and <code>sum(!is.na(x))</code> help.</li>
+<li>Write <code>n_outliers(x, low = 200, high = 1500)</code>, which counts the values below <code>low</code> or above <code>high</code>. Try <code>n_outliers(rt2)</code>, then <code>n_outliers(rt2, high = 600)</code>.</li>
 </ol>
 </section>
-<section id="a-data-frame-sleep" class="level2">
-<h2 class="anchored" data-anchor-id="a-data-frame-sleep">9. A data frame: <code>sleep</code></h2>
-<p>Built into R: extra hours of sleep (<code>extra</code>) for 10 patients (<code>ID</code>) under two drugs (<code>group</code>).</p>
+<section id="a-drug-trial-sleep" class="level2">
+<h2 class="anchored" data-anchor-id="a-drug-trial-sleep">7. A drug trial: <code>sleep</code></h2>
+<p><code>sleep</code> comes with R: extra hours of sleep (<code>extra</code>) for 10 patients (<code>ID</code>) under two drugs (<code>group</code>).</p>
 <ol type="1">
-<li><code>str()</code>, <code>head()</code>, <code>summary()</code>. Rows and columns?</li>
-<li>Mean <code>extra</code> per drug (<code>tapply()</code>, or subset twice).</li>
-<li>Every patient took both drugs. Per patient, compute <code>drug 2 - drug 1</code>. How many are positive?</li>
-<li>Write this sentence in your document, with inline code in place of the dots:</li>
-</ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>On average, drug 2 increased sleep by <span class="in">`{r} ...`</span> hours more than drug 1,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>and <span class="in">`{r} ...`</span> out of 10 patients slept more with drug 2.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="a-figure-with-a-caption" class="level2">
-<h2 class="anchored" data-anchor-id="a-figure-with-a-caption">10. A figure with a caption</h2>
-<ol type="1">
-<li><code>boxplot(extra ~ group, data = sleep)</code>.</li>
-<li>Add <code>#| label: fig-...</code> and <code>#| fig-cap:</code>. Reference it in the text with <code>@fig-...</code>. Render.</li>
-<li>Add <code>#| echo: false</code>. What changes?</li>
+<li>Look at it with <code>str()</code>, <code>head()</code> and <code>summary()</code>. How many rows and columns?</li>
+<li>What is the mean <code>extra</code> for each drug?</li>
+<li>Every patient took both drugs. For each patient, compute drug 2 minus drug 1. How many slept more with drug 2?</li>
 </ol>
 </section>
-<section id="read-data-from-the-project" class="level2">
-<h2 class="anchored" data-anchor-id="read-data-from-the-project">11. Read data from the project</h2>
-<p><code>sleepstudy</code> (<a href="https://doi.org/10.1046/j.1365-2869.2003.00337.x">Belenky et al., 2003</a>): mean reaction time per day for 18 subjects. Days 0 and 1 were training, day 2 is the baseline. After day 2, subjects spent only 3 hours in bed per night.</p>
+<section id="sleep-deprivation-sleepstudy" class="level2">
+<h2 class="anchored" data-anchor-id="sleep-deprivation-sleepstudy">8. Sleep deprivation: <code>sleepstudy</code></h2>
+<p>Reaction times of 18 subjects, one mean per day (<a href="https://doi.org/10.1046/j.1365-2869.2003.00337.x">Belenky et al., 2003</a>). Days 0 and 1 were training and day 2 is the baseline. After day 2, subjects spent only 3 hours in bed per night.</p>
 <ol type="1">
-<li><code>read.csv(here::here("data", "sleepstudy.csv"))</code>.</li>
-<li>How many subjects? (<code>unique()</code>, <code>length()</code>)</li>
-<li>Mean reaction time at baseline (day 2) and on day 9?</li>
-<li>Per subject, the change from day 2 to day 9. <em>Hint:</em> keep the rows of day 2 and of day 9 in two data frames; check that <code>Subject</code> is in the same order; subtract.</li>
+<li>Read it: <code>sleepstudy &lt;- read.csv(here::here("data", "sleepstudy.csv"))</code>.</li>
+<li>How many subjects are there?</li>
+<li>What is the mean reaction time on day 2, and on day 9?</li>
+<li>For each subject, compute the change from day 2 to day 9. Put the two days in two data frames, check that <code>Subject</code> is in the same order, then subtract.</li>
 <li>How many subjects slowed down? Who slowed down the most?</li>
-<li><code>hist()</code> of the changes, with a figure caption.</li>
-<li>One sentence with the mean change and the number of subjects who slowed down, all with inline code.</li>
+<li>Draw a <code>hist()</code> of the changes.</li>
 </ol>
+</section>
+</section>
+<section id="part-2-quarto" class="level1">
+<h1>Part 2: Quarto</h1>
+<section id="your-first-report" class="level2">
+<h2 class="anchored" data-anchor-id="your-first-report">9. Your first report</h2>
+<ol type="1">
+<li><em>File &gt; New File &gt; Quarto Document</em>. Put your name as author, save it as <code>session1-report.qmd</code> and click <strong>Render</strong>.</li>
+<li>In the header, replace <code>format: html</code> with the lines below and render again. What changed?</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc-location</span><span class="kw">:</span><span class="at"> left</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Write a few lines: a <code>###</code> heading, one <strong>bold</strong> and one <em>italic</em> word, a short list and a link to a website.</li>
+</ol>
+</section>
+<section id="bring-in-your-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="bring-in-your-analysis">10. Bring in your analysis</h2>
+<ol type="1">
+<li>Copy your exercise 8 code into chunks in the report. Render.</li>
+<li>Give the histogram chunk a label and a caption (<code>#| label: fig-change</code>, <code>#| fig-cap: "..."</code>). Refer to it in the text with <code>@fig-change</code>.</li>
+<li>Add <code>#| echo: false</code> to the chunk that reads the data. What changes?</li>
+</ol>
+</section>
+<section id="numbers-in-the-text" class="level2">
+<h2 class="anchored" data-anchor-id="numbers-in-the-text">11. Numbers in the text</h2>
+<ol type="1">
+<li>Write one sentence with the mean change and the number of subjects who slowed down. Use inline code, as in <code>`{r} round(mean(change))`</code>, never typed numbers.</li>
+<li>Copy your <code>sleep</code> code from exercise 7 into the report and complete this sentence:</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>On average, patients slept <span class="in">`{r} ...`</span> hours more with drug 2 than with drug 1,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>and <span class="in">`{r} ...`</span> out of 10 slept more with drug 2.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="does-it-render-from-scratch" class="level2">
 <h2 class="anchored" data-anchor-id="does-it-render-from-scratch">12. Does it render from scratch?</h2>
 <ol type="1">
-<li>In the <strong>console</strong>, type <code>x &lt;- 42</code>. In your document, add a chunk with <code>x * 2</code>. Render. What happens, and why?</li>
-<li><em>Session &gt; Restart R</em>, then render again. Everything still works?</li>
+<li>In the <strong>console</strong>, type <code>x &lt;- 42</code>. In the report, add a chunk with <code>x * 2</code>. Render. What happens, and why?</li>
+<li>Delete that chunk, then <em>Session &gt; Restart R</em> and render again. Does everything still work?</li>
 <li>Add a last chunk with <code>sessionInfo()</code>.</li>
 </ol>
 </section>
-<section id="bonus-other-formats" class="level2">
-<h2 class="anchored" data-anchor-id="bonus-other-formats">Bonus: Other formats</h2>
-<p>Render with</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span><span class="at"> default</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">typst</span><span class="kw">:</span><span class="at"> default</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You get a PDF, no LaTeX needed. Does anything break?</p>
+<section id="bonus-pdf-and-word" class="level2">
+<h2 class="anchored" data-anchor-id="bonus-pdf-and-word">Bonus: PDF and Word</h2>
+<ol type="1">
+<li>A PDF needs LaTeX. Install TinyTeX once, in the RStudio <strong>Terminal</strong> (not the Console): <code>quarto install tinytex</code>.</li>
+<li>Add two formats to the header:</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc-location</span><span class="kw">:</span><span class="at"> left</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span><span class="at"> default</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">docx</span><span class="kw">:</span><span class="at"> default</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Render all three in the Terminal: <code>quarto render session1-report.qmd</code>. Open the PDF and the Word file. What differs from the HTML?</li>
+</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

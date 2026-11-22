@@ -44,98 +44,98 @@
     "href": "sessions/01-reproducibility/exercises.html",
     "title": "Session 1: Exercises",
     "section": "",
-    "text": "New Quarto document in your course project: copy the code you need from here, answer below it. Render after every exercise.\nData (save into data/ in your project): sleepstudy.csv"
+    "text": "Part 1 is plain R, in a script. In Part 2 you turn your analysis into a Quarto report.\nData (save into data/ in your project): sleepstudy.csv"
   },
   {
-    "objectID": "sessions/01-reproducibility/exercises.html#render-it",
-    "href": "sessions/01-reproducibility/exercises.html#render-it",
+    "objectID": "sessions/01-reproducibility/exercises.html#reaction-times",
+    "href": "sessions/01-reproducibility/exercises.html#reaction-times",
     "title": "Session 1: Exercises",
-    "section": "1. Render it",
-    "text": "1. Render it\n\nFile &gt; New File &gt; Quarto Document, your name as author. Save it in the project. Render.\nAdd toc-location: left under html: and render again. What changed?"
+    "section": "1. Reaction times",
+    "text": "1. Reaction times\nOne participant, ten trials of a Stroop task, reaction times in ms:\n\nrt &lt;- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)\ncondition &lt;- c(\"cong\", \"incong\", \"incong\", \"cong\", \"incong\",\n               \"cong\", \"incong\", \"incong\", \"cong\", \"cong\")\n\n\nHow many trials? What are the mean, median, min and max?\nOne trial looks odd. Which one? Use which.max(). Why are the mean and the median so different?\nMake rt_clean, without trials over 2000 ms. What is the mean now?\nWhat is the mean for \"cong\" and for \"incong\" trials, without the odd one? Drop it from both vectors, so they stay aligned.\nConvert rt to seconds."
   },
   {
-    "objectID": "sessions/01-reproducibility/exercises.html#markdown",
-    "href": "sessions/01-reproducibility/exercises.html#markdown",
+    "objectID": "sessions/01-reproducibility/exercises.html#missing-trials",
+    "href": "sessions/01-reproducibility/exercises.html#missing-trials",
     "title": "Session 1: Exercises",
-    "section": "2. Markdown",
-    "text": "2. Markdown\nIn your document, describe your PhD project with a ### heading, one bold and one italic word, a 3-item list and a link to your lab."
-  },
-  {
-    "objectID": "sessions/01-reproducibility/exercises.html#vectors",
-    "href": "sessions/01-reproducibility/exercises.html#vectors",
-    "title": "Session 1: Exercises",
-    "section": "3. Vectors",
-    "text": "3. Vectors\nStroop task, one participant, RT in ms:\n\nrt &lt;- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)\ncondition &lt;- c(\"cong\", \"incong\", \"incong\", \"cong\", \"incong\",\n               \"cong\", \"incong\", \"incong\", \"cong\", \"cong\")\n\n\nNumber of trials; mean, median, min, max RT.\nFind the suspicious trial (which.max()). Why do mean and median differ?\nCreate rt_clean without trials over 2000 ms. Recompute the mean.\nMean RT for \"cong\" and \"incong\" trials, without the slow one. Hint: drop it from both vectors.\nConvert rt to seconds (rt_s)."
-  },
-  {
-    "objectID": "sessions/01-reproducibility/exercises.html#missing-values-and-comparisons",
-    "href": "sessions/01-reproducibility/exercises.html#missing-values-and-comparisons",
-    "title": "Session 1: Exercises",
-    "section": "4. Missing values and comparisons",
-    "text": "4. Missing values and comparisons\nA second participant missed two trials:\n\nrt2 &lt;- c(523, NA, 487, 150, 601, 455, 2310, NA, 512, 498)\n\n\nHow many NAs? In which trials?\nMean RT, ignoring them.\nFlag implausible trials: faster than 200 ms or slower than 1500 ms. How many? What proportion of the non-missing trials? Hint: the mean of a logical vector is a proportion.\nPrint rt2[rt2 &gt; 200]. What went wrong? Keep only the trials that are both non-missing and plausible."
+    "section": "2. Missing trials",
+    "text": "2. Missing trials\nA second participant missed two trials:\n\nrt2 &lt;- c(523, NA, 487, 150, 601, 455, 2310, NA, 512, 498)\n\n\nHow many trials are missing, and which ones?\nWhat is the mean without them?\nTrials faster than 200 ms or slower than 1500 ms are implausible. How many are there? What proportion of the non-missing trials? The mean of TRUE/FALSE values is a proportion.\nTry rt2[rt2 &gt; 200]. Why do NAs appear? Keep only the trials that are present and plausible."
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#spot-the-bugs",
     "href": "sessions/01-reproducibility/exercises.html#spot-the-bugs",
     "title": "Session 1: Exercises",
-    "section": "5. Spot the bugs",
-    "text": "5. Spot the bugs\nThis code has five mistakes. Copy it, fix it, run it. One mistake gives no error, only a wrong answer: which one?\n\nscores &lt;- c(12, 15, 9, 20, 17)\ngroup &lt;- c(\"a\", \"b\", \"a\", \"b\", \"a\")\nmean(scores[group = \"a\"]\nmaen(scores[group == \"b\"])\nMean(scores)\nsummary(Scores)"
+    "section": "3. Spot the bugs",
+    "text": "3. Spot the bugs\nThis code has five mistakes. Fix them. One gives no error, just a wrong answer: which one?\n\nscores &lt;- c(12, 15, 9, 20, 17)\ngroup &lt;- c(\"a\", \"b\", \"a\", \"b\", \"a\")\nmean(scores[group = \"a\"]\nmaen(scores[group == \"b\"])\nMean(scores)\nsummary(Scores)"
   },
   {
-    "objectID": "sessions/01-reproducibility/exercises.html#factors-a-likert-item",
-    "href": "sessions/01-reproducibility/exercises.html#factors-a-likert-item",
+    "objectID": "sessions/01-reproducibility/exercises.html#a-likert-item",
+    "href": "sessions/01-reproducibility/exercises.html#a-likert-item",
     "title": "Session 1: Exercises",
-    "section": "6. Factors: a Likert item",
-    "text": "6. Factors: a Likert item\n“How often do you have trouble sleeping?”\n\nanswers &lt;- c(\"often\", \"never\", \"sometimes\", \"always\", \"often\", \"rarely\",\n             \"sometimes\", \"often\", \"never\", \"always\", \"sometimes\", \"often\")\n\n\ntable(answers). Is the order sensible?\nMake answers_f, an ordered factor with levels from \"never\" to \"always\". table() again.\nScores 1 to 5: as.numeric(answers_f). Mean score?\nA new participant answers \"Often\". Add it, rebuild the factor. What happens, and why?"
+    "section": "4. A Likert item",
+    "text": "4. A Likert item\nTwelve answers to “How often do you have trouble sleeping?”:\n\nanswers &lt;- c(\"often\", \"never\", \"sometimes\", \"always\", \"often\", \"rarely\",\n             \"sometimes\", \"often\", \"never\", \"always\", \"sometimes\", \"often\")\n\n\nRun table(answers). Does the order make sense?\nMake answers_f, an ordered factor from \"never\" to \"always\". Run table() again.\nas.numeric(answers_f) turns the answers into scores from 1 to 5. What is the mean score?\nSomeone answers \"Often\". Add it and rebuild the factor. What happens?"
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#a-data-frame-by-hand",
     "href": "sessions/01-reproducibility/exercises.html#a-data-frame-by-hand",
     "title": "Session 1: Exercises",
-    "section": "7. A data frame by hand",
-    "text": "7. A data frame by hand\n\n\n\nid\ngroup\nage\nmmse\n\n\n\n\nP01\npatient\n72\n21\n\n\nP02\ncontrol\n65\n29\n\n\nP03\npatient\n68\n23\n\n\nP04\ncontrol\n70\n28\n\n\nP05\npatient\n61\n25\n\n\nP06\ncontrol\n74\n27\n\n\n\n\nBuild it as participants (group as a factor). Check with str().\nAdd a column impaired: TRUE if mmse is below 24.\nPatients older than 65.\nMean mmse per group (tapply()).\nSort the rows by age (order())."
+    "section": "5. A data frame by hand",
+    "text": "5. A data frame by hand\n\n\n\nid\ngroup\nage\nmmse\n\n\n\n\nP01\npatient\n72\n21\n\n\nP02\ncontrol\n65\n29\n\n\nP03\npatient\n68\n23\n\n\nP04\ncontrol\n70\n28\n\n\nP05\npatient\n61\n25\n\n\nP06\ncontrol\n74\n27\n\n\n\n\nType it in as participants, with group as a factor. Check it with str().\nAdd a column impaired: TRUE when mmse is below 24.\nWhich patients are older than 65?\nWhat is the mean mmse in each group? Try tapply().\nSort the rows by age with order()."
   },
   {
-    "objectID": "sessions/01-reproducibility/exercises.html#your-first-function",
-    "href": "sessions/01-reproducibility/exercises.html#your-first-function",
+    "objectID": "sessions/01-reproducibility/exercises.html#your-first-functions",
+    "href": "sessions/01-reproducibility/exercises.html#your-first-functions",
     "title": "Session 1: Exercises",
-    "section": "8. Your first function",
-    "text": "8. Your first function\n\nWrite se(), the standard error of the mean, \\(s/\\sqrt{n}\\). Use it on rt_clean.\nMake it ignore NAs, and try it on rt2. Hint: sd(x, na.rm = TRUE), sum(!is.na(x)).\nWrite n_outliers(x, low = 200, high = 1500): the number of values below low or above high, ignoring NAs. Try n_outliers(rt2) and n_outliers(rt2, high = 600)."
+    "section": "6. Your first functions",
+    "text": "6. Your first functions\n\nWrite se(), the standard error of the mean, \\(s/\\sqrt{n}\\). Try it on rt_clean.\nNow try it on rt2. Make it ignore NAs: sd(x, na.rm = TRUE) and sum(!is.na(x)) help.\nWrite n_outliers(x, low = 200, high = 1500), which counts the values below low or above high. Try n_outliers(rt2), then n_outliers(rt2, high = 600)."
   },
   {
-    "objectID": "sessions/01-reproducibility/exercises.html#a-data-frame-sleep",
-    "href": "sessions/01-reproducibility/exercises.html#a-data-frame-sleep",
+    "objectID": "sessions/01-reproducibility/exercises.html#a-drug-trial-sleep",
+    "href": "sessions/01-reproducibility/exercises.html#a-drug-trial-sleep",
     "title": "Session 1: Exercises",
-    "section": "9. A data frame: sleep",
-    "text": "9. A data frame: sleep\nBuilt into R: extra hours of sleep (extra) for 10 patients (ID) under two drugs (group).\n\nstr(), head(), summary(). Rows and columns?\nMean extra per drug (tapply(), or subset twice).\nEvery patient took both drugs. Per patient, compute drug 2 - drug 1. How many are positive?\nWrite this sentence in your document, with inline code in place of the dots:\n\nOn average, drug 2 increased sleep by `{r} ...` hours more than drug 1,\nand `{r} ...` out of 10 patients slept more with drug 2."
+    "section": "7. A drug trial: sleep",
+    "text": "7. A drug trial: sleep\nsleep comes with R: extra hours of sleep (extra) for 10 patients (ID) under two drugs (group).\n\nLook at it with str(), head() and summary(). How many rows and columns?\nWhat is the mean extra for each drug?\nEvery patient took both drugs. For each patient, compute drug 2 minus drug 1. How many slept more with drug 2?"
   },
   {
-    "objectID": "sessions/01-reproducibility/exercises.html#a-figure-with-a-caption",
-    "href": "sessions/01-reproducibility/exercises.html#a-figure-with-a-caption",
+    "objectID": "sessions/01-reproducibility/exercises.html#sleep-deprivation-sleepstudy",
+    "href": "sessions/01-reproducibility/exercises.html#sleep-deprivation-sleepstudy",
     "title": "Session 1: Exercises",
-    "section": "10. A figure with a caption",
-    "text": "10. A figure with a caption\n\nboxplot(extra ~ group, data = sleep).\nAdd #| label: fig-... and #| fig-cap:. Reference it in the text with @fig-.... Render.\nAdd #| echo: false. What changes?"
+    "section": "8. Sleep deprivation: sleepstudy",
+    "text": "8. Sleep deprivation: sleepstudy\nReaction times of 18 subjects, one mean per day (Belenky et al., 2003). Days 0 and 1 were training and day 2 is the baseline. After day 2, subjects spent only 3 hours in bed per night.\n\nRead it: sleepstudy &lt;- read.csv(here::here(\"data\", \"sleepstudy.csv\")).\nHow many subjects are there?\nWhat is the mean reaction time on day 2, and on day 9?\nFor each subject, compute the change from day 2 to day 9. Put the two days in two data frames, check that Subject is in the same order, then subtract.\nHow many subjects slowed down? Who slowed down the most?\nDraw a hist() of the changes."
   },
   {
-    "objectID": "sessions/01-reproducibility/exercises.html#read-data-from-the-project",
-    "href": "sessions/01-reproducibility/exercises.html#read-data-from-the-project",
+    "objectID": "sessions/01-reproducibility/exercises.html#your-first-report",
+    "href": "sessions/01-reproducibility/exercises.html#your-first-report",
     "title": "Session 1: Exercises",
-    "section": "11. Read data from the project",
-    "text": "11. Read data from the project\nsleepstudy (Belenky et al., 2003): mean reaction time per day for 18 subjects. Days 0 and 1 were training, day 2 is the baseline. After day 2, subjects spent only 3 hours in bed per night.\n\nread.csv(here::here(\"data\", \"sleepstudy.csv\")).\nHow many subjects? (unique(), length())\nMean reaction time at baseline (day 2) and on day 9?\nPer subject, the change from day 2 to day 9. Hint: keep the rows of day 2 and of day 9 in two data frames; check that Subject is in the same order; subtract.\nHow many subjects slowed down? Who slowed down the most?\nhist() of the changes, with a figure caption.\nOne sentence with the mean change and the number of subjects who slowed down, all with inline code."
+    "section": "9. Your first report",
+    "text": "9. Your first report\n\nFile &gt; New File &gt; Quarto Document. Put your name as author, save it as session1-report.qmd and click Render.\nIn the header, replace format: html with the lines below and render again. What changed?\n\nformat:\n  html:\n    toc: true\n    toc-location: left\n\nWrite a few lines: a ### heading, one bold and one italic word, a short list and a link to a website."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/exercises.html#bring-in-your-analysis",
+    "href": "sessions/01-reproducibility/exercises.html#bring-in-your-analysis",
+    "title": "Session 1: Exercises",
+    "section": "10. Bring in your analysis",
+    "text": "10. Bring in your analysis\n\nCopy your exercise 8 code into chunks in the report. Render.\nGive the histogram chunk a label and a caption (#| label: fig-change, #| fig-cap: \"...\"). Refer to it in the text with @fig-change.\nAdd #| echo: false to the chunk that reads the data. What changes?"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/exercises.html#numbers-in-the-text",
+    "href": "sessions/01-reproducibility/exercises.html#numbers-in-the-text",
+    "title": "Session 1: Exercises",
+    "section": "11. Numbers in the text",
+    "text": "11. Numbers in the text\n\nWrite one sentence with the mean change and the number of subjects who slowed down. Use inline code, as in `{r} round(mean(change))`, never typed numbers.\nCopy your sleep code from exercise 7 into the report and complete this sentence:\n\nOn average, patients slept `{r} ...` hours more with drug 2 than with drug 1,\nand `{r} ...` out of 10 slept more with drug 2."
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#does-it-render-from-scratch",
     "href": "sessions/01-reproducibility/exercises.html#does-it-render-from-scratch",
     "title": "Session 1: Exercises",
     "section": "12. Does it render from scratch?",
-    "text": "12. Does it render from scratch?\n\nIn the console, type x &lt;- 42. In your document, add a chunk with x * 2. Render. What happens, and why?\nSession &gt; Restart R, then render again. Everything still works?\nAdd a last chunk with sessionInfo()."
+    "text": "12. Does it render from scratch?\n\nIn the console, type x &lt;- 42. In the report, add a chunk with x * 2. Render. What happens, and why?\nDelete that chunk, then Session &gt; Restart R and render again. Does everything still work?\nAdd a last chunk with sessionInfo()."
   },
   {
-    "objectID": "sessions/01-reproducibility/exercises.html#bonus-other-formats",
-    "href": "sessions/01-reproducibility/exercises.html#bonus-other-formats",
+    "objectID": "sessions/01-reproducibility/exercises.html#bonus-pdf-and-word",
+    "href": "sessions/01-reproducibility/exercises.html#bonus-pdf-and-word",
     "title": "Session 1: Exercises",
-    "section": "Bonus: Other formats",
-    "text": "Bonus: Other formats\nRender with\nformat:\n  html: default\n  typst: default\nYou get a PDF, no LaTeX needed. Does anything break?"
+    "section": "Bonus: PDF and Word",
+    "text": "Bonus: PDF and Word\n\nA PDF needs LaTeX. Install TinyTeX once, in the RStudio Terminal (not the Console): quarto install tinytex.\nAdd two formats to the header:\n\nformat:\n  html:\n    toc: true\n    toc-location: left\n  pdf: default\n  docx: default\n\nRender all three in the Terminal: quarto render session1-report.qmd. Open the PDF and the Word file. What differs from the HTML?"
   },
   {
     "objectID": "index.html",
@@ -152,7 +152,7 @@
     "href": "resources.html",
     "title": "Resources",
     "section": "",
-    "text": "Seeing Theory: probability and distributions (S4), inference (S5–S6), regression (S7)\nR Psychologist: CIs, power, p-values, Cohen’s d, correlation\nStatKey: bootstrap and randomisation tests\nGuess the Correlation; p-hacker; Spurious Correlations; Datasaurus Dozen",
+    "text": "Seeing Theory: probability and distributions (S4), inference (S5–S6), regression (S7)\nR Psychologist: CIs, power, p-values, Cohen’s d, correlation\nGuess the Correlation; p-hacker; Spurious Correlations; Datasaurus Dozen",
     "crumbs": [
       "Resources"
     ]
@@ -162,17 +162,7 @@
     "href": "resources.html#statistical-intuition-interactive",
     "title": "Resources",
     "section": "",
-    "text": "Seeing Theory: probability and distributions (S4), inference (S5–S6), regression (S7)\nR Psychologist: CIs, power, p-values, Cohen’s d, correlation\nStatKey: bootstrap and randomisation tests\nGuess the Correlation; p-hacker; Spurious Correlations; Datasaurus Dozen",
-    "crumbs": [
-      "Resources"
-    ]
-  },
-  {
-    "objectID": "resources.html#statistics-books",
-    "href": "resources.html#statistics-books",
-    "title": "Resources",
-    "section": "Statistics books",
-    "text": "Statistics books\n\nPoldrack, Statistical Thinking for the 21st Century and its R companion\nNavarro, Learning Statistics with R\nLakens, Improving Your Statistical Inferences\nIsmay, Kim, Valdivia, ModernDive\nLindeløv, Common statistical tests are linear models\nNature Methods, Points of Significance\nKass, Eden, Brown, Analysis of Neural Data (Springer, 2014); Durstewitz, Advanced Data Analysis in Neuroscience (Springer, 2017)",
+    "text": "Seeing Theory: probability and distributions (S4), inference (S5–S6), regression (S7)\nR Psychologist: CIs, power, p-values, Cohen’s d, correlation\nGuess the Correlation; p-hacker; Spurious Correlations; Datasaurus Dozen",
     "crumbs": [
       "Resources"
     ]
@@ -198,21 +188,11 @@
     ]
   },
   {
-    "objectID": "resources.html#reproducibility-and-pitfalls",
-    "href": "resources.html#reproducibility-and-pitfalls",
-    "title": "Resources",
-    "section": "Reproducibility and pitfalls",
-    "text": "Reproducibility and pitfalls\n\nThe Turing Way\nBaker (2016). 1,500 scientists lift the lid on reproducibility. Nature.\nButton et al. (2013). Power failure. Nat Rev Neurosci.\nBotvinik-Nezer et al. (2020). Variability in the analysis of a single neuroimaging dataset by many teams. Nature.\nMakin & Orban de Xivry (2019). Ten common statistical mistakes. eLife. Read this one.\nNieuwenhuis et al. (2011). Erroneous analyses of interactions in neuroscience. Nat Neurosci.\nBennett et al. (2009). The principled control of false positives in neuroimaging. SCAN.\nWasserstein & Lazar (2016). The ASA statement on p-values. Am Stat.\nWeissgerber et al. (2015). Beyond bar and line graphs. PLoS Biol.",
-    "crumbs": [
-      "Resources"
-    ]
-  },
-  {
     "objectID": "resources.html#beyond-this-course",
     "href": "resources.html#beyond-this-course",
     "title": "Resources",
     "section": "Beyond this course",
-    "text": "Beyond this course\n\nRepeated measures (trials, sessions, recordings per subject) are not independent. Here we average or pair; the proper tool is a mixed model: lme4; Yu et al. (2022), Beyond t test and ANOVA, Neuron.\nRobust/regularised regression: MASS::rlm(), robustbase::lmrob(), quantreg::rq(), glmnet.\nNeuro data in R: Neuroconductor, RNifti, eegUtils, eeguana, ggseg. Open data: OpenNeuro, OSF.",
+    "text": "Beyond this course\n\nRepeated measures (trials, sessions, recordings per subject) are not independent. Here we average or pair; the proper tool is a mixed model: lme4; Yu et al. (2022), Beyond t test and ANOVA, Neuron.\nNeuro data in R: Neuroconductor, eegUtils, eeguana, ggseg. Open data: OpenNeuro, OSF …",
     "crumbs": [
       "Resources"
     ]
@@ -355,7 +335,7 @@
     "href": "sessions/01-reproducibility/slides.html#anatomy-of-a-.qmd-file",
     "title": "Introduction",
     "section": "Anatomy of a .qmd file",
-    "text": "Anatomy of a .qmd file\n---\ntitle: \"Sleep deprivation: first look\"\nauthor: \"Your Name\"\nformat: html\n---\n\n## Data\n\n```{r}\n#| echo: false\nsleepstudy &lt;- read.csv(here::here(\"data\", \"sleepstudy.csv\"))\n```\n\nThe dataset contains `{r} nrow(sleepstudy)` measurements.\n\nYAML header between ---: title, author, format (html, docx, typst).\nMarkdown text: ## Section, **bold**, *italic*, - lists, $\\bar x$.\nCode chunks: run at render; options start with #|.\nInline code: numbers inside sentences, never typed by hand."
+    "text": "Anatomy of a .qmd file\n---\ntitle: \"Sleep deprivation: first look\"\nauthor: \"Your Name\"\nformat: html\n---\n\n## Data\n\n```{r}\n#| echo: false\nsleepstudy &lt;- read.csv(here::here(\"data\", \"sleepstudy.csv\"))\n```\n\nThe dataset contains `{r} nrow(sleepstudy)` measurements.\n\nYAML header between ---: title, author, format (html, pdf, docx).\nMarkdown text: ## Section, **bold**, *italic*, - lists, $\\bar x$.\nCode chunks: run at render; options start with #|.\nInline code: numbers inside sentences, never typed by hand."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#rendering-and-chunk-options",
