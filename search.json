@@ -142,7 +142,7 @@
     "href": "index.html",
     "title": "Statistics for Neuroscience - Level A",
     "section": "",
-    "text": "#\nDate\nTime\nTopic\nSlides\nExercises\nSolutions\n\n\n\n\n1\nMon 23/11\n10:30–12:30\nIntroduction to R and Quarto\nSlides\nExercises\n\n\n\n2\nThu 26/11\n10:30–12:30\nData manipulation\n\n\n\n\n\n3\nMon 30/11\n10:30–12:30\nVisualisation and EDA\n\n\n\n\n\n4\nWed 02/12\n14:30–16:30\nProbability and sampling\n\n\n\n\n\n5\nThu 17/12\n10:30–12:30\nEstimation and confidence intervals\n\n\n\n\n\n6\nMon 21/12\n10:30–12:30\nHypothesis testing\n\n\n\n\n\n7\nWed 13/01\n14:30–17:30\nLinear models\n\n\n\n\n\n\n\nDatasets\nAll in data/. Each exercise page links the ones it uses: save them in the data folder of your project.\n\n\nAcknowledgements\nBuilds on previous editions from Giovanni Saraceno (giovsaraceno/Statistics_for_Neuroscience) and Angela Andreella (angeella/PNC).",
+    "text": "#\nDate\nTime\nTopic\nSlides\nExercises\nSolutions\n\n\n\n\n1\nMon 23/11\n10:30–12:30\nIntroduction to R and Quarto\nSlides\nExercises\n\n\n\n2\nThu 26/11\n10:30–12:30\nData manipulation\n\n\n\n\n\n3\nMon 30/11\n10:30–12:30\nVisualisation and EDA\n\n\n\n\n\n4\nWed 02/12\n14:30–16:30\nProbability and sampling\n\n\n\n\n\n5\nThu 17/12\n10:30–12:30\nEstimation and confidence intervals\n\n\n\n\n\n6\nMon 21/12\n10:30–12:30\nHypothesis testing\n\n\n\n\n\n7\nWed 13/01\n14:30–17:30\nLinear models\n\n\n\n\n\n\n\nAcknowledgements\nBuilds on previous editions from Giovanni Saraceno (giovsaraceno/Statistics_for_Neuroscience) and Angela Andreella (angeella/PNC).",
     "crumbs": [
       "Schedule"
     ]
