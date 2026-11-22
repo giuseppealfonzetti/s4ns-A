@@ -29,7 +29,7 @@ We want conclusions that hold **in general**.
 
 Statistics quantifies how much we can generalise **despite**
 
-- measurement noise (scanner, electrodes, questionnaires);
+- measurement noise (instruments, questionnaires);
 - variability between and within subjects;
 - factors we did not measure.
 
@@ -79,7 +79,7 @@ A standard tool to deal with correlated responses is *mixed models*, but they we
 . . .
 
 - *Nature* survey of 1,576 researchers: more than 70% had tried and failed to replicate another scientist's experiments, more than half their own ([Baker, 2016](https://doi.org/10.1038/533452a)).
-- 70 teams analysed the same fMRI data to test the same 9 hypotheses. No two teams used the same workflow, and their results varied considerably ([Botvinik-Nezer et al., 2020](https://doi.org/10.1038/s41586-020-2314-9)).
+- 70 teams analysed the same brain-imaging data to test the same 9 hypotheses. No two teams used the same workflow, and their results varied considerably ([Botvinik-Nezer et al., 2020](https://doi.org/10.1038/s41586-020-2314-9)).
 
 . . .
 
@@ -277,7 +277,7 @@ subjects <- data.frame(
   id    = c("S01", "S02", "S03", "S04"),
   group = factor(c("patient", "control", "patient", "control")),
   age   = c(64, 58, 71, 60),
-  mmse  = c(22, 29, 19, 28)
+  score = c(22, 29, 19, 28)
 )
 subjects
 ```
@@ -296,7 +296,7 @@ str(subjects)
 #| echo: TRUE
 subjects$age                                       # a column
 subjects[2, ]                                      # a row
-subjects[subjects$age > 60 & subjects$mmse < 25, ] # rows: over 60 and MMSE below 25
+subjects[subjects$age > 60 & subjects$score < 24, ] # rows: over 60 and score below 24
 ```
 
 ## Functions {style="font-size: 0.6em;"}

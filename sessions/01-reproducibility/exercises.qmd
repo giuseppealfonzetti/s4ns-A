@@ -8,8 +8,6 @@ format:
     toc: true
 ---
 
-Part 1 is plain R, in a script. In Part 2 you turn your analysis into a Quarto report.
-
 **Data** (save into `data/` in your project): [sleepstudy.csv](../../data/sleepstudy.csv){download="sleepstudy.csv"}
 
 ::: {.callout-warning collapse="true"}
@@ -28,18 +26,18 @@ Open your course project, then *File > New File > R Script* and save it as `sess
 
 ## 1. Reaction times
 
-One participant, ten trials of a Stroop task, reaction times in ms:
+One participant, ten trials of a given task, reaction times in ms:
 
 ```{r}
 rt <- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)
-condition <- c("cong", "incong", "incong", "cong", "incong",
-               "cong", "incong", "incong", "cong", "cong")
+condition <- c("easy", "hard", "hard", "easy", "hard",
+               "easy", "hard", "hard", "easy", "easy")
 ```
 
 1. How many trials? What are the mean, median, min and max?
 2. One trial looks odd. Which one? Use `which.max()`. Why are the mean and the median so different?
 3. Make `rt_clean`, without trials over 2000 ms. What is the mean now?
-4. What is the mean for `"cong"` and for `"incong"` trials, without the odd one? Drop it from both vectors, so they stay aligned.
+4. What is the mean for `"easy"` and for `"hard"` trials, without the odd one? Drop it from both vectors, so they stay aligned.
 5. Convert `rt` to seconds.
 
 ## 2. Missing trials
@@ -85,7 +83,9 @@ answers <- c("often", "never", "sometimes", "always", "often", "rarely",
 
 ## 5. A data frame by hand
 
-| id | group | age | mmse |
+Six participants. `score` is a memory test, from 0 (worst) to 30 (best).
+
+| id | group | age | score |
 |---|---|---|---|
 | P01 | patient | 72 | 21 |
 | P02 | control | 65 | 29 |
@@ -95,9 +95,9 @@ answers <- c("often", "never", "sometimes", "always", "often", "rarely",
 | P06 | control | 74 | 27 |
 
 1. Type it in as `participants`, with `group` as a factor. Check it with `str()`.
-2. Add a column `impaired`: `TRUE` when `mmse` is below 24.
+2. Add a column `low_score`: `TRUE` when `score` is below 24.
 3. Which patients are older than 65?
-4. What is the mean `mmse` in each group? Try `tapply()`.
+4. What is the mean `score` in each group? Try `tapply()`.
 5. Sort the rows by age with `order()`.
 
 ## 6. Your first functions
