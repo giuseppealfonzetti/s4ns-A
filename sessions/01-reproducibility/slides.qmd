@@ -33,7 +33,7 @@ Statistics quantifies how much we can generalise **despite**
 - variability between and within subjects;
 - factors we did not measure.
 
-## Fisher's three ideas, in neuroscience {style="font-size: 0.6em;"}
+## Aims {style="font-size: 0.6em;"}
 
 **Study of populations**
 
@@ -54,7 +54,7 @@ Statistics quantifies how much we can generalise **despite**
 
 [Fisher (1925), *Statistical Methods for Research Workers*, ch. 1](https://psychclassics.yorku.ca/Fisher/Methods/chap1.htm)
 
-## A warning we will carry along {style="font-size: 0.6em;"}
+## Pay attention! {style="font-size: 0.6em;"}
 
 Classical tools (t-test, ANOVA, regression) assume **independent observations**.
 
@@ -69,7 +69,7 @@ Neuroscience data often are not:
 
 Ignoring this leads to **overconfidence** (underestimation of uncertainty)
 
-A standard tool to deal with correlated responses is *mixed models*, but they we will not cover them in this course. 
+A standard tool to deal with correlated responses is *mixed models*, but we will not cover them in this course. 
 
 ## The reproducibility crisis {style="font-size: 0.6em;"}
 
