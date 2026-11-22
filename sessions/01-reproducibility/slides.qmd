@@ -1,5 +1,5 @@
 ---
-title: "Introduction to R and Quarto"
+title: "Introduction"
 subtitle: "Statistics for Neuroscience - Level A"
 author: Giuseppe Alfonzetti
 format:
@@ -21,7 +21,7 @@ highlight-style: tango
 
 ## From a sample to general conclusions {style="font-size: 0.6em;"}
 
-We observe a **tiny portion** of the world: a few subjects, sessions, trials.
+We observe a **tiny portion** of the world, e.g. a few subjects, sessions, trials.
 
 We want conclusions that hold **in general**.
 
@@ -44,7 +44,7 @@ Statistics quantifies how much we can generalise **despite**
 
 **Study of variation**
 
-- Variability between subjects, across time, across space (voxels, channels).
+- Variability between subjects, across time, across space.
 
 . . .
 
@@ -62,36 +62,34 @@ Classical tools (t-test, ANOVA, regression) assume **independent observations**.
 
 Neuroscience data often are not:
 
-- 10 trials from one subject are more alike than 10 trials from 10 subjects;
+- 10 trials from one subject are more *similar* than 10 trials from 10 subjects;
 - the same questionnaire filled in 6 times by one participant gives correlated scores.
 
 . . .
 
-Ignoring this leads to **overconfidence** (standard errors too small) and too many false positives.
+Ignoring this leads to **overconfidence** (underestimation of uncertainty)
 
-In this course we keep it simple: one value per subject, or paired tests. The proper tool is **mixed models** (see Resources).
+A standard tool to deal with correlated responses is *mixed models*, but they we will not cover them in this course. 
 
 ## The reproducibility crisis {style="font-size: 0.6em;"}
 
 - **Reproducibility**: same data and same analysis give the same results.
 - **Replication**: new data on the same question give consistent results.
 
-[National Academies (2019)](https://doi.org/10.17226/25303)
-
 . . .
 
-- Survey of 1,576 researchers: more than 70% failed to replicate another scientist's experiment, more than half their own ([Baker, 2016](https://doi.org/10.1038/533452a)).
+- *Nature* survey of 1,576 researchers: more than 70% had tried and failed to replicate another scientist's experiments, more than half their own ([Baker, 2016](https://doi.org/10.1038/533452a)).
 - 70 teams analysed the same fMRI data to test the same 9 hypotheses. No two teams used the same workflow, and their results varied considerably ([Botvinik-Nezer et al., 2020](https://doi.org/10.1038/s41586-020-2314-9)).
 
 . . .
 
 Common threats: low statistical power, trying analyses until something is significant (p-hacking), hypotheses made up after seeing the results, unpublished null results, no shared data or code ([Munafò et al., 2017](https://doi.org/10.1038/s41562-016-0021)).
 
-## What we can do about it {style="font-size: 0.6em;"}
+## A starting point {style="font-size: 0.6em;"}
 
 - State the hypothesis **before** looking at the data.
-- Share **raw data** and **commented code**: every number in the paper comes from a script.
-- Write reports where text, code and results live **together** (Quarto, today).
+- Share **raw data** and **code**. Every number in the paper generated automatically.
+- Write reports where text, code and results live **together**.
 
 . . .
 
@@ -103,7 +101,6 @@ This is why we analyse data with code.
 
 ![](../../assets/ds_life_cycle.png){width=90% fig-align="center"}
 
-Import, tidy, transform: S2. Visualise: S3. Model: S4 to S7. Communicate: Quarto, today.
 
 Figure from Wickham, Çetinkaya-Rundel and Grolemund, [*R for Data Science*](https://r4ds.hadley.nz/intro), 2nd ed.
 
@@ -112,9 +109,6 @@ Figure from Wickham, Çetinkaya-Rundel and Grolemund, [*R for Data Science*](htt
 ## RStudio {style="font-size: 0.6em;"}
 
 ![](../../assets/rstudio.png){width=70% fig-align="center"}
-
-Panel 1, **Editor**: scripts and Quarto documents. Panel 2, **Console**: where code runs. Panel 3, **Environment**: your objects. Panel 4: **Files, Plots, Help**.
-
 
 ## Basic R grammar {style="font-size: 0.6em;"}
 
@@ -240,7 +234,7 @@ RT
 | `==`, `!=` | equal, not equal | `3 == 3` is `TRUE` |
 | `<`, `>`, `<=`, `>=` | comparisons | `5 > 2` is `TRUE` |
 | `%in%` | element in a set | `"a" %in% c("a","b")` is `TRUE` |
-| `&`, `\|`, `!` | and, or, not | `TRUE & FALSE` is `FALSE` |
+| `&`, `|`, `!` | and, or, not | `TRUE & FALSE` is `FALSE` |
 
 . . .
 
@@ -391,14 +385,11 @@ The dataset contains `{{r}} nrow(sleepstudy)` measurements.
 
 | Option | Effect |
 |---|---|
-| `#\| echo: false` | hide code, show results |
-| `#\| eval: false` | show code, don't run it |
-| `#\| include: false` | run, show nothing |
-| `#\| label: fig-rt` and `#\| fig-cap: "..."` | numbered figure, cite with `@fig-rt` |
+| `#| echo: false` | hide code, show results |
+| `#| eval: false` | show code, don't run it |
+| `#| include: false` | run, show nothing |
+| `#| label: fig-rt` and `#| fig-cap: "..."` | numbered figure, cite with `@fig-rt` |
 
-. . .
-
-From now on, **do all exercises inside a `.qmd`**.
 
 # Hands-on {background="#9B0014"}
 
