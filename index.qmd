@@ -13,6 +13,6 @@ toc: false
 | 5 | Thu 17/12 | 10:30–12:30 | Estimation and confidence intervals | | | |
 | 6 | Mon 21/12 | 10:30–12:30 | Hypothesis testing | | | |
 | 7 | Wed 13/01 | 14:30–17:30 | Linear models | | | |
-te e
+
 ### Acknowledgements
 Builds on previous editions from Giovanni Saraceno ([giovsaraceno/Statistics_for_Neuroscience](https://github.com/giovsaraceno/Statistics_for_Neuroscience)) and Angela Andreella ([angeella/PNC](https://github.com/angeella/PNC)).
