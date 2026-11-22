@@ -205,18 +205,18 @@
     "text": "From a sample to general conclusions\nWe observe a tiny portion of the world, e.g. a few subjects, sessions, trials.\nWe want conclusions that hold in general.\n\nStatistics quantifies how much we can generalise despite\n\nmeasurement noise (instruments, questionnaires);\nvariability between and within subjects;\nfactors we did not measure."
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#fishers-three-ideas-in-neuroscience",
-    "href": "sessions/01-reproducibility/slides.html#fishers-three-ideas-in-neuroscience",
+    "objectID": "sessions/01-reproducibility/slides.html#aims",
+    "href": "sessions/01-reproducibility/slides.html#aims",
     "title": "Introduction",
-    "section": "Fisher’s three ideas, in neuroscience",
-    "text": "Fisher’s three ideas, in neuroscience\nStudy of populations\n\n100 subjects scanned once: population across individuals.\n1 subject scanned daily for a year: population across time.\n\n\nStudy of variation\n\nVariability between subjects, across time, across space.\n\n\n\nData reduction\n\nFrom millions of numbers per subject to summaries (means, components, features).\n\nFisher (1925), Statistical Methods for Research Workers, ch. 1"
+    "section": "Aims",
+    "text": "Aims\nStudy of populations\n\n100 subjects scanned once: population across individuals.\n1 subject scanned daily for a year: population across time.\n\n\nStudy of variation\n\nVariability between subjects, across time, across space.\n\n\n\nData reduction\n\nFrom millions of numbers per subject to summaries (means, components, features).\n\nFisher (1925), Statistical Methods for Research Workers, ch. 1"
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#a-warning-we-will-carry-along",
-    "href": "sessions/01-reproducibility/slides.html#a-warning-we-will-carry-along",
+    "objectID": "sessions/01-reproducibility/slides.html#pay-attention",
+    "href": "sessions/01-reproducibility/slides.html#pay-attention",
     "title": "Introduction",
-    "section": "A warning we will carry along",
-    "text": "A warning we will carry along\nClassical tools (t-test, ANOVA, regression) assume independent observations.\n\nNeuroscience data often are not:\n\n10 trials from one subject are more similar than 10 trials from 10 subjects;\nthe same questionnaire filled in 6 times by one participant gives correlated scores.\n\n\n\nIgnoring this leads to overconfidence (underestimation of uncertainty)\nA standard tool to deal with correlated responses is mixed models, but they we will not cover them in this course."
+    "section": "Pay attention!",
+    "text": "Pay attention!\nClassical tools (t-test, ANOVA, regression) assume independent observations.\n\nNeuroscience data often are not:\n\n10 trials from one subject are more similar than 10 trials from 10 subjects;\nthe same questionnaire filled in 6 times by one participant gives correlated scores.\n\n\n\nIgnoring this leads to overconfidence (underestimation of uncertainty)\nA standard tool to deal with correlated responses is mixed models, but we will not cover them in this course."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#the-reproducibility-crisis",
