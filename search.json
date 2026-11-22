@@ -44,14 +44,14 @@
     "href": "sessions/01-reproducibility/exercises.html",
     "title": "Session 1: Exercises",
     "section": "",
-    "text": "Part 1 is plain R, in a script. In Part 2 you turn your analysis into a Quarto report.\nData (save into data/ in your project): sleepstudy.csv"
+    "text": "Data (save into data/ in your project): sleepstudy.csv"
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#reaction-times",
     "href": "sessions/01-reproducibility/exercises.html#reaction-times",
     "title": "Session 1: Exercises",
     "section": "1. Reaction times",
-    "text": "1. Reaction times\nOne participant, ten trials of a Stroop task, reaction times in ms:\n\nrt &lt;- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)\ncondition &lt;- c(\"cong\", \"incong\", \"incong\", \"cong\", \"incong\",\n               \"cong\", \"incong\", \"incong\", \"cong\", \"cong\")\n\n\nHow many trials? What are the mean, median, min and max?\nOne trial looks odd. Which one? Use which.max(). Why are the mean and the median so different?\nMake rt_clean, without trials over 2000 ms. What is the mean now?\nWhat is the mean for \"cong\" and for \"incong\" trials, without the odd one? Drop it from both vectors, so they stay aligned.\nConvert rt to seconds."
+    "text": "1. Reaction times\nOne participant, ten trials of a given task, reaction times in ms:\n\nrt &lt;- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)\ncondition &lt;- c(\"easy\", \"hard\", \"hard\", \"easy\", \"hard\",\n               \"easy\", \"hard\", \"hard\", \"easy\", \"easy\")\n\n\nHow many trials? What are the mean, median, min and max?\nOne trial looks odd. Which one? Use which.max(). Why are the mean and the median so different?\nMake rt_clean, without trials over 2000 ms. What is the mean now?\nWhat is the mean for \"easy\" and for \"hard\" trials, without the odd one? Drop it from both vectors, so they stay aligned.\nConvert rt to seconds."
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#missing-trials",
@@ -79,7 +79,7 @@
     "href": "sessions/01-reproducibility/exercises.html#a-data-frame-by-hand",
     "title": "Session 1: Exercises",
     "section": "5. A data frame by hand",
-    "text": "5. A data frame by hand\n\n\n\nid\ngroup\nage\nmmse\n\n\n\n\nP01\npatient\n72\n21\n\n\nP02\ncontrol\n65\n29\n\n\nP03\npatient\n68\n23\n\n\nP04\ncontrol\n70\n28\n\n\nP05\npatient\n61\n25\n\n\nP06\ncontrol\n74\n27\n\n\n\n\nType it in as participants, with group as a factor. Check it with str().\nAdd a column impaired: TRUE when mmse is below 24.\nWhich patients are older than 65?\nWhat is the mean mmse in each group? Try tapply().\nSort the rows by age with order()."
+    "text": "5. A data frame by hand\nSix participants. score is a memory test, from 0 (worst) to 30 (best).\n\n\n\nid\ngroup\nage\nscore\n\n\n\n\nP01\npatient\n72\n21\n\n\nP02\ncontrol\n65\n29\n\n\nP03\npatient\n68\n23\n\n\nP04\ncontrol\n70\n28\n\n\nP05\npatient\n61\n25\n\n\nP06\ncontrol\n74\n27\n\n\n\n\nType it in as participants, with group as a factor. Check it with str().\nAdd a column low_score: TRUE when score is below 24.\nWhich patients are older than 65?\nWhat is the mean score in each group? Try tapply().\nSort the rows by age with order()."
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#your-first-functions",
@@ -202,7 +202,7 @@
     "href": "sessions/01-reproducibility/slides.html#from-a-sample-to-general-conclusions",
     "title": "Introduction",
     "section": "From a sample to general conclusions",
-    "text": "From a sample to general conclusions\nWe observe a tiny portion of the world, e.g. a few subjects, sessions, trials.\nWe want conclusions that hold in general.\n\nStatistics quantifies how much we can generalise despite\n\nmeasurement noise (scanner, electrodes, questionnaires);\nvariability between and within subjects;\nfactors we did not measure."
+    "text": "From a sample to general conclusions\nWe observe a tiny portion of the world, e.g. a few subjects, sessions, trials.\nWe want conclusions that hold in general.\n\nStatistics quantifies how much we can generalise despite\n\nmeasurement noise (instruments, questionnaires);\nvariability between and within subjects;\nfactors we did not measure."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#fishers-three-ideas-in-neuroscience",
@@ -223,7 +223,7 @@
     "href": "sessions/01-reproducibility/slides.html#the-reproducibility-crisis",
     "title": "Introduction",
     "section": "The reproducibility crisis",
-    "text": "The reproducibility crisis\n\nReproducibility: same data and same analysis give the same results.\nReplication: new data on the same question give consistent results.\n\n\n\nNature survey of 1,576 researchers: more than 70% had tried and failed to replicate another scientist’s experiments, more than half their own (Baker, 2016).\n70 teams analysed the same fMRI data to test the same 9 hypotheses. No two teams used the same workflow, and their results varied considerably (Botvinik-Nezer et al., 2020).\n\n\n\nCommon threats: low statistical power, trying analyses until something is significant (p-hacking), hypotheses made up after seeing the results, unpublished null results, no shared data or code (Munafò et al., 2017)."
+    "text": "The reproducibility crisis\n\nReproducibility: same data and same analysis give the same results.\nReplication: new data on the same question give consistent results.\n\n\n\nNature survey of 1,576 researchers: more than 70% had tried and failed to replicate another scientist’s experiments, more than half their own (Baker, 2016).\n70 teams analysed the same brain-imaging data to test the same 9 hypotheses. No two teams used the same workflow, and their results varied considerably (Botvinik-Nezer et al., 2020).\n\n\n\nCommon threats: low statistical power, trying analyses until something is significant (p-hacking), hypotheses made up after seeing the results, unpublished null results, no shared data or code (Munafò et al., 2017)."
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#a-starting-point",
@@ -300,14 +300,14 @@
     "href": "sessions/01-reproducibility/slides.html#data-frames",
     "title": "Introduction",
     "section": "Data frames",
-    "text": "Data frames\nOne row per observation, one column per variable. Columns can have different types.\n\nsubjects &lt;- data.frame(\n  id    = c(\"S01\", \"S02\", \"S03\", \"S04\"),\n  group = factor(c(\"patient\", \"control\", \"patient\", \"control\")),\n  age   = c(64, 58, 71, 60),\n  mmse  = c(22, 29, 19, 28)\n)\nsubjects\n\n   id   group age mmse\n1 S01 patient  64   22\n2 S02 control  58   29\n3 S03 patient  71   19\n4 S04 control  60   28"
+    "text": "Data frames\nOne row per observation, one column per variable. Columns can have different types.\n\nsubjects &lt;- data.frame(\n  id    = c(\"S01\", \"S02\", \"S03\", \"S04\"),\n  group = factor(c(\"patient\", \"control\", \"patient\", \"control\")),\n  age   = c(64, 58, 71, 60),\n  score = c(22, 29, 19, 28)\n)\nsubjects\n\n   id   group age score\n1 S01 patient  64    22\n2 S02 control  58    29\n3 S03 patient  71    19\n4 S04 control  60    28"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#data-frames-access",
     "href": "sessions/01-reproducibility/slides.html#data-frames-access",
     "title": "Introduction",
     "section": "Data frames: access",
-    "text": "Data frames: access\n\ndim(subjects)\n\n[1] 4 4\n\nstr(subjects)\n\n'data.frame':   4 obs. of  4 variables:\n $ id   : chr  \"S01\" \"S02\" \"S03\" \"S04\"\n $ group: Factor w/ 2 levels \"control\",\"patient\": 2 1 2 1\n $ age  : num  64 58 71 60\n $ mmse : num  22 29 19 28\n\n\n\n\nsubjects$age                                       # a column\n\n[1] 64 58 71 60\n\nsubjects[2, ]                                      # a row\n\n   id   group age mmse\n2 S02 control  58   29\n\nsubjects[subjects$age &gt; 60 & subjects$mmse &lt; 25, ] # rows: over 60 and MMSE below 25\n\n   id   group age mmse\n1 S01 patient  64   22\n3 S03 patient  71   19"
+    "text": "Data frames: access\n\ndim(subjects)\n\n[1] 4 4\n\nstr(subjects)\n\n'data.frame':   4 obs. of  4 variables:\n $ id   : chr  \"S01\" \"S02\" \"S03\" \"S04\"\n $ group: Factor w/ 2 levels \"control\",\"patient\": 2 1 2 1\n $ age  : num  64 58 71 60\n $ score: num  22 29 19 28\n\n\n\n\nsubjects$age                                       # a column\n\n[1] 64 58 71 60\n\nsubjects[2, ]                                      # a row\n\n   id   group age score\n2 S02 control  58    29\n\nsubjects[subjects$age &gt; 60 & subjects$score &lt; 24, ] # rows: over 60 and score below 24\n\n   id   group age score\n1 S01 patient  64    22\n3 S03 patient  71    19"
   },
   {
     "objectID": "sessions/01-reproducibility/slides.html#functions",

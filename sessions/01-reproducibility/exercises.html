@@ -256,7 +256,6 @@ window.Quarto = {
 </header>
 
 
-<p>Part 1 is plain R, in a script. In Part 2 you turn your analysis into a Quarto report.</p>
 <p><strong>Data</strong> (save into <code>data/</code> in your project): <a href="../../data/sleepstudy.csv" download="sleepstudy.csv">sleepstudy.csv</a></p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -284,17 +283,17 @@ No R on your laptop yet?
 <p>Open your course project, then <em>File &gt; New File &gt; R Script</em> and save it as <code>session1.R</code>. Run a line with Ctrl+Enter (Cmd+Enter on a Mac).</p>
 <section id="reaction-times" class="level2">
 <h2 class="anchored" data-anchor-id="reaction-times">1. Reaction times</h2>
-<p>One participant, ten trials of a Stroop task, reaction times in ms:</p>
+<p>One participant, ten trials of a given task, reaction times in ms:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rt <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">523</span>, <span class="dv">487</span>, <span class="dv">601</span>, <span class="dv">455</span>, <span class="dv">2310</span>, <span class="dv">512</span>, <span class="dv">498</span>, <span class="dv">577</span>, <span class="dv">466</span>, <span class="dv">540</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>condition <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"cong"</span>, <span class="st">"incong"</span>, <span class="st">"incong"</span>, <span class="st">"cong"</span>, <span class="st">"incong"</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"cong"</span>, <span class="st">"incong"</span>, <span class="st">"incong"</span>, <span class="st">"cong"</span>, <span class="st">"cong"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>condition <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"easy"</span>, <span class="st">"hard"</span>, <span class="st">"hard"</span>, <span class="st">"easy"</span>, <span class="st">"hard"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"easy"</span>, <span class="st">"hard"</span>, <span class="st">"hard"</span>, <span class="st">"easy"</span>, <span class="st">"easy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
 <li>How many trials? What are the mean, median, min and max?</li>
 <li>One trial looks odd. Which one? Use <code>which.max()</code>. Why are the mean and the median so different?</li>
 <li>Make <code>rt_clean</code>, without trials over 2000 ms. What is the mean now?</li>
-<li>What is the mean for <code>"cong"</code> and for <code>"incong"</code> trials, without the odd one? Drop it from both vectors, so they stay aligned.</li>
+<li>What is the mean for <code>"easy"</code> and for <code>"hard"</code> trials, without the odd one? Drop it from both vectors, so they stay aligned.</li>
 <li>Convert <code>rt</code> to seconds.</li>
 </ol>
 </section>
@@ -339,13 +338,14 @@ No R on your laptop yet?
 </section>
 <section id="a-data-frame-by-hand" class="level2">
 <h2 class="anchored" data-anchor-id="a-data-frame-by-hand">5. A data frame by hand</h2>
+<p>Six participants. <code>score</code> is a memory test, from 0 (worst) to 30 (best).</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th>id</th>
 <th>group</th>
 <th>age</th>
-<th>mmse</th>
+<th>score</th>
 </tr>
 </thead>
 <tbody>
@@ -389,9 +389,9 @@ No R on your laptop yet?
 </table>
 <ol type="1">
 <li>Type it in as <code>participants</code>, with <code>group</code> as a factor. Check it with <code>str()</code>.</li>
-<li>Add a column <code>impaired</code>: <code>TRUE</code> when <code>mmse</code> is below 24.</li>
+<li>Add a column <code>low_score</code>: <code>TRUE</code> when <code>score</code> is below 24.</li>
 <li>Which patients are older than 65?</li>
-<li>What is the mean <code>mmse</code> in each group? Try <code>tapply()</code>.</li>
+<li>What is the mean <code>score</code> in each group? Try <code>tapply()</code>.</li>
 <li>Sort the rows by age with <code>order()</code>.</li>
 </ol>
 </section>

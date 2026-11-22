@@ -1073,7 +1073,7 @@ Giuseppe Alfonzetti
 <div class="fragment">
 <p>Statistics quantifies how much we can generalise <strong>despite</strong></p>
 <ul>
-<li>measurement noise (scanner, electrodes, questionnaires);</li>
+<li>measurement noise (instruments, questionnaires);</li>
 <li>variability between and within subjects;</li>
 <li>factors we did not measure.</li>
 </ul>
@@ -1124,7 +1124,7 @@ Giuseppe Alfonzetti
 <div class="fragment">
 <ul>
 <li><em>Nature</em> survey of 1,576 researchers: more than 70% had tried and failed to replicate another scientist’s experiments, more than half their own (<a href="https://doi.org/10.1038/533452a">Baker, 2016</a>).</li>
-<li>70 teams analysed the same fMRI data to test the same 9 hypotheses. No two teams used the same workflow, and their results varied considerably (<a href="https://doi.org/10.1038/s41586-020-2314-9">Botvinik-Nezer et al., 2020</a>).</li>
+<li>70 teams analysed the same brain-imaging data to test the same 9 hypotheses. No two teams used the same workflow, and their results varied considerably (<a href="https://doi.org/10.1038/s41586-020-2314-9">Botvinik-Nezer et al., 2020</a>).</li>
 </ul>
 </div>
 <div class="fragment">
@@ -1377,15 +1377,15 @@ Levels: never &lt; often &lt; always</code></pre>
 <span id="cb42-2"><a></a>  <span class="at">id    =</span> <span class="fu">c</span>(<span class="st">&quot;S01&quot;</span>, <span class="st">&quot;S02&quot;</span>, <span class="st">&quot;S03&quot;</span>, <span class="st">&quot;S04&quot;</span>),</span>
 <span id="cb42-3"><a></a>  <span class="at">group =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;patient&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;patient&quot;</span>, <span class="st">&quot;control&quot;</span>)),</span>
 <span id="cb42-4"><a></a>  <span class="at">age   =</span> <span class="fu">c</span>(<span class="dv">64</span>, <span class="dv">58</span>, <span class="dv">71</span>, <span class="dv">60</span>),</span>
-<span id="cb42-5"><a></a>  <span class="at">mmse  =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">29</span>, <span class="dv">19</span>, <span class="dv">28</span>)</span>
+<span id="cb42-5"><a></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">29</span>, <span class="dv">19</span>, <span class="dv">28</span>)</span>
 <span id="cb42-6"><a></a>)</span>
 <span id="cb42-7"><a></a>subjects</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   id   group age mmse
-1 S01 patient  64   22
-2 S02 control  58   29
-3 S03 patient  71   19
-4 S04 control  60   28</code></pre>
+<pre><code>   id   group age score
+1 S01 patient  64    22
+2 S02 control  58    29
+3 S03 patient  71    19
+4 S04 control  60    28</code></pre>
 </div>
 </div>
 </section>
@@ -1402,7 +1402,7 @@ Levels: never &lt; often &lt; always</code></pre>
  $ id   : chr  &quot;S01&quot; &quot;S02&quot; &quot;S03&quot; &quot;S04&quot;
  $ group: Factor w/ 2 levels &quot;control&quot;,&quot;patient&quot;: 2 1 2 1
  $ age  : num  64 58 71 60
- $ mmse : num  22 29 19 28</code></pre>
+ $ score: num  22 29 19 28</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -1413,14 +1413,14 @@ Levels: never &lt; often &lt; always</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>subjects[<span class="dv">2</span>, ]                                      <span class="co"># a row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   id   group age mmse
-2 S02 control  58   29</code></pre>
+<pre><code>   id   group age score
+2 S02 control  58    29</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>subjects[subjects<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">60</span> <span class="sc">&amp;</span> subjects<span class="sc">$</span>mmse <span class="sc">&lt;</span> <span class="dv">25</span>, ] <span class="co"># rows: over 60 and MMSE below 25</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>subjects[subjects<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">60</span> <span class="sc">&amp;</span> subjects<span class="sc">$</span>score <span class="sc">&lt;</span> <span class="dv">24</span>, ] <span class="co"># rows: over 60 and score below 24</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   id   group age mmse
-1 S01 patient  64   22
-3 S03 patient  71   19</code></pre>
+<pre><code>   id   group age score
+1 S01 patient  64    22
+3 S03 patient  71    19</code></pre>
 </div>
 </div>
 </div>
