@@ -7,18 +7,16 @@ subtitle: "Free and online"
 
 - [Seeing Theory](https://seeing-theory.brown.edu): [probability](https://seeing-theory.brown.edu/basic-probability/index.html) and [distributions](https://seeing-theory.brown.edu/probability-distributions/index.html) (S4), [inference](https://seeing-theory.brown.edu/frequentist-inference/index.html) (S5–S6), [regression](https://seeing-theory.brown.edu/regression-analysis/index.html) (S7)
 - R Psychologist: [CIs](https://rpsychologist.com/d3/CI/), [power](https://rpsychologist.com/d3/NHST/), [p-values](https://rpsychologist.com/pvalue/), [Cohen's d](https://rpsychologist.com/cohend/), [correlation](https://rpsychologist.com/correlation/)
-- [StatKey](https://www.lock5stat.com/StatKey/): bootstrap and randomisation tests
 - [Guess the Correlation](https://www.guessthecorrelation.com); [p-hacker](https://shinyapps.org/apps/p-hacker/); [Spurious Correlations](https://www.tylervigen.com/spurious-correlations); [Datasaurus Dozen](https://jumpingrivers.github.io/datasauRus/)
 
-## Statistics books
+<!-- ## Statistics books
 
 - Poldrack, [*Statistical Thinking for the 21st Century*](https://statsthinking21.github.io/statsthinking21-core-site/) and its [R companion](https://statsthinking21.github.io/statsthinking21-R-site/)
 - Navarro, [*Learning Statistics with R*](https://learningstatisticswithr.com)
 - Lakens, [*Improving Your Statistical Inferences*](https://lakens.github.io/statistical_inferences/)
 - Ismay, Kim, Valdivia, [*ModernDive*](https://moderndive.com)
 - Lindeløv, [*Common statistical tests are linear models*](https://lindeloev.github.io/tests-as-linear/)
-- Nature Methods, [*Points of Significance*](https://www.nature.com/collections/qghhqm)
-- Kass, Eden, Brown, *Analysis of Neural Data* (Springer, 2014); Durstewitz, *Advanced Data Analysis in Neuroscience* (Springer, 2017)
+- Kass, Eden, Brown, *Analysis of Neural Data* (Springer, 2014); Durstewitz, *Advanced Data Analysis in Neuroscience* (Springer, 2017) -->
 
 ## R, data and Quarto
 
@@ -36,20 +34,7 @@ subtitle: "Free and online"
 - Wickham et al., [*ggplot2*](https://ggplot2-book.org); Wilke, [*Fundamentals of Data Visualization*](https://clauswilke.com/dataviz/)
 - Colour-blind safe palettes: [viridis](https://sjmgarnier.github.io/viridis/), [ColorBrewer](https://colorbrewer2.org)
 
-## Reproducibility and pitfalls
-
-- [*The Turing Way*](https://book.the-turing-way.org)
-- Baker (2016). [1,500 scientists lift the lid on reproducibility](https://doi.org/10.1038/533452a). *Nature*.
-- Button et al. (2013). [Power failure](https://doi.org/10.1038/nrn3475). *Nat Rev Neurosci*.
-- Botvinik-Nezer et al. (2020). [Variability in the analysis of a single neuroimaging dataset by many teams](https://doi.org/10.1038/s41586-020-2314-9). *Nature*.
-- Makin & Orban de Xivry (2019). [Ten common statistical mistakes](https://doi.org/10.7554/eLife.48175). *eLife*. **Read this one.**
-- Nieuwenhuis et al. (2011). [Erroneous analyses of interactions in neuroscience](https://doi.org/10.1038/nn.2886). *Nat Neurosci*.
-- Bennett et al. (2009). [The principled control of false positives in neuroimaging](https://doi.org/10.1093/scan/nsp053). *SCAN*.
-- Wasserstein & Lazar (2016). [The ASA statement on p-values](https://doi.org/10.1080/00031305.2016.1154108). *Am Stat*.
-- Weissgerber et al. (2015). [Beyond bar and line graphs](https://doi.org/10.1371/journal.pbio.1002128). *PLoS Biol*.
-
 ## Beyond this course
 
 - **Repeated measures** (trials, sessions, recordings per subject) are not independent. Here we average or pair; the proper tool is a mixed model: [`lme4`](https://cran.r-project.org/package=lme4); Yu et al. (2022), [Beyond t test and ANOVA](https://doi.org/10.1016/j.neuron.2021.10.030), *Neuron*.
-- **Robust/regularised regression:** `MASS::rlm()`, `robustbase::lmrob()`, `quantreg::rq()`, `glmnet`.
-- **Neuro data in R:** [Neuroconductor](https://neuroconductor.org), `RNifti`, [`eegUtils`](https://craddm.github.io/eegUtils/), [`eeguana`](https://github.com/bnicenboim/eeguana), [`ggseg`](https://github.com/ggseg/ggseg). Open data: [OpenNeuro](https://openneuro.org), [OSF](https://osf.io).
+- **Neuro data in R:** [Neuroconductor](https://neuroconductor.org), [`eegUtils`](https://craddm.github.io/eegUtils/), [`eeguana`](https://github.com/bnicenboim/eeguana), [`ggseg`](https://github.com/ggseg/ggseg). Open data: [OpenNeuro](https://openneuro.org), [OSF](https://osf.io) ...
