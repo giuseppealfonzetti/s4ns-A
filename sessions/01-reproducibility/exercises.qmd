@@ -34,10 +34,10 @@ condition <- c("easy", "hard", "hard", "easy", "hard",
                "easy", "hard", "hard", "easy", "easy")
 ```
 
-1. How many trials? What are the mean, median, min and max?
+1. How many trials? What are the mean, median, min and max? `median()`, `min()` and `max()` work like `mean()`.
 2. One trial looks odd. Which one? Use `which.max()`. Why are the mean and the median so different?
-3. Make `rt_clean`, without trials over 2000 ms. What is the mean now?
-4. What is the mean for `"easy"` and for `"hard"` trials, without the odd one? Drop it from both vectors, so they stay aligned.
+3. Make `rt_clean`, without trials over 2000 ms. What is the mean now? `keep <- rt < 2000` marks the trials to keep, and `rt[keep]` keeps them.
+4. What is the mean for `"easy"` and for `"hard"` trials, without the odd one? Use `keep` on both vectors, `rt[keep]` and `condition[keep]`, so they stay aligned.
 5. Convert `rt` to seconds.
 
 ## 2. Missing trials
@@ -79,7 +79,7 @@ answers <- c("often", "never", "sometimes", "always", "often", "rarely",
 1. Run `table(answers)`. Does the order make sense?
 2. Make `answers_f`, an ordered factor from `"never"` to `"always"`. Run `table()` again.
 3. `as.numeric(answers_f)` turns the answers into scores from 1 to 5. What is the mean score?
-4. Someone answers `"Often"`. Add it and rebuild the factor. What happens?
+4. Someone answers `"Often"`. Add it with `c(answers, "Often")` and rebuild the factor. What happens?
 
 ## 5. A data frame by hand
 
@@ -95,10 +95,10 @@ Six participants. `score` is a memory test, from 0 (worst) to 30 (best).
 | P06 | control | 74 | 27 |
 
 1. Type it in as `participants`, with `group` as a factor. Check it with `str()`.
-2. Add a column `low_score`: `TRUE` when `score` is below 24.
+2. Add a column `low_score`: `TRUE` when `score` is below 24. `participants$low_score <- ...` adds a column.
 3. Which patients are older than 65?
-4. What is the mean `score` in each group? Try `tapply()`.
-5. Sort the rows by age with `order()`.
+4. What is the mean `score` in each group? `participants$score[participants$group == "patient"]` keeps the patients' scores: take their mean, then do the same for the controls.
+5. Sort the rows by age. `order(participants$age)` gives the new row order: use it as `participants[order(participants$age), ]`.
 
 ## 6. Your first functions
 
@@ -110,20 +110,21 @@ Six participants. `score` is a memory test, from 0 (worst) to 30 (best).
 
 `sleep` comes with R: extra hours of sleep (`extra`) for 10 patients (`ID`) under two drugs (`group`).
 
-1. Look at it with `str()`, `head()` and `summary()`. How many rows and columns?
-2. What is the mean `extra` for each drug?
-3. Every patient took both drugs. For each patient, compute drug 2 minus drug 1. How many slept more with drug 2?
+1. Look at it with `str()`, `head()` (the first rows) and `summary()` (a summary of each column). How many rows and columns?
+2. What is the mean `extra` for each drug? As in exercise 5, one drug at a time.
+3. Every patient took both drugs. For each patient, compute drug 2 minus drug 1. `sleep$extra[sleep$group == "2"]` gives the values under drug 2; the patients are in the same order under both drugs, so you can subtract. How many slept more with drug 2?
 
 ## 8. Sleep deprivation: `sleepstudy`
 
 Reaction times of 18 subjects, one mean per day ([Belenky et al., 2003](https://doi.org/10.1046/j.1365-2869.2003.00337.x)). Days 0 and 1 were training and day 2 is the baseline. After day 2, subjects spent only 3 hours in bed per night.
 
-1. Read it: `sleepstudy <- read.csv(here::here("data", "sleepstudy.csv"))`.
-2. How many subjects are there?
-3. What is the mean reaction time on day 2, and on day 9?
-4. For each subject, compute the change from day 2 to day 9. Put the two days in two data frames, check that `Subject` is in the same order, then subtract.
-5. How many subjects slowed down? Who slowed down the most?
-6. Draw a `hist()` of the changes.
+1. Download `sleepstudy.csv` from the **Data** link at the top of this page and save it in the `data` folder of your project.
+2. Read it: `sleepstudy <- read.csv(here::here("data", "sleepstudy.csv"))`.
+3. How many subjects are there? `unique(sleepstudy$Subject)` lists each subject once, and `length()` counts them.
+4. What is the mean reaction time on day 2, and on day 9? `sleepstudy$Reaction[sleepstudy$Days == 2]` gives the reaction times of day 2.
+5. For each subject, compute the change from day 2 to day 9. Put the two days in two data frames, `base` and `day9`. Check that `Subject` is in the same order: `all(base$Subject == day9$Subject)` is `TRUE` if it is. Then subtract.
+6. How many subjects slowed down? Who slowed down the most? `which.max(change)` gives a position: use it on the `Subject` column.
+7. Draw a histogram of the changes: `hist(change)`.
 
 # Part 2: Quarto
 
@@ -143,13 +144,13 @@ format:
 
 ## 10. Bring in your analysis
 
-1. Copy your exercise 8 code into chunks in the report. Render.
-2. Give the histogram chunk a label and a caption (`#| label: fig-change`, `#| fig-cap: "..."`). Refer to it in the text with `@fig-change`.
+1. Copy your exercise 8 code into chunks in the report. Insert a chunk with Ctrl+Alt+I (Cmd+Option+I on a Mac). Render.
+2. Give the histogram chunk a label and a caption (`#| label: fig-change`, `#| fig-cap: "..."`). Refer to it in the text with `@fig-change`. Add axis labels: `hist(change, xlab = "Change in reaction time (ms)", main = NULL)`.
 3. Add `#| echo: false` to the chunk that reads the data. What changes?
 
 ## 11. Numbers in the text
 
-1. Write one sentence with the mean change and the number of subjects who slowed down. Use inline code, as in `` `{{r}} round(mean(change))` ``, never typed numbers.
+1. Write one sentence with the mean change and the number of subjects who slowed down. Use inline code, as in `` `{{r}} round(mean(change))` ``, never typed numbers. `round(x, 2)` keeps 2 decimals.
 2. Copy your `sleep` code from exercise 7 into the report and complete this sentence:
 
 ```markdown
@@ -165,7 +166,7 @@ and `{{r}} ...` out of 10 slept more with drug 2.
 
 ## Bonus: PDF and Word
 
-1. A PDF needs LaTeX. Install TinyTeX once, in the RStudio **Terminal** (not the Console): `quarto install tinytex`.
+1. A PDF needs LaTeX. Install TinyTeX once, in the RStudio **Terminal**, the tab next to the Console: `quarto install tinytex`.
 2. Add two formats to the header:
 
 ```yaml
