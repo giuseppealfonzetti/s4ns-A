@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giuseppe">
-<meta name="dcterms.date" content="2026-11-22">
+<meta name="dcterms.date" content="2026-11-23">
 
 <title>Session 1: Exercises – Statistics for Neuroscience A</title>
 <style>
@@ -244,7 +244,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 22, 2026</p>
+      <p class="date">November 23, 2026</p>
     </div>
   </div>
   
@@ -290,10 +290,10 @@ No R on your laptop yet?
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"easy"</span>, <span class="st">"hard"</span>, <span class="st">"hard"</span>, <span class="st">"easy"</span>, <span class="st">"easy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
-<li>How many trials? What are the mean, median, min and max?</li>
+<li>How many trials? What are the mean, median, min and max? <code>median()</code>, <code>min()</code> and <code>max()</code> work like <code>mean()</code>.</li>
 <li>One trial looks odd. Which one? Use <code>which.max()</code>. Why are the mean and the median so different?</li>
-<li>Make <code>rt_clean</code>, without trials over 2000 ms. What is the mean now?</li>
-<li>What is the mean for <code>"easy"</code> and for <code>"hard"</code> trials, without the odd one? Drop it from both vectors, so they stay aligned.</li>
+<li>Make <code>rt_clean</code>, without trials over 2000 ms. What is the mean now? <code>keep &lt;- rt &lt; 2000</code> marks the trials to keep, and <code>rt[keep]</code> keeps them.</li>
+<li>What is the mean for <code>"easy"</code> and for <code>"hard"</code> trials, without the odd one? Use <code>keep</code> on both vectors, <code>rt[keep]</code> and <code>condition[keep]</code>, so they stay aligned.</li>
 <li>Convert <code>rt</code> to seconds.</li>
 </ol>
 </section>
@@ -333,7 +333,7 @@ No R on your laptop yet?
 <li>Run <code>table(answers)</code>. Does the order make sense?</li>
 <li>Make <code>answers_f</code>, an ordered factor from <code>"never"</code> to <code>"always"</code>. Run <code>table()</code> again.</li>
 <li><code>as.numeric(answers_f)</code> turns the answers into scores from 1 to 5. What is the mean score?</li>
-<li>Someone answers <code>"Often"</code>. Add it and rebuild the factor. What happens?</li>
+<li>Someone answers <code>"Often"</code>. Add it with <code>c(answers, "Often")</code> and rebuild the factor. What happens?</li>
 </ol>
 </section>
 <section id="a-data-frame-by-hand" class="level2">
@@ -389,10 +389,10 @@ No R on your laptop yet?
 </table>
 <ol type="1">
 <li>Type it in as <code>participants</code>, with <code>group</code> as a factor. Check it with <code>str()</code>.</li>
-<li>Add a column <code>low_score</code>: <code>TRUE</code> when <code>score</code> is below 24.</li>
+<li>Add a column <code>low_score</code>: <code>TRUE</code> when <code>score</code> is below 24. <code>participants$low_score &lt;- ...</code> adds a column.</li>
 <li>Which patients are older than 65?</li>
-<li>What is the mean <code>score</code> in each group? Try <code>tapply()</code>.</li>
-<li>Sort the rows by age with <code>order()</code>.</li>
+<li>What is the mean <code>score</code> in each group? <code>participants$score[participants$group == "patient"]</code> keeps the patients’ scores: take their mean, then do the same for the controls.</li>
+<li>Sort the rows by age. <code>order(participants$age)</code> gives the new row order: use it as <code>participants[order(participants$age), ]</code>.</li>
 </ol>
 </section>
 <section id="your-first-functions" class="level2">
@@ -407,21 +407,22 @@ No R on your laptop yet?
 <h2 class="anchored" data-anchor-id="a-drug-trial-sleep">7. A drug trial: <code>sleep</code></h2>
 <p><code>sleep</code> comes with R: extra hours of sleep (<code>extra</code>) for 10 patients (<code>ID</code>) under two drugs (<code>group</code>).</p>
 <ol type="1">
-<li>Look at it with <code>str()</code>, <code>head()</code> and <code>summary()</code>. How many rows and columns?</li>
-<li>What is the mean <code>extra</code> for each drug?</li>
-<li>Every patient took both drugs. For each patient, compute drug 2 minus drug 1. How many slept more with drug 2?</li>
+<li>Look at it with <code>str()</code>, <code>head()</code> (the first rows) and <code>summary()</code> (a summary of each column). How many rows and columns?</li>
+<li>What is the mean <code>extra</code> for each drug? As in exercise 5, one drug at a time.</li>
+<li>Every patient took both drugs. For each patient, compute drug 2 minus drug 1. <code>sleep$extra[sleep$group == "2"]</code> gives the values under drug 2; the patients are in the same order under both drugs, so you can subtract. How many slept more with drug 2?</li>
 </ol>
 </section>
 <section id="sleep-deprivation-sleepstudy" class="level2">
 <h2 class="anchored" data-anchor-id="sleep-deprivation-sleepstudy">8. Sleep deprivation: <code>sleepstudy</code></h2>
 <p>Reaction times of 18 subjects, one mean per day (<a href="https://doi.org/10.1046/j.1365-2869.2003.00337.x">Belenky et al., 2003</a>). Days 0 and 1 were training and day 2 is the baseline. After day 2, subjects spent only 3 hours in bed per night.</p>
 <ol type="1">
+<li>Download <code>sleepstudy.csv</code> from the <strong>Data</strong> link at the top of this page and save it in the <code>data</code> folder of your project.</li>
 <li>Read it: <code>sleepstudy &lt;- read.csv(here::here("data", "sleepstudy.csv"))</code>.</li>
-<li>How many subjects are there?</li>
-<li>What is the mean reaction time on day 2, and on day 9?</li>
-<li>For each subject, compute the change from day 2 to day 9. Put the two days in two data frames, check that <code>Subject</code> is in the same order, then subtract.</li>
-<li>How many subjects slowed down? Who slowed down the most?</li>
-<li>Draw a <code>hist()</code> of the changes.</li>
+<li>How many subjects are there? <code>unique(sleepstudy$Subject)</code> lists each subject once, and <code>length()</code> counts them.</li>
+<li>What is the mean reaction time on day 2, and on day 9? <code>sleepstudy$Reaction[sleepstudy$Days == 2]</code> gives the reaction times of day 2.</li>
+<li>For each subject, compute the change from day 2 to day 9. Put the two days in two data frames, <code>base</code> and <code>day9</code>. Check that <code>Subject</code> is in the same order: <code>all(base$Subject == day9$Subject)</code> is <code>TRUE</code> if it is. Then subtract.</li>
+<li>How many subjects slowed down? Who slowed down the most? <code>which.max(change)</code> gives a position: use it on the <code>Subject</code> column.</li>
+<li>Draw a histogram of the changes: <code>hist(change)</code>.</li>
 </ol>
 </section>
 </section>
@@ -444,15 +445,15 @@ No R on your laptop yet?
 <section id="bring-in-your-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="bring-in-your-analysis">10. Bring in your analysis</h2>
 <ol type="1">
-<li>Copy your exercise 8 code into chunks in the report. Render.</li>
-<li>Give the histogram chunk a label and a caption (<code>#| label: fig-change</code>, <code>#| fig-cap: "..."</code>). Refer to it in the text with <code>@fig-change</code>.</li>
+<li>Copy your exercise 8 code into chunks in the report. Insert a chunk with Ctrl+Alt+I (Cmd+Option+I on a Mac). Render.</li>
+<li>Give the histogram chunk a label and a caption (<code>#| label: fig-change</code>, <code>#| fig-cap: "..."</code>). Refer to it in the text with <code>@fig-change</code>. Add axis labels: <code>hist(change, xlab = "Change in reaction time (ms)", main = NULL)</code>.</li>
 <li>Add <code>#| echo: false</code> to the chunk that reads the data. What changes?</li>
 </ol>
 </section>
 <section id="numbers-in-the-text" class="level2">
 <h2 class="anchored" data-anchor-id="numbers-in-the-text">11. Numbers in the text</h2>
 <ol type="1">
-<li>Write one sentence with the mean change and the number of subjects who slowed down. Use inline code, as in <code>`{r} round(mean(change))`</code>, never typed numbers.</li>
+<li>Write one sentence with the mean change and the number of subjects who slowed down. Use inline code, as in <code>`{r} round(mean(change))`</code>, never typed numbers. <code>round(x, 2)</code> keeps 2 decimals.</li>
 <li>Copy your <code>sleep</code> code from exercise 7 into the report and complete this sentence:</li>
 </ol>
 <div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>On average, patients slept <span class="in">`{r} ...`</span> hours more with drug 2 than with drug 1,</span>
@@ -469,7 +470,7 @@ No R on your laptop yet?
 <section id="bonus-pdf-and-word" class="level2">
 <h2 class="anchored" data-anchor-id="bonus-pdf-and-word">Bonus: PDF and Word</h2>
 <ol type="1">
-<li>A PDF needs LaTeX. Install TinyTeX once, in the RStudio <strong>Terminal</strong> (not the Console): <code>quarto install tinytex</code>.</li>
+<li>A PDF needs LaTeX. Install TinyTeX once, in the RStudio <strong>Terminal</strong>, the tab next to the Console: <code>quarto install tinytex</code>.</li>
 <li>Add two formats to the header:</li>
 </ol>
 <div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>

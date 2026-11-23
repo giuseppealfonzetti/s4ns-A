@@ -51,7 +51,7 @@
     "href": "sessions/01-reproducibility/exercises.html#reaction-times",
     "title": "Session 1: Exercises",
     "section": "1. Reaction times",
-    "text": "1. Reaction times\nOne participant, ten trials of a given task, reaction times in ms:\n\nrt &lt;- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)\ncondition &lt;- c(\"easy\", \"hard\", \"hard\", \"easy\", \"hard\",\n               \"easy\", \"hard\", \"hard\", \"easy\", \"easy\")\n\n\nHow many trials? What are the mean, median, min and max?\nOne trial looks odd. Which one? Use which.max(). Why are the mean and the median so different?\nMake rt_clean, without trials over 2000 ms. What is the mean now?\nWhat is the mean for \"easy\" and for \"hard\" trials, without the odd one? Drop it from both vectors, so they stay aligned.\nConvert rt to seconds."
+    "text": "1. Reaction times\nOne participant, ten trials of a given task, reaction times in ms:\n\nrt &lt;- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)\ncondition &lt;- c(\"easy\", \"hard\", \"hard\", \"easy\", \"hard\",\n               \"easy\", \"hard\", \"hard\", \"easy\", \"easy\")\n\n\nHow many trials? What are the mean, median, min and max? median(), min() and max() work like mean().\nOne trial looks odd. Which one? Use which.max(). Why are the mean and the median so different?\nMake rt_clean, without trials over 2000 ms. What is the mean now? keep &lt;- rt &lt; 2000 marks the trials to keep, and rt[keep] keeps them.\nWhat is the mean for \"easy\" and for \"hard\" trials, without the odd one? Use keep on both vectors, rt[keep] and condition[keep], so they stay aligned.\nConvert rt to seconds."
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#missing-trials",
@@ -72,14 +72,14 @@
     "href": "sessions/01-reproducibility/exercises.html#a-likert-item",
     "title": "Session 1: Exercises",
     "section": "4. A Likert item",
-    "text": "4. A Likert item\nTwelve answers to “How often do you have trouble sleeping?”:\n\nanswers &lt;- c(\"often\", \"never\", \"sometimes\", \"always\", \"often\", \"rarely\",\n             \"sometimes\", \"often\", \"never\", \"always\", \"sometimes\", \"often\")\n\n\nRun table(answers). Does the order make sense?\nMake answers_f, an ordered factor from \"never\" to \"always\". Run table() again.\nas.numeric(answers_f) turns the answers into scores from 1 to 5. What is the mean score?\nSomeone answers \"Often\". Add it and rebuild the factor. What happens?"
+    "text": "4. A Likert item\nTwelve answers to “How often do you have trouble sleeping?”:\n\nanswers &lt;- c(\"often\", \"never\", \"sometimes\", \"always\", \"often\", \"rarely\",\n             \"sometimes\", \"often\", \"never\", \"always\", \"sometimes\", \"often\")\n\n\nRun table(answers). Does the order make sense?\nMake answers_f, an ordered factor from \"never\" to \"always\". Run table() again.\nas.numeric(answers_f) turns the answers into scores from 1 to 5. What is the mean score?\nSomeone answers \"Often\". Add it with c(answers, \"Often\") and rebuild the factor. What happens?"
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#a-data-frame-by-hand",
     "href": "sessions/01-reproducibility/exercises.html#a-data-frame-by-hand",
     "title": "Session 1: Exercises",
     "section": "5. A data frame by hand",
-    "text": "5. A data frame by hand\nSix participants. score is a memory test, from 0 (worst) to 30 (best).\n\n\n\nid\ngroup\nage\nscore\n\n\n\n\nP01\npatient\n72\n21\n\n\nP02\ncontrol\n65\n29\n\n\nP03\npatient\n68\n23\n\n\nP04\ncontrol\n70\n28\n\n\nP05\npatient\n61\n25\n\n\nP06\ncontrol\n74\n27\n\n\n\n\nType it in as participants, with group as a factor. Check it with str().\nAdd a column low_score: TRUE when score is below 24.\nWhich patients are older than 65?\nWhat is the mean score in each group? Try tapply().\nSort the rows by age with order()."
+    "text": "5. A data frame by hand\nSix participants. score is a memory test, from 0 (worst) to 30 (best).\n\n\n\nid\ngroup\nage\nscore\n\n\n\n\nP01\npatient\n72\n21\n\n\nP02\ncontrol\n65\n29\n\n\nP03\npatient\n68\n23\n\n\nP04\ncontrol\n70\n28\n\n\nP05\npatient\n61\n25\n\n\nP06\ncontrol\n74\n27\n\n\n\n\nType it in as participants, with group as a factor. Check it with str().\nAdd a column low_score: TRUE when score is below 24. participants$low_score &lt;- ... adds a column.\nWhich patients are older than 65?\nWhat is the mean score in each group? participants$score[participants$group == \"patient\"] keeps the patients’ scores: take their mean, then do the same for the controls.\nSort the rows by age. order(participants$age) gives the new row order: use it as participants[order(participants$age), ]."
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#your-first-functions",
@@ -93,14 +93,14 @@
     "href": "sessions/01-reproducibility/exercises.html#a-drug-trial-sleep",
     "title": "Session 1: Exercises",
     "section": "7. A drug trial: sleep",
-    "text": "7. A drug trial: sleep\nsleep comes with R: extra hours of sleep (extra) for 10 patients (ID) under two drugs (group).\n\nLook at it with str(), head() and summary(). How many rows and columns?\nWhat is the mean extra for each drug?\nEvery patient took both drugs. For each patient, compute drug 2 minus drug 1. How many slept more with drug 2?"
+    "text": "7. A drug trial: sleep\nsleep comes with R: extra hours of sleep (extra) for 10 patients (ID) under two drugs (group).\n\nLook at it with str(), head() (the first rows) and summary() (a summary of each column). How many rows and columns?\nWhat is the mean extra for each drug? As in exercise 5, one drug at a time.\nEvery patient took both drugs. For each patient, compute drug 2 minus drug 1. sleep$extra[sleep$group == \"2\"] gives the values under drug 2; the patients are in the same order under both drugs, so you can subtract. How many slept more with drug 2?"
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#sleep-deprivation-sleepstudy",
     "href": "sessions/01-reproducibility/exercises.html#sleep-deprivation-sleepstudy",
     "title": "Session 1: Exercises",
     "section": "8. Sleep deprivation: sleepstudy",
-    "text": "8. Sleep deprivation: sleepstudy\nReaction times of 18 subjects, one mean per day (Belenky et al., 2003). Days 0 and 1 were training and day 2 is the baseline. After day 2, subjects spent only 3 hours in bed per night.\n\nRead it: sleepstudy &lt;- read.csv(here::here(\"data\", \"sleepstudy.csv\")).\nHow many subjects are there?\nWhat is the mean reaction time on day 2, and on day 9?\nFor each subject, compute the change from day 2 to day 9. Put the two days in two data frames, check that Subject is in the same order, then subtract.\nHow many subjects slowed down? Who slowed down the most?\nDraw a hist() of the changes."
+    "text": "8. Sleep deprivation: sleepstudy\nReaction times of 18 subjects, one mean per day (Belenky et al., 2003). Days 0 and 1 were training and day 2 is the baseline. After day 2, subjects spent only 3 hours in bed per night.\n\nDownload sleepstudy.csv from the Data link at the top of this page and save it in the data folder of your project.\nRead it: sleepstudy &lt;- read.csv(here::here(\"data\", \"sleepstudy.csv\")).\nHow many subjects are there? unique(sleepstudy$Subject) lists each subject once, and length() counts them.\nWhat is the mean reaction time on day 2, and on day 9? sleepstudy$Reaction[sleepstudy$Days == 2] gives the reaction times of day 2.\nFor each subject, compute the change from day 2 to day 9. Put the two days in two data frames, base and day9. Check that Subject is in the same order: all(base$Subject == day9$Subject) is TRUE if it is. Then subtract.\nHow many subjects slowed down? Who slowed down the most? which.max(change) gives a position: use it on the Subject column.\nDraw a histogram of the changes: hist(change)."
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#your-first-report",
@@ -114,14 +114,14 @@
     "href": "sessions/01-reproducibility/exercises.html#bring-in-your-analysis",
     "title": "Session 1: Exercises",
     "section": "10. Bring in your analysis",
-    "text": "10. Bring in your analysis\n\nCopy your exercise 8 code into chunks in the report. Render.\nGive the histogram chunk a label and a caption (#| label: fig-change, #| fig-cap: \"...\"). Refer to it in the text with @fig-change.\nAdd #| echo: false to the chunk that reads the data. What changes?"
+    "text": "10. Bring in your analysis\n\nCopy your exercise 8 code into chunks in the report. Insert a chunk with Ctrl+Alt+I (Cmd+Option+I on a Mac). Render.\nGive the histogram chunk a label and a caption (#| label: fig-change, #| fig-cap: \"...\"). Refer to it in the text with @fig-change. Add axis labels: hist(change, xlab = \"Change in reaction time (ms)\", main = NULL).\nAdd #| echo: false to the chunk that reads the data. What changes?"
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#numbers-in-the-text",
     "href": "sessions/01-reproducibility/exercises.html#numbers-in-the-text",
     "title": "Session 1: Exercises",
     "section": "11. Numbers in the text",
-    "text": "11. Numbers in the text\n\nWrite one sentence with the mean change and the number of subjects who slowed down. Use inline code, as in `{r} round(mean(change))`, never typed numbers.\nCopy your sleep code from exercise 7 into the report and complete this sentence:\n\nOn average, patients slept `{r} ...` hours more with drug 2 than with drug 1,\nand `{r} ...` out of 10 slept more with drug 2."
+    "text": "11. Numbers in the text\n\nWrite one sentence with the mean change and the number of subjects who slowed down. Use inline code, as in `{r} round(mean(change))`, never typed numbers. round(x, 2) keeps 2 decimals.\nCopy your sleep code from exercise 7 into the report and complete this sentence:\n\nOn average, patients slept `{r} ...` hours more with drug 2 than with drug 1,\nand `{r} ...` out of 10 slept more with drug 2."
   },
   {
     "objectID": "sessions/01-reproducibility/exercises.html#does-it-render-from-scratch",
@@ -135,7 +135,7 @@
     "href": "sessions/01-reproducibility/exercises.html#bonus-pdf-and-word",
     "title": "Session 1: Exercises",
     "section": "Bonus: PDF and Word",
-    "text": "Bonus: PDF and Word\n\nA PDF needs LaTeX. Install TinyTeX once, in the RStudio Terminal (not the Console): quarto install tinytex.\nAdd two formats to the header:\n\nformat:\n  html:\n    toc: true\n    toc-location: left\n  pdf: default\n  docx: default\n\nRender all three in the Terminal: quarto render session1-report.qmd. Open the PDF and the Word file. What differs from the HTML?"
+    "text": "Bonus: PDF and Word\n\nA PDF needs LaTeX. Install TinyTeX once, in the RStudio Terminal, the tab next to the Console: quarto install tinytex.\nAdd two formats to the header:\n\nformat:\n  html:\n    toc: true\n    toc-location: left\n  pdf: default\n  docx: default\n\nRender all three in the Terminal: quarto render session1-report.qmd. Open the PDF and the Word file. What differs from the HTML?"
   },
   {
     "objectID": "index.html",
