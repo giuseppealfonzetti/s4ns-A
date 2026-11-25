@@ -19,7 +19,7 @@ highlight-style: tango
 
 # Why statistics? {background="#9B0014"}
 
-## From a sample to general conclusions {style="font-size: 0.6em;"}
+## From a sample to general conclusions {style="font-size: 0.8em;"}
 
 We observe a **tiny portion** of the world, e.g. a few subjects, sessions, trials.
 
@@ -33,7 +33,7 @@ Statistics quantifies how much we can generalise **despite**
 - variability between and within subjects;
 - factors we did not measure.
 
-## Aims {style="font-size: 0.6em;"}
+## Aims {style="font-size: 0.8em;"}
 
 **Study of populations**
 
@@ -54,7 +54,7 @@ Statistics quantifies how much we can generalise **despite**
 
 [Fisher (1925), *Statistical Methods for Research Workers*, ch. 1](https://psychclassics.yorku.ca/Fisher/Methods/chap1.htm)
 
-## Pay attention! {style="font-size: 0.6em;"}
+## Pay attention! {style="font-size: 0.8em;"}
 
 Classical tools (t-test, ANOVA, regression) assume **independent observations**.
 
@@ -71,7 +71,7 @@ Ignoring this leads to **overconfidence** (underestimation of uncertainty)
 
 A standard tool to deal with correlated responses is *mixed models*, but we will not cover them in this course. 
 
-## The reproducibility crisis {style="font-size: 0.6em;"}
+## The reproducibility crisis {style="font-size: 0.8em;"}
 
 - **Reproducibility**: same data and same analysis give the same results.
 - **Replication**: new data on the same question give consistent results.
@@ -81,11 +81,11 @@ A standard tool to deal with correlated responses is *mixed models*, but we will
 - *Nature* survey of 1,576 researchers: more than 70% had tried and failed to replicate another scientist's experiments, more than half their own ([Baker, 2016](https://doi.org/10.1038/533452a)).
 - 70 teams analysed the same brain-imaging data to test the same 9 hypotheses. No two teams used the same workflow, and their results varied considerably ([Botvinik-Nezer et al., 2020](https://doi.org/10.1038/s41586-020-2314-9)).
 
-. . .
+## Why studies fail to replicate {style="font-size: 0.8em;"}
 
 Common threats: low statistical power, trying analyses until something is significant (p-hacking), hypotheses made up after seeing the results, unpublished null results, no shared data or code ([Munafò et al., 2017](https://doi.org/10.1038/s41562-016-0021)).
 
-## A starting point {style="font-size: 0.6em;"}
+## A starting point {style="font-size: 0.8em;"}
 
 - State the hypothesis **before** looking at the data.
 - Share **raw data** and **code**. Every number in the paper generated automatically.
@@ -97,7 +97,7 @@ Common threats: low statistical power, trying analyses until something is signif
 This is why we analyse data with code.
 :::
 
-## The data analysis pipeline {style="font-size: 0.6em;"}
+## The data analysis pipeline {style="font-size: 0.8em;"}
 
 ![](../../assets/ds_life_cycle.png){width=90% fig-align="center"}
 
@@ -106,11 +106,11 @@ Figure from Wickham, Çetinkaya-Rundel and Grolemund, [*R for Data Science*](htt
 
 # Introduction to R {background="#9B0014"}
 
-## RStudio {style="font-size: 0.6em;"}
+## RStudio {style="font-size: 0.8em;"}
 
 ![](../../assets/rstudio.png){width=70% fig-align="center"}
 
-## Basic R grammar {style="font-size: 0.6em;"}
+## Basic R grammar {style="font-size: 0.8em;"}
 
 Run a line: `Ctrl+Enter` (Windows) / `Cmd+Enter` (Mac).
 
@@ -133,7 +133,7 @@ trials <- 1:5                     # sequence 1 to 5
 seq(0, 1, by = 0.25)              # regular sequence
 ```
 
-## Working with vectors {style="font-size: 0.6em;"}
+## Working with vectors {style="font-size: 0.8em;"}
 
 ```{r}
 #| echo: TRUE
@@ -152,14 +152,14 @@ rt / 1000        # convert to seconds
 rt - mean(rt)    # centre around the mean
 ```
 
-. . .
+## Summaries of a vector {style="font-size: 0.8em;"}
 
 ```{r}
 #| echo: TRUE
 mean(rt); sd(rt); length(rt); range(rt)
 ```
 
-## RStudio tips and help {style="font-size: 0.6em;"}
+## RStudio tips and help {style="font-size: 0.8em;"}
 
 - **Tab**: autocomplete names.
 - **`Alt + -`** / **`Option + -`**: insert `<-`.
@@ -176,7 +176,7 @@ mean(rt); sd(rt); length(rt); range(rt)
 
 Read **Arguments** and **Examples**. E.g. to ignore `NA`s in `mean()`, use `na.rm = TRUE`.
 
-## Missing values {style="font-size: 0.6em;"}
+## Missing values {style="font-size: 0.8em;"}
 
 No response on a trial: `NA`.
 
@@ -196,7 +196,7 @@ sum(is.na(rt))
 which(is.na(rt))
 ```
 
-## Common mistakes {style="font-size: 0.6em;"}
+## Common mistakes {style="font-size: 0.8em;"}
 
 R is case-sensitive: `RT` and `rt` are different objects. Pick one style (`snake_case`: `mean_rt`).
 
@@ -227,7 +227,7 @@ RT
 ```
 `Error: object 'RT' not found`
 
-## Logical values and comparisons {style="font-size: 0.6em;"}
+## Logical values and comparisons {style="font-size: 0.8em;"}
 
 | Operator | Meaning | Example |
 |----------|---------|---------|
@@ -245,7 +245,7 @@ too_fast_or_slow <- rt < 200 | rt > 1500   # flag implausible trials
 rt[!too_fast_or_slow]                       # keep valid trials
 ```
 
-## Factors {style="font-size: 0.6em;"}
+## Factors {style="font-size: 0.8em;"}
 
 Categorical variables with fixed **levels**:
 
@@ -266,7 +266,7 @@ answer <- c("never", "always", "often", "never")
 factor(answer, levels = c("never", "often", "always"), ordered = TRUE)
 ```
 
-## Data frames {style="font-size: 0.6em;"}
+## Data frames {style="font-size: 0.8em;"}
 
 One row per observation, one column per variable. Columns can have different types.
 
@@ -282,7 +282,7 @@ subjects <- data.frame(
 subjects
 ```
 
-## Data frames: access {style="font-size: 0.6em;"}
+## Data frames: access {style="font-size: 0.8em;"}
 
 ```{r}
 #| echo: TRUE
@@ -290,16 +290,17 @@ dim(subjects)
 str(subjects)
 ```
 
-. . .
+## Data frames: columns and rows {style="font-size: 0.8em;"}
 
 ```{r}
 #| echo: TRUE
-subjects$age                                       # a column
-subjects[2, ]                                      # a row
-subjects[subjects$age > 60 & subjects$score < 24, ] # rows: over 60 and score below 24
+subjects$age     # a column
+subjects[2, ]    # a row
+# rows: over 60 and score below 24
+subjects[subjects$age > 60 & subjects$score < 24, ]
 ```
 
-## Functions {style="font-size: 0.6em;"}
+## Functions {style="font-size: 0.8em;"}
 
 ```{r}
 #| echo: TRUE
@@ -322,14 +323,15 @@ se <- function(x) {
 se(c(512, 430, 601, 488, 550))
 ```
 
-## Packages {style="font-size: 0.6em;"}
+## Packages {style="font-size: 0.8em;"}
 
 ```{r}
 #| echo: TRUE
 #| eval: FALSE
 install.packages("tidyverse")   # once, in the console
 library(tidyverse)              # at the top of every file that uses it
-here::here("data")              # package::function(): one function, no library()
+# package::function(): one function, without library()
+here::here("data")
 ```
 
 . . .
@@ -338,7 +340,7 @@ End every report with `sessionInfo()`: R and package versions.
 
 # Reports with Quarto {background="#9B0014"}
 
-## Why reports from code? {style="font-size: 0.6em;"}
+## Why reports from code? {style="font-size: 0.8em;"}
 
 The copy-paste workflow:
 
@@ -353,7 +355,7 @@ A **Quarto** document (`.qmd`) holds **text**, **code** and (after rendering) **
 - every number is computed when the document is created;
 - new data? Click **Render** and everything updates.
 
-## Anatomy of a `.qmd` file {style="font-size: 0.55em;"}
+## Anatomy of a `.qmd` file {style="font-size: 0.75em;"}
 
 ````markdown
 ---
@@ -377,7 +379,7 @@ The dataset contains `{{r}} nrow(sleepstudy)` measurements.
 3. **Code chunks**: run at render; options start with `#|`.
 4. **Inline code**: numbers inside sentences, never typed by hand.
 
-## Rendering and chunk options {style="font-size: 0.6em;"}
+## Rendering and chunk options {style="font-size: 0.8em;"}
 
 **Render**: `Ctrl/Cmd + Shift + K`. The file runs **from scratch**: it must load its own packages and data.
 

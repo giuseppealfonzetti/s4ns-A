@@ -1,0 +1,129 @@
+---
+title: "Session 2: Exercises"
+subtitle: "Data manipulation"
+author: "Giuseppe"
+date: today
+format:
+  html:
+    toc: true
+---
+
+**Data** (save into `data/` in your project): [HappinessAlcoholConsumption.csv](../../data/HappinessAlcoholConsumption.csv){download="HappinessAlcoholConsumption.csv"}
+
+One dataset today, from the raw file to a finished report. For 122 countries: a happiness score from 0 to 10, the servings of beer, spirits and wine per person per year, the region of the world and the hemisphere.
+
+## Setup
+
+1. Open your course project. Create a new Quarto document, `session2.qmd`. This document **becomes your report**: answer every exercise there, one chunk per step, and **Render** often.
+2. Put this at the top:
+
+```yaml
+---
+title: "Happiness and alcohol around the world"
+author: "Your Name"
+format: html
+---
+```
+
+3. Then this chunk. If `janitor` is not installed, run `install.packages("janitor")` once in the console.
+
+```{r}
+#| message: false
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+# Part 1: Import
+
+## 1. Read the file
+
+1. Read it: `happy <- read_csv(here("data", "HappinessAlcoholConsumption.csv"))`.
+2. How many rows and columns? Use `dim()`.
+3. `glimpse(happy)` shows every column with its first values. What is one row?
+
+# Part 2: Cleaning
+
+## 2. Column names
+
+1. Clean the names: `happy <- clean_names(happy)`.
+2. Look at them with `names(happy)`. What changed? From now on, use the new names.
+
+## 3. A typo
+
+1. Run `count(happy, hemisphere)`. One value is a typo: which one, and how many countries have it?
+2. Fix it: `happy <- mutate(happy, hemisphere = if_else(hemisphere == "noth", "north", hemisphere))`. `if_else()` gives the second value where the condition is `TRUE`, the third elsewhere.
+3. Run `count()` again: three hemispheres now?
+
+## 4. Missing values
+
+How many missing values in the whole table? `sum(is.na(happy))` counts them: `is.na()` gives `TRUE` for each missing cell, `sum()` counts the `TRUE`s.
+
+# Part 3: Manipulation
+
+## 5. Keep what we need
+
+Keep `country`, `region`, `hemisphere`, `happiness_score`, `beer_per_capita`, `spirit_per_capita` and `wine_per_capita` with `select()`. Save the result in `happy` again.
+
+## 6. A new column
+
+Add `total_per_capita`, the sum of the three drinks, with `mutate()`. Save it in `happy` again.
+
+## 7. Sort and filter
+
+1. The 5 countries that drink the most: sort with `arrange(desc(total_per_capita))`, then keep 5 rows with `head(5)`.
+2. The countries of Western Europe, from the happiest down: one pipe with `filter(region == "Western Europe")` and `arrange()`.
+
+# Part 4: Summaries
+
+## 8. Describe the happiness score
+
+In one `summarise()`: the mean, median, 25th and 75th percentiles, minimum, maximum and standard deviation of `happiness_score`. Is the mean close to the median?
+
+## 9. By region
+
+For each region: the number of countries, `n()`, and the mean happiness, sorted from the happiest region down. Save the result as `by_region`.
+
+## 10. By hemisphere
+
+For each hemisphere: the median of `total_per_capita`. Where do people drink the most?
+
+# Part 5: The report
+
+## 11. Tidy the document
+
+1. Give each part a heading: `## Import`, `## Cleaning`, and so on.
+2. A reader of the report needs the results, not every line of code. Add `#| echo: false` to the chunks whose code they do not need, as in session 1.
+
+## 12. Results with numbers
+
+Add a section `## Results` at the end, with 3 or 4 sentences. **Every number comes from inline code**, never typed by hand. For example:
+
+````markdown
+We have data on `{{r}} nrow(happy)` countries. The mean happiness score
+is `{{r}} round(mean(happy$happiness_score), 1)`.
+````
+
+- Save a summary in an object first, as `by_region` in exercise 9, then pick a value from it: `by_region$region[1]` is the first region, `by_region$mean_happiness[1]` its mean (use your own column name). `[1]` takes the first element.
+- `round(x, 1)` keeps one decimal.
+
+Ideas: the happiest region and its mean; how many countries had the typo; the country that drinks the most.
+
+## 13. Render, change, render again
+
+1. Render the report and read it: do the sentences make sense?
+2. Now change the data: right after the cleaning, keep only the northern hemisphere with `happy <- filter(happy, hemisphere == "north")`. Render again. Every number in your sentences updates by itself.
+3. Undo the change and render once more.
+
+## Bonus: long format
+
+Make the three drinks long, one row per country and drink:
+
+```{r}
+#| eval: false
+happy |>
+  pivot_longer(cols = c(beer_per_capita, spirit_per_capita, wine_per_capita),
+               names_to = "drink", values_to = "servings")
+```
+
+Then the mean `servings` for each `region` and `drink`. R prints a message about grouping: it is not an error. Which region drinks the most wine? `filter(drink == "wine_per_capita")` keeps only wine.

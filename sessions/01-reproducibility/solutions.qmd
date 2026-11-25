@@ -1,0 +1,231 @@
+---
+title: "Session 1: Solutions"
+subtitle: "R and Quarto basics"
+format:
+  html:
+    toc: true
+---
+
+# Part 1: R
+
+## 1. Reaction times
+
+```{r}
+rt <- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)
+condition <- c("easy", "hard", "hard", "easy", "hard",
+               "easy", "hard", "hard", "easy", "easy")
+
+length(rt)
+mean(rt); median(rt); min(rt); max(rt)
+which.max(rt)   # trial 5: far slower than the rest. The median is robust to it, the mean is not.
+```
+
+```{r}
+keep <- rt < 2000            # one logical vector subsets both, so they stay aligned
+rt_clean <- rt[keep]
+cond_clean <- condition[keep]
+mean(rt_clean)
+
+mean(rt_clean[cond_clean == "easy"])
+mean(rt_clean[cond_clean == "hard"])
+
+rt_s <- rt / 1000
+```
+
+## 2. Missing trials
+
+```{r}
+rt2 <- c(523, NA, 487, 150, 601, 455, 2310, NA, 512, 498)
+
+sum(is.na(rt2)); which(is.na(rt2))
+mean(rt2, na.rm = TRUE)
+
+implausible <- rt2 < 200 | rt2 > 1500    # NA where rt2 is NA
+sum(implausible, na.rm = TRUE)
+mean(implausible, na.rm = TRUE)          # proportion of the non-missing trials
+```
+
+```{r}
+rt2[rt2 > 200]     # NA > 200 is NA, so each NA trial returns an NA
+rt2_ok <- rt2[!is.na(rt2) & rt2 >= 200 & rt2 <= 1500]
+rt2_ok
+```
+
+## 3. Spot the bugs
+
+```{r}
+scores <- c(12, 15, 9, 20, 17)
+group <- c("a", "b", "a", "b", "a")
+mean(scores[group == "a"])   # = instead of ==, and a missing )
+mean(scores[group == "b"])   # maen
+mean(scores)                 # Mean: R is case-sensitive
+summary(scores)              # Scores
+```
+
+The silent one is `=` instead of `==`. Inside `[ ]`, `group = "a"` does not compare anything: R reads it as `scores["a"]`, the element named `"a"`. There is none, so you get `NA` and no error.
+
+## 4. A Likert item
+
+```{r}
+answers <- c("often", "never", "sometimes", "always", "often", "rarely",
+             "sometimes", "often", "never", "always", "sometimes", "often")
+table(answers)     # alphabetical: "always" comes first
+
+lev <- c("never", "rarely", "sometimes", "often", "always")
+answers_f <- factor(answers, levels = lev, ordered = TRUE)
+table(answers_f)
+
+score <- as.numeric(answers_f)
+mean(score)
+```
+
+```{r}
+factor(c(answers, "Often"), levels = lev, ordered = TRUE)
+```
+
+`"Often"` is not one of the levels (case-sensitive), so it becomes `NA`, silently. Check with `sum(is.na(...))` after building a factor.
+
+## 5. A data frame by hand
+
+```{r}
+participants <- data.frame(
+  id    = c("P01", "P02", "P03", "P04", "P05", "P06"),
+  group = factor(c("patient", "control", "patient", "control", "patient", "control")),
+  age   = c(72, 65, 68, 70, 61, 74),
+  score = c(21, 29, 23, 28, 25, 27)
+)
+str(participants)
+
+participants$low_score <- participants$score < 24
+participants[participants$group == "patient" & participants$age > 65, ]
+mean(participants$score[participants$group == "patient"])
+mean(participants$score[participants$group == "control"])
+participants[order(participants$age), ]
+```
+
+## 6. Your first functions
+
+```{r}
+se <- function(x) {
+  sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)))   # length() would count the NA
+}
+se(rt_clean)
+se(rt2)
+
+n_outliers <- function(x, low = 200, high = 1500) {
+  sum(x < low | x > high, na.rm = TRUE)
+}
+n_outliers(rt2)
+n_outliers(rt2, high = 600)   # 601 now counts too
+```
+
+## 7. A drug trial: `sleep`
+
+```{r}
+str(sleep)        # 20 rows, 3 columns: each patient appears twice
+head(sleep)
+summary(sleep)
+mean(sleep$extra[sleep$group == "1"])
+mean(sleep$extra[sleep$group == "2"])
+
+# both groups list the patients in the same ID order (check sleep$ID), so we can subtract
+d21 <- sleep$extra[sleep$group == "2"] - sleep$extra[sleep$group == "1"]
+sum(d21 > 0)
+```
+
+## 8. Sleep deprivation: `sleepstudy`
+
+```{r}
+sleepstudy <- read.csv(here::here("data", "sleepstudy.csv"))
+length(unique(sleepstudy$Subject))
+rt_base <- mean(sleepstudy$Reaction[sleepstudy$Days == 2])
+rt9 <- mean(sleepstudy$Reaction[sleepstudy$Days == 9])
+c(rt_base, rt9)
+```
+
+```{r}
+base <- sleepstudy[sleepstudy$Days == 2, ]
+day9 <- sleepstudy[sleepstudy$Days == 9, ]
+all(base$Subject == day9$Subject)    # same order: safe to subtract
+
+change <- day9$Reaction - base$Reaction
+sum(change > 0)
+base$Subject[which.max(change)]
+hist(change)
+```
+
+# Part 2: Quarto
+
+## 9. Your first report
+
+A table of contents appears in a left sidebar. All HTML options: <https://quarto.org/docs/reference/formats/html.html>.
+
+```markdown
+### My project
+
+I study **sleep** in *university students* using:
+
+- questionnaires
+- a sleep diary
+- reaction times
+
+More on the [Quarto website](https://quarto.org).
+```
+
+## 10. Bring in your analysis
+
+````markdown
+```{{r}}
+#| echo: false
+sleepstudy <- read.csv(here::here("data", "sleepstudy.csv"))
+```
+
+```{{r}}
+base <- sleepstudy[sleepstudy$Days == 2, ]
+day9 <- sleepstudy[sleepstudy$Days == 9, ]
+change <- day9$Reaction - base$Reaction
+```
+
+```{{r}}
+#| label: fig-change
+#| fig-cap: "Change in reaction time from baseline (day 2) to day 9, one value per subject."
+hist(change, xlab = "Change in reaction time (ms)", main = NULL)
+```
+````
+
+```{r}
+#| label: fig-change
+#| fig-cap: "Change in reaction time from baseline (day 2) to day 9, one value per subject."
+#| echo: false
+hist(change, xlab = "Change in reaction time (ms)", main = NULL)
+```
+
+`@fig-change` becomes a numbered, clickable "Figure 1". With `echo: false` the chunk still runs, but its code is hidden. This chunk prints nothing, so it disappears from the report.
+
+## 11. Numbers in the text
+
+```markdown
+After 7 nights with 3 hours in bed, reaction time increased by `{{r}} round(mean(change))` ms
+on average; `{{r}} sum(change > 0)` of `{{r}} length(change)` subjects slowed down (@fig-change).
+```
+
+> After 7 nights with 3 hours in bed, reaction time increased by `{r} round(mean(change))` ms on average; `{r} sum(change > 0)` of `{r} length(change)` subjects slowed down (@fig-change).
+
+```markdown
+On average, patients slept `{{r}} round(mean(d21), 2)` hours more with drug 2 than with drug 1,
+and `{{r}} sum(d21 > 0)` out of 10 slept more with drug 2.
+```
+
+> On average, patients slept `{r} round(mean(d21), 2)` hours more with drug 2 than with drug 1, and `{r} sum(d21 > 0)` out of 10 slept more with drug 2.
+
+## 12. Does it render from scratch?
+
+Render fails: `object 'x' not found`. Rendering starts a fresh R session that never saw the console. Everything the document needs must be created **inside** it. After *Restart R* the document still renders: it is self-contained.
+
+```{r}
+sessionInfo()
+```
+
+## Bonus
+
+Same text, figure and numbers in all three: one source, three outputs. The PDF and the Word file have no table of contents, because `toc` sits under `html:` only. The Word file can be edited, e.g. by a co-author, but edits there are lost at the next render: change the `.qmd` instead.

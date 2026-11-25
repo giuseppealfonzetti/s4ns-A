@@ -6,8 +6,8 @@ toc: false
 
 | # | Date | Time | Topic | Slides | Exercises | Solutions |
 |---|------|------|-------|:--:|:--:|:--:|
-| 1 | Mon 23/11 | 10:30–12:30 | Introduction to R and Quarto | [Slides](sessions/01-reproducibility/slides.qmd) | [Exercises](sessions/01-reproducibility/exercises.qmd) | |
-| 2 | Thu 26/11 | 10:30–12:30 | Data manipulation | | | |
+| 1 | Mon 23/11 | 10:30–12:30 | Introduction to R and Quarto | [Slides](sessions/01-reproducibility/slides.qmd) | [Exercises](sessions/01-reproducibility/exercises.qmd) | [Solutions](sessions/01-reproducibility/solutions.qmd) |
+| 2 | Thu 26/11 | 10:30–12:30 | Data manipulation | [Slides](sessions/02-data-wrangling/slides.qmd) | [Exercises](sessions/02-data-wrangling/exercises.qmd) | |
 | 3 | Mon 30/11 | 10:30–12:30 | Visualisation and EDA | | | |
 | 4 | Wed 02/12 | 14:30–16:30 | Probability and sampling | | | |
 | 5 | Thu 17/12 | 10:30–12:30 | Estimation and confidence intervals | | | |
