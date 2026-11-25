@@ -40,6 +40,353 @@
     ]
   },
   {
+    "objectID": "sessions/02-data-wrangling/exercises.html",
+    "href": "sessions/02-data-wrangling/exercises.html",
+    "title": "Session 2: Exercises",
+    "section": "",
+    "text": "Data (save into data/ in your project): HappinessAlcoholConsumption.csv\nOne dataset today, from the raw file to a finished report. For 122 countries: a happiness score from 0 to 10, the servings of beer, spirits and wine per person per year, the region of the world and the hemisphere."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#setup",
+    "href": "sessions/02-data-wrangling/exercises.html#setup",
+    "title": "Session 2: Exercises",
+    "section": "Setup",
+    "text": "Setup\n\nOpen your course project. Create a new Quarto document, session2.qmd. This document becomes your report: answer every exercise there, one chunk per step, and Render often.\nPut this at the top:\n\n---\ntitle: \"Happiness and alcohol around the world\"\nauthor: \"Your Name\"\nformat: html\n---\n\nThen this chunk. If janitor is not installed, run install.packages(\"janitor\") once in the console.\n\n\nlibrary(tidyverse)\nlibrary(here)\nlibrary(janitor)"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#read-the-file",
+    "href": "sessions/02-data-wrangling/exercises.html#read-the-file",
+    "title": "Session 2: Exercises",
+    "section": "1. Read the file",
+    "text": "1. Read the file\n\nRead it: happy &lt;- read_csv(here(\"data\", \"HappinessAlcoholConsumption.csv\")).\nHow many rows and columns? Use dim().\nglimpse(happy) shows every column with its first values. What is one row?"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#column-names",
+    "href": "sessions/02-data-wrangling/exercises.html#column-names",
+    "title": "Session 2: Exercises",
+    "section": "2. Column names",
+    "text": "2. Column names\n\nClean the names: happy &lt;- clean_names(happy).\nLook at them with names(happy). What changed? From now on, use the new names."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#a-typo",
+    "href": "sessions/02-data-wrangling/exercises.html#a-typo",
+    "title": "Session 2: Exercises",
+    "section": "3. A typo",
+    "text": "3. A typo\n\nRun count(happy, hemisphere). One value is a typo: which one, and how many countries have it?\nFix it: happy &lt;- mutate(happy, hemisphere = if_else(hemisphere == \"noth\", \"north\", hemisphere)). if_else() gives the second value where the condition is TRUE, the third elsewhere.\nRun count() again: three hemispheres now?"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#missing-values",
+    "href": "sessions/02-data-wrangling/exercises.html#missing-values",
+    "title": "Session 2: Exercises",
+    "section": "4. Missing values",
+    "text": "4. Missing values\nHow many missing values in the whole table? sum(is.na(happy)) counts them: is.na() gives TRUE for each missing cell, sum() counts the TRUEs."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#keep-what-we-need",
+    "href": "sessions/02-data-wrangling/exercises.html#keep-what-we-need",
+    "title": "Session 2: Exercises",
+    "section": "5. Keep what we need",
+    "text": "5. Keep what we need\nKeep country, region, hemisphere, happiness_score, beer_per_capita, spirit_per_capita and wine_per_capita with select(). Save the result in happy again."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#a-new-column",
+    "href": "sessions/02-data-wrangling/exercises.html#a-new-column",
+    "title": "Session 2: Exercises",
+    "section": "6. A new column",
+    "text": "6. A new column\nAdd total_per_capita, the sum of the three drinks, with mutate(). Save it in happy again."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#sort-and-filter",
+    "href": "sessions/02-data-wrangling/exercises.html#sort-and-filter",
+    "title": "Session 2: Exercises",
+    "section": "7. Sort and filter",
+    "text": "7. Sort and filter\n\nThe 5 countries that drink the most: sort with arrange(desc(total_per_capita)), then keep 5 rows with head(5).\nThe countries of Western Europe, from the happiest down: one pipe with filter(region == \"Western Europe\") and arrange()."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#describe-the-happiness-score",
+    "href": "sessions/02-data-wrangling/exercises.html#describe-the-happiness-score",
+    "title": "Session 2: Exercises",
+    "section": "8. Describe the happiness score",
+    "text": "8. Describe the happiness score\nIn one summarise(): the mean, median, 25th and 75th percentiles, minimum, maximum and standard deviation of happiness_score. Is the mean close to the median?"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#by-region",
+    "href": "sessions/02-data-wrangling/exercises.html#by-region",
+    "title": "Session 2: Exercises",
+    "section": "9. By region",
+    "text": "9. By region\nFor each region: the number of countries, n(), and the mean happiness, sorted from the happiest region down. Save the result as by_region."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#by-hemisphere",
+    "href": "sessions/02-data-wrangling/exercises.html#by-hemisphere",
+    "title": "Session 2: Exercises",
+    "section": "10. By hemisphere",
+    "text": "10. By hemisphere\nFor each hemisphere: the median of total_per_capita. Where do people drink the most?"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#tidy-the-document",
+    "href": "sessions/02-data-wrangling/exercises.html#tidy-the-document",
+    "title": "Session 2: Exercises",
+    "section": "11. Tidy the document",
+    "text": "11. Tidy the document\n\nGive each part a heading: ## Import, ## Cleaning, and so on.\nA reader of the report needs the results, not every line of code. Add #| echo: false to the chunks whose code they do not need, as in session 1."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#results-with-numbers",
+    "href": "sessions/02-data-wrangling/exercises.html#results-with-numbers",
+    "title": "Session 2: Exercises",
+    "section": "12. Results with numbers",
+    "text": "12. Results with numbers\nAdd a section ## Results at the end, with 3 or 4 sentences. Every number comes from inline code, never typed by hand. For example:\nWe have data on `{r} nrow(happy)` countries. The mean happiness score\nis `{r} round(mean(happy$happiness_score), 1)`.\n\nSave a summary in an object first, as by_region in exercise 9, then pick a value from it: by_region$region[1] is the first region, by_region$mean_happiness[1] its mean (use your own column name). [1] takes the first element.\nround(x, 1) keeps one decimal.\n\nIdeas: the happiest region and its mean; how many countries had the typo; the country that drinks the most."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#render-change-render-again",
+    "href": "sessions/02-data-wrangling/exercises.html#render-change-render-again",
+    "title": "Session 2: Exercises",
+    "section": "13. Render, change, render again",
+    "text": "13. Render, change, render again\n\nRender the report and read it: do the sentences make sense?\nNow change the data: right after the cleaning, keep only the northern hemisphere with happy &lt;- filter(happy, hemisphere == \"north\"). Render again. Every number in your sentences updates by itself.\nUndo the change and render once more."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/exercises.html#bonus-long-format",
+    "href": "sessions/02-data-wrangling/exercises.html#bonus-long-format",
+    "title": "Session 2: Exercises",
+    "section": "Bonus: long format",
+    "text": "Bonus: long format\nMake the three drinks long, one row per country and drink:\n\nhappy |&gt;\n  pivot_longer(cols = c(beer_per_capita, spirit_per_capita, wine_per_capita),\n               names_to = \"drink\", values_to = \"servings\")\n\nThen the mean servings for each region and drink. R prints a message about grouping: it is not an error. Which region drinks the most wine? filter(drink == \"wine_per_capita\") keeps only wine."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#from-a-sample-to-general-conclusions",
+    "href": "sessions/01-reproducibility/slides.html#from-a-sample-to-general-conclusions",
+    "title": "Introduction",
+    "section": "From a sample to general conclusions",
+    "text": "From a sample to general conclusions\nWe observe a tiny portion of the world, e.g. a few subjects, sessions, trials.\nWe want conclusions that hold in general.\n\nStatistics quantifies how much we can generalise despite\n\nmeasurement noise (instruments, questionnaires);\nvariability between and within subjects;\nfactors we did not measure."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#aims",
+    "href": "sessions/01-reproducibility/slides.html#aims",
+    "title": "Introduction",
+    "section": "Aims",
+    "text": "Aims\nStudy of populations\n\n100 subjects scanned once: population across individuals.\n1 subject scanned daily for a year: population across time.\n\n\nStudy of variation\n\nVariability between subjects, across time, across space.\n\n\n\nData reduction\n\nFrom millions of numbers per subject to summaries (means, components, features).\n\nFisher (1925), Statistical Methods for Research Workers, ch. 1"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#pay-attention",
+    "href": "sessions/01-reproducibility/slides.html#pay-attention",
+    "title": "Introduction",
+    "section": "Pay attention!",
+    "text": "Pay attention!\nClassical tools (t-test, ANOVA, regression) assume independent observations.\n\nNeuroscience data often are not:\n\n10 trials from one subject are more similar than 10 trials from 10 subjects;\nthe same questionnaire filled in 6 times by one participant gives correlated scores.\n\n\n\nIgnoring this leads to overconfidence (underestimation of uncertainty)\nA standard tool to deal with correlated responses is mixed models, but we will not cover them in this course."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#the-reproducibility-crisis",
+    "href": "sessions/01-reproducibility/slides.html#the-reproducibility-crisis",
+    "title": "Introduction",
+    "section": "The reproducibility crisis",
+    "text": "The reproducibility crisis\n\nReproducibility: same data and same analysis give the same results.\nReplication: new data on the same question give consistent results.\n\n\n\nNature survey of 1,576 researchers: more than 70% had tried and failed to replicate another scientist’s experiments, more than half their own (Baker, 2016).\n70 teams analysed the same brain-imaging data to test the same 9 hypotheses. No two teams used the same workflow, and their results varied considerably (Botvinik-Nezer et al., 2020)."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#why-studies-fail-to-replicate",
+    "href": "sessions/01-reproducibility/slides.html#why-studies-fail-to-replicate",
+    "title": "Introduction",
+    "section": "Why studies fail to replicate",
+    "text": "Why studies fail to replicate\nCommon threats: low statistical power, trying analyses until something is significant (p-hacking), hypotheses made up after seeing the results, unpublished null results, no shared data or code (Munafò et al., 2017)."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#a-starting-point",
+    "href": "sessions/01-reproducibility/slides.html#a-starting-point",
+    "title": "Introduction",
+    "section": "A starting point",
+    "text": "A starting point\n\nState the hypothesis before looking at the data.\nShare raw data and code. Every number in the paper generated automatically.\nWrite reports where text, code and results live together.\n\n\n\nThis is why we analyse data with code."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#the-data-analysis-pipeline",
+    "href": "sessions/01-reproducibility/slides.html#the-data-analysis-pipeline",
+    "title": "Introduction",
+    "section": "The data analysis pipeline",
+    "text": "The data analysis pipeline\n\nFigure from Wickham, Çetinkaya-Rundel and Grolemund, R for Data Science, 2nd ed."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#rstudio",
+    "href": "sessions/01-reproducibility/slides.html#rstudio",
+    "title": "Introduction",
+    "section": "RStudio",
+    "text": "RStudio"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#basic-r-grammar",
+    "href": "sessions/01-reproducibility/slides.html#basic-r-grammar",
+    "title": "Introduction",
+    "section": "Basic R grammar",
+    "text": "Basic R grammar\nRun a line: Ctrl+Enter (Windows) / Cmd+Enter (Mac).\n\na &lt;- 1                    # assign 1 to a (numeric value)\nb &lt;- 2\nlabel &lt;- \"control\"        # character value\na + b\n\n[1] 3\n\n\n\nVectors:\n\nrt &lt;- c(512, 430, 601, 488, 550)  # reaction times (ms)\ntrials &lt;- 1:5                     # sequence 1 to 5\nseq(0, 1, by = 0.25)              # regular sequence\n\n[1] 0.00 0.25 0.50 0.75 1.00"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#working-with-vectors",
+    "href": "sessions/01-reproducibility/slides.html#working-with-vectors",
+    "title": "Introduction",
+    "section": "Working with vectors",
+    "text": "Working with vectors\n\nrt[1]            # first element\n\n[1] 512\n\nrt[2:4]          # elements 2 to 4\n\n[1] 430 601 488\n\nrt[c(1, 5)]      # elements 1 and 5\n\n[1] 512 550\n\n\n\nOperations are element-wise:\n\nrt / 1000        # convert to seconds\n\n[1] 0.512 0.430 0.601 0.488 0.550\n\nrt - mean(rt)    # centre around the mean\n\n[1]  -4.2 -86.2  84.8 -28.2  33.8"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#summaries-of-a-vector",
+    "href": "sessions/01-reproducibility/slides.html#summaries-of-a-vector",
+    "title": "Introduction",
+    "section": "Summaries of a vector",
+    "text": "Summaries of a vector\n\nmean(rt); sd(rt); length(rt); range(rt)\n\n[1] 516.2\n\n\n[1] 64.37546\n\n\n[1] 5\n\n\n[1] 430 601"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#rstudio-tips-and-help",
+    "href": "sessions/01-reproducibility/slides.html#rstudio-tips-and-help",
+    "title": "Introduction",
+    "section": "RStudio tips and help",
+    "text": "RStudio tips and help\n\nTab: autocomplete names.\nAlt + - / Option + -: insert &lt;-.\nEnvironment pane: the objects you created.\nWrite code in a file, not the console.\n\n\n\n?mean\n\nRead Arguments and Examples. E.g. to ignore NAs in mean(), use na.rm = TRUE."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#missing-values",
+    "href": "sessions/01-reproducibility/slides.html#missing-values",
+    "title": "Introduction",
+    "section": "Missing values",
+    "text": "Missing values\nNo response on a trial: NA.\n\nrt &lt;- c(512, 430, NA, 488, 550)\nmean(rt)\n\n[1] NA\n\nmean(rt, na.rm = TRUE)\n\n[1] 495\n\n\n\n\nis.na(rt)\n\n[1] FALSE FALSE  TRUE FALSE FALSE\n\nsum(is.na(rt))\n\n[1] 1\n\nwhich(is.na(rt))\n\n[1] 3"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#common-mistakes",
+    "href": "sessions/01-reproducibility/slides.html#common-mistakes",
+    "title": "Introduction",
+    "section": "Common mistakes",
+    "text": "Common mistakes\nR is case-sensitive: RT and rt are different objects. Pick one style (snake_case: mean_rt).\n\n\nmean(c(1, 2, 3)\n\nMissing ): R shows + and waits. Press Esc.\n\n\n\nmaen(rt)\n\nError in maen(rt) : could not find function \"maen\"\n\n\n\nRT\n\nError: object 'RT' not found"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#logical-values-and-comparisons",
+    "href": "sessions/01-reproducibility/slides.html#logical-values-and-comparisons",
+    "title": "Introduction",
+    "section": "Logical values and comparisons",
+    "text": "Logical values and comparisons\n\n\n\nOperator\nMeaning\nExample\n\n\n\n\n==, !=\nequal, not equal\n3 == 3 is TRUE\n\n\n&lt;, &gt;, &lt;=, &gt;=\ncomparisons\n5 &gt; 2 is TRUE\n\n\n%in%\nelement in a set\n\"a\" %in% c(\"a\",\"b\") is TRUE\n\n\n&, |, !\nand, or, not\nTRUE & FALSE is FALSE\n\n\n\n\n\nrt &lt;- c(512, 430, 1601, 488, 150)\ntoo_fast_or_slow &lt;- rt &lt; 200 | rt &gt; 1500   # flag implausible trials\nrt[!too_fast_or_slow]                       # keep valid trials\n\n[1] 512 430 488"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#factors",
+    "href": "sessions/01-reproducibility/slides.html#factors",
+    "title": "Introduction",
+    "section": "Factors",
+    "text": "Factors\nCategorical variables with fixed levels:\n\ngroup &lt;- factor(c(\"patient\", \"control\", \"control\", \"patient\", \"control\"))\nlevels(group)\n\n[1] \"control\" \"patient\"\n\ntable(group)\n\ngroup\ncontrol patient \n      3       2 \n\n\n\nOrdered categories (a Likert item):\n\nanswer &lt;- c(\"never\", \"always\", \"often\", \"never\")\nfactor(answer, levels = c(\"never\", \"often\", \"always\"), ordered = TRUE)\n\n[1] never  always often  never \nLevels: never &lt; often &lt; always"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#data-frames",
+    "href": "sessions/01-reproducibility/slides.html#data-frames",
+    "title": "Introduction",
+    "section": "Data frames",
+    "text": "Data frames\nOne row per observation, one column per variable. Columns can have different types.\n\nsubjects &lt;- data.frame(\n  id    = c(\"S01\", \"S02\", \"S03\", \"S04\"),\n  group = factor(c(\"patient\", \"control\", \"patient\", \"control\")),\n  age   = c(64, 58, 71, 60),\n  score = c(22, 29, 19, 28)\n)\nsubjects\n\n   id   group age score\n1 S01 patient  64    22\n2 S02 control  58    29\n3 S03 patient  71    19\n4 S04 control  60    28"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#data-frames-access",
+    "href": "sessions/01-reproducibility/slides.html#data-frames-access",
+    "title": "Introduction",
+    "section": "Data frames: access",
+    "text": "Data frames: access\n\ndim(subjects)\n\n[1] 4 4\n\nstr(subjects)\n\n'data.frame':   4 obs. of  4 variables:\n $ id   : chr  \"S01\" \"S02\" \"S03\" \"S04\"\n $ group: Factor w/ 2 levels \"control\",\"patient\": 2 1 2 1\n $ age  : num  64 58 71 60\n $ score: num  22 29 19 28"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#data-frames-columns-and-rows",
+    "href": "sessions/01-reproducibility/slides.html#data-frames-columns-and-rows",
+    "title": "Introduction",
+    "section": "Data frames: columns and rows",
+    "text": "Data frames: columns and rows\n\nsubjects$age     # a column\n\n[1] 64 58 71 60\n\nsubjects[2, ]    # a row\n\n   id   group age score\n2 S02 control  58    29\n\n# rows: over 60 and score below 24\nsubjects[subjects$age &gt; 60 & subjects$score &lt; 24, ]\n\n   id   group age score\n1 S01 patient  64    22\n3 S03 patient  71    19"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#functions",
+    "href": "sessions/01-reproducibility/slides.html#functions",
+    "title": "Introduction",
+    "section": "Functions",
+    "text": "Functions\n\nname &lt;- function(arg1, arg2 = default) {\n  # body\n  result          # last value is returned\n}\n\n\nThe standard error of the mean, \\(s / \\sqrt{n}\\):\n\nse &lt;- function(x) {\n  sd(x) / sqrt(length(x))\n}\nse(c(512, 430, 601, 488, 550))\n\n[1] 28.78958"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#packages",
+    "href": "sessions/01-reproducibility/slides.html#packages",
+    "title": "Introduction",
+    "section": "Packages",
+    "text": "Packages\n\ninstall.packages(\"tidyverse\")   # once, in the console\nlibrary(tidyverse)              # at the top of every file that uses it\n# package::function(): one function, without library()\nhere::here(\"data\")\n\n\nEnd every report with sessionInfo(): R and package versions."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#why-reports-from-code",
+    "href": "sessions/01-reproducibility/slides.html#why-reports-from-code",
+    "title": "Introduction",
+    "section": "Why reports from code?",
+    "text": "Why reports from code?\nThe copy-paste workflow:\n\nrun the script;\ncopy numbers into Word, paste plots;\na reviewer asks to exclude 3 subjects… redo it all by hand.\n\n\nA Quarto document (.qmd) holds text, code and (after rendering) results:\n\nevery number is computed when the document is created;\nnew data? Click Render and everything updates."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#anatomy-of-a-.qmd-file",
+    "href": "sessions/01-reproducibility/slides.html#anatomy-of-a-.qmd-file",
+    "title": "Introduction",
+    "section": "Anatomy of a .qmd file",
+    "text": "Anatomy of a .qmd file\n---\ntitle: \"Sleep deprivation: first look\"\nauthor: \"Your Name\"\nformat: html\n---\n\n## Data\n\n```{r}\n#| echo: false\nsleepstudy &lt;- read.csv(here::here(\"data\", \"sleepstudy.csv\"))\n```\n\nThe dataset contains `{r} nrow(sleepstudy)` measurements.\n\nYAML header between ---: title, author, format (html, pdf, docx).\nMarkdown text: ## Section, **bold**, *italic*, - lists, $\\bar x$.\nCode chunks: run at render; options start with #|.\nInline code: numbers inside sentences, never typed by hand."
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#rendering-and-chunk-options",
+    "href": "sessions/01-reproducibility/slides.html#rendering-and-chunk-options",
+    "title": "Introduction",
+    "section": "Rendering and chunk options",
+    "text": "Rendering and chunk options\nRender: Ctrl/Cmd + Shift + K. The file runs from scratch: it must load its own packages and data.\n\n\n\n\n\n\n\n\nOption\nEffect\n\n\n\n\n#| echo: false\nhide code, show results\n\n\n#| eval: false\nshow code, don’t run it\n\n\n#| include: false\nrun, show nothing\n\n\n#| label: fig-rt and #| fig-cap: \"...\"\nnumbered figure, cite with @fig-rt"
+  },
+  {
+    "objectID": "sessions/01-reproducibility/slides.html#practice",
+    "href": "sessions/01-reproducibility/slides.html#practice",
+    "title": "Introduction",
+    "section": "Practice",
+    "text": "Practice\n\nConnect to https://giuseppealfonzetti.github.io/s4ns-A/\nClick on the “Exercises” link corresponding to today class."
+  },
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "Seeing Theory: probability and distributions (S4), inference (S5–S6), regression (S7)\nR Psychologist: CIs, power, p-values, Cohen’s d, correlation\nGuess the Correlation; p-hacker; Spurious Correlations; Datasaurus Dozen",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#statistical-intuition-interactive",
+    "href": "resources.html#statistical-intuition-interactive",
+    "title": "Resources",
+    "section": "",
+    "text": "Seeing Theory: probability and distributions (S4), inference (S5–S6), regression (S7)\nR Psychologist: CIs, power, p-values, Cohen’s d, correlation\nGuess the Correlation; p-hacker; Spurious Correlations; Datasaurus Dozen",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#r-data-and-quarto",
+    "href": "resources.html#r-data-and-quarto",
+    "title": "Resources",
+    "section": "R, data and Quarto",
+    "text": "R, data and Quarto\n\nWickham et al., R for Data Science (2e)\nGrolemund, Hands-On Programming with R\nPsyTeachR, Data Skills for Reproducible Research\nPosit cheatsheets (dplyr, ggplot2, purrr, Quarto)\nQuarto documentation\nBryan, Happy Git and GitHub for the useR\nStuck? Posit Community, with a minimal reproducible example",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#visualisation",
+    "href": "resources.html#visualisation",
+    "title": "Resources",
+    "section": "Visualisation",
+    "text": "Visualisation\n\nFrom Data to Viz; R Graph Gallery\nWickham et al., ggplot2; Wilke, Fundamentals of Data Visualization\nColour-blind safe palettes: viridis, ColorBrewer",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#beyond-this-course",
+    "href": "resources.html#beyond-this-course",
+    "title": "Resources",
+    "section": "Beyond this course",
+    "text": "Beyond this course\n\nRepeated measures (trials, sessions, recordings per subject) are not independent. Here we average or pair; the proper tool is a mixed model: lme4; Yu et al. (2022), Beyond t test and ANOVA, Neuron.\nNeuro data in R: Neuroconductor, eegUtils, eeguana, ggseg. Open data: OpenNeuro, OSF …",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistics for Neuroscience - Level A",
+    "section": "",
+    "text": "#\nDate\nTime\nTopic\nSlides\nExercises\nSolutions\n\n\n\n\n1\nMon 23/11\n10:30–12:30\nIntroduction to R and Quarto\nSlides\nExercises\nSolutions\n\n\n2\nThu 26/11\n10:30–12:30\nData manipulation\nSlides\nExercises\n\n\n\n3\nMon 30/11\n10:30–12:30\nVisualisation and EDA\n\n\n\n\n\n4\nWed 02/12\n14:30–16:30\nProbability and sampling\n\n\n\n\n\n5\nThu 17/12\n10:30–12:30\nEstimation and confidence intervals\n\n\n\n\n\n6\nMon 21/12\n10:30–12:30\nHypothesis testing\n\n\n\n\n\n7\nWed 13/01\n14:30–17:30\nLinear models\n\n\n\n\n\n\n\nAcknowledgements\nBuilds on previous editions from Giovanni Saraceno (giovsaraceno/Statistics_for_Neuroscience) and Angela Andreella (angeella/PNC).",
+    "crumbs": [
+      "Schedule"
+    ]
+  },
+  {
     "objectID": "sessions/01-reproducibility/exercises.html",
     "href": "sessions/01-reproducibility/exercises.html",
     "title": "Session 1: Exercises",
@@ -138,217 +485,388 @@
     "text": "Bonus: PDF and Word\n\nA PDF needs LaTeX. Install TinyTeX once, in the RStudio Terminal, the tab next to the Console: quarto install tinytex.\nAdd two formats to the header:\n\nformat:\n  html:\n    toc: true\n    toc-location: left\n  pdf: default\n  docx: default\n\nRender all three in the Terminal: quarto render session1-report.qmd. Open the PDF and the Word file. What differs from the HTML?"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Statistics for Neuroscience - Level A",
+    "objectID": "sessions/01-reproducibility/solutions.html",
+    "href": "sessions/01-reproducibility/solutions.html",
+    "title": "Session 1: Solutions",
     "section": "",
-    "text": "#\nDate\nTime\nTopic\nSlides\nExercises\nSolutions\n\n\n\n\n1\nMon 23/11\n10:30–12:30\nIntroduction to R and Quarto\nSlides\nExercises\n\n\n\n2\nThu 26/11\n10:30–12:30\nData manipulation\n\n\n\n\n\n3\nMon 30/11\n10:30–12:30\nVisualisation and EDA\n\n\n\n\n\n4\nWed 02/12\n14:30–16:30\nProbability and sampling\n\n\n\n\n\n5\nThu 17/12\n10:30–12:30\nEstimation and confidence intervals\n\n\n\n\n\n6\nMon 21/12\n10:30–12:30\nHypothesis testing\n\n\n\n\n\n7\nWed 13/01\n14:30–17:30\nLinear models\n\n\n\n\n\n\n\nAcknowledgements\nBuilds on previous editions from Giovanni Saraceno (giovsaraceno/Statistics_for_Neuroscience) and Angela Andreella (angeella/PNC).",
-    "crumbs": [
-      "Schedule"
-    ]
+    "text": "rt &lt;- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)\ncondition &lt;- c(\"easy\", \"hard\", \"hard\", \"easy\", \"hard\",\n               \"easy\", \"hard\", \"hard\", \"easy\", \"easy\")\n\nlength(rt)\n\n[1] 10\n\nmean(rt); median(rt); min(rt); max(rt)\n\n[1] 696.9\n\n\n[1] 517.5\n\n\n[1] 455\n\n\n[1] 2310\n\nwhich.max(rt)   # trial 5: far slower than the rest. The median is robust to it, the mean is not.\n\n[1] 5\n\n\n\nkeep &lt;- rt &lt; 2000            # one logical vector subsets both, so they stay aligned\nrt_clean &lt;- rt[keep]\ncond_clean &lt;- condition[keep]\nmean(rt_clean)\n\n[1] 517.6667\n\nmean(rt_clean[cond_clean == \"easy\"])\n\n[1] 499.2\n\nmean(rt_clean[cond_clean == \"hard\"])\n\n[1] 540.75\n\nrt_s &lt;- rt / 1000\n\n\n\n\n\nrt2 &lt;- c(523, NA, 487, 150, 601, 455, 2310, NA, 512, 498)\n\nsum(is.na(rt2)); which(is.na(rt2))\n\n[1] 2\n\n\n[1] 2 8\n\nmean(rt2, na.rm = TRUE)\n\n[1] 692\n\nimplausible &lt;- rt2 &lt; 200 | rt2 &gt; 1500    # NA where rt2 is NA\nsum(implausible, na.rm = TRUE)\n\n[1] 2\n\nmean(implausible, na.rm = TRUE)          # proportion of the non-missing trials\n\n[1] 0.25\n\n\n\nrt2[rt2 &gt; 200]     # NA &gt; 200 is NA, so each NA trial returns an NA\n\n[1]  523   NA  487  601  455 2310   NA  512  498\n\nrt2_ok &lt;- rt2[!is.na(rt2) & rt2 &gt;= 200 & rt2 &lt;= 1500]\nrt2_ok\n\n[1] 523 487 601 455 512 498\n\n\n\n\n\n\nscores &lt;- c(12, 15, 9, 20, 17)\ngroup &lt;- c(\"a\", \"b\", \"a\", \"b\", \"a\")\nmean(scores[group == \"a\"])   # = instead of ==, and a missing )\n\n[1] 12.66667\n\nmean(scores[group == \"b\"])   # maen\n\n[1] 17.5\n\nmean(scores)                 # Mean: R is case-sensitive\n\n[1] 14.6\n\nsummary(scores)              # Scores\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n    9.0    12.0    15.0    14.6    17.0    20.0 \n\n\nThe silent one is = instead of ==. Inside [ ], group = \"a\" does not compare anything: R reads it as scores[\"a\"], the element named \"a\". There is none, so you get NA and no error.\n\n\n\n\nanswers &lt;- c(\"often\", \"never\", \"sometimes\", \"always\", \"often\", \"rarely\",\n             \"sometimes\", \"often\", \"never\", \"always\", \"sometimes\", \"often\")\ntable(answers)     # alphabetical: \"always\" comes first\n\nanswers\n   always     never     often    rarely sometimes \n        2         2         4         1         3 \n\nlev &lt;- c(\"never\", \"rarely\", \"sometimes\", \"often\", \"always\")\nanswers_f &lt;- factor(answers, levels = lev, ordered = TRUE)\ntable(answers_f)\n\nanswers_f\n    never    rarely sometimes     often    always \n        2         1         3         4         2 \n\nscore &lt;- as.numeric(answers_f)\nmean(score)\n\n[1] 3.25\n\n\n\nfactor(c(answers, \"Often\"), levels = lev, ordered = TRUE)\n\n [1] often     never     sometimes always    often     rarely    sometimes\n [8] often     never     always    sometimes often     &lt;NA&gt;     \nLevels: never &lt; rarely &lt; sometimes &lt; often &lt; always\n\n\n\"Often\" is not one of the levels (case-sensitive), so it becomes NA, silently. Check with sum(is.na(...)) after building a factor.\n\n\n\n\nparticipants &lt;- data.frame(\n  id    = c(\"P01\", \"P02\", \"P03\", \"P04\", \"P05\", \"P06\"),\n  group = factor(c(\"patient\", \"control\", \"patient\", \"control\", \"patient\", \"control\")),\n  age   = c(72, 65, 68, 70, 61, 74),\n  score = c(21, 29, 23, 28, 25, 27)\n)\nstr(participants)\n\n'data.frame':   6 obs. of  4 variables:\n $ id   : chr  \"P01\" \"P02\" \"P03\" \"P04\" ...\n $ group: Factor w/ 2 levels \"control\",\"patient\": 2 1 2 1 2 1\n $ age  : num  72 65 68 70 61 74\n $ score: num  21 29 23 28 25 27\n\nparticipants$low_score &lt;- participants$score &lt; 24\nparticipants[participants$group == \"patient\" & participants$age &gt; 65, ]\n\n   id   group age score low_score\n1 P01 patient  72    21      TRUE\n3 P03 patient  68    23      TRUE\n\nmean(participants$score[participants$group == \"patient\"])\n\n[1] 23\n\nmean(participants$score[participants$group == \"control\"])\n\n[1] 28\n\nparticipants[order(participants$age), ]\n\n   id   group age score low_score\n5 P05 patient  61    25     FALSE\n2 P02 control  65    29     FALSE\n3 P03 patient  68    23      TRUE\n4 P04 control  70    28     FALSE\n1 P01 patient  72    21      TRUE\n6 P06 control  74    27     FALSE\n\n\n\n\n\n\nse &lt;- function(x) {\n  sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)))   # length() would count the NA\n}\nse(rt_clean)\n\n[1] 16.22241\n\nse(rt2)\n\n[1] 235.9161\n\nn_outliers &lt;- function(x, low = 200, high = 1500) {\n  sum(x &lt; low | x &gt; high, na.rm = TRUE)\n}\nn_outliers(rt2)\n\n[1] 2\n\nn_outliers(rt2, high = 600)   # 601 now counts too\n\n[1] 3\n\n\n\n\n\n\nstr(sleep)        # 20 rows, 3 columns: each patient appears twice\n\n'data.frame':   20 obs. of  3 variables:\n $ extra: num  0.7 -1.6 -0.2 -1.2 -0.1 3.4 3.7 0.8 0 2 ...\n $ group: Factor w/ 2 levels \"1\",\"2\": 1 1 1 1 1 1 1 1 1 1 ...\n $ ID   : Factor w/ 10 levels \"1\",\"2\",\"3\",\"4\",..: 1 2 3 4 5 6 7 8 9 10 ...\n\nhead(sleep)\n\n  extra group ID\n1   0.7     1  1\n2  -1.6     1  2\n3  -0.2     1  3\n4  -1.2     1  4\n5  -0.1     1  5\n6   3.4     1  6\n\nsummary(sleep)\n\n     extra        group        ID   \n Min.   :-1.600   1:10   1      :2  \n 1st Qu.:-0.025   2:10   2      :2  \n Median : 0.950          3      :2  \n Mean   : 1.540          4      :2  \n 3rd Qu.: 3.400          5      :2  \n Max.   : 5.500          6      :2  \n                         (Other):8  \n\nmean(sleep$extra[sleep$group == \"1\"])\n\n[1] 0.75\n\nmean(sleep$extra[sleep$group == \"2\"])\n\n[1] 2.33\n\n# both groups list the patients in the same ID order (check sleep$ID), so we can subtract\nd21 &lt;- sleep$extra[sleep$group == \"2\"] - sleep$extra[sleep$group == \"1\"]\nsum(d21 &gt; 0)\n\n[1] 9\n\n\n\n\n\n\nsleepstudy &lt;- read.csv(here::here(\"data\", \"sleepstudy.csv\"))\nlength(unique(sleepstudy$Subject))\n\n[1] 18\n\nrt_base &lt;- mean(sleepstudy$Reaction[sleepstudy$Days == 2])\nrt9 &lt;- mean(sleepstudy$Reaction[sleepstudy$Days == 9])\nc(rt_base, rt9)\n\n[1] 265.3619 350.8512\n\n\n\nbase &lt;- sleepstudy[sleepstudy$Days == 2, ]\nday9 &lt;- sleepstudy[sleepstudy$Days == 9, ]\nall(base$Subject == day9$Subject)    # same order: safe to subtract\n\n[1] TRUE\n\nchange &lt;- day9$Reaction - base$Reaction\nsum(change &gt; 0)\n\n[1] 16\n\nbase$Subject[which.max(change)]\n\n[1] 308\n\nhist(change)"
   },
   {
-    "objectID": "resources.html",
-    "href": "resources.html",
-    "title": "Resources",
+    "objectID": "sessions/01-reproducibility/solutions.html#reaction-times",
+    "href": "sessions/01-reproducibility/solutions.html#reaction-times",
+    "title": "Session 1: Solutions",
     "section": "",
-    "text": "Seeing Theory: probability and distributions (S4), inference (S5–S6), regression (S7)\nR Psychologist: CIs, power, p-values, Cohen’s d, correlation\nGuess the Correlation; p-hacker; Spurious Correlations; Datasaurus Dozen",
-    "crumbs": [
-      "Resources"
-    ]
+    "text": "rt &lt;- c(523, 487, 601, 455, 2310, 512, 498, 577, 466, 540)\ncondition &lt;- c(\"easy\", \"hard\", \"hard\", \"easy\", \"hard\",\n               \"easy\", \"hard\", \"hard\", \"easy\", \"easy\")\n\nlength(rt)\n\n[1] 10\n\nmean(rt); median(rt); min(rt); max(rt)\n\n[1] 696.9\n\n\n[1] 517.5\n\n\n[1] 455\n\n\n[1] 2310\n\nwhich.max(rt)   # trial 5: far slower than the rest. The median is robust to it, the mean is not.\n\n[1] 5\n\n\n\nkeep &lt;- rt &lt; 2000            # one logical vector subsets both, so they stay aligned\nrt_clean &lt;- rt[keep]\ncond_clean &lt;- condition[keep]\nmean(rt_clean)\n\n[1] 517.6667\n\nmean(rt_clean[cond_clean == \"easy\"])\n\n[1] 499.2\n\nmean(rt_clean[cond_clean == \"hard\"])\n\n[1] 540.75\n\nrt_s &lt;- rt / 1000"
   },
   {
-    "objectID": "resources.html#statistical-intuition-interactive",
-    "href": "resources.html#statistical-intuition-interactive",
-    "title": "Resources",
+    "objectID": "sessions/01-reproducibility/solutions.html#missing-trials",
+    "href": "sessions/01-reproducibility/solutions.html#missing-trials",
+    "title": "Session 1: Solutions",
     "section": "",
-    "text": "Seeing Theory: probability and distributions (S4), inference (S5–S6), regression (S7)\nR Psychologist: CIs, power, p-values, Cohen’s d, correlation\nGuess the Correlation; p-hacker; Spurious Correlations; Datasaurus Dozen",
-    "crumbs": [
-      "Resources"
-    ]
+    "text": "rt2 &lt;- c(523, NA, 487, 150, 601, 455, 2310, NA, 512, 498)\n\nsum(is.na(rt2)); which(is.na(rt2))\n\n[1] 2\n\n\n[1] 2 8\n\nmean(rt2, na.rm = TRUE)\n\n[1] 692\n\nimplausible &lt;- rt2 &lt; 200 | rt2 &gt; 1500    # NA where rt2 is NA\nsum(implausible, na.rm = TRUE)\n\n[1] 2\n\nmean(implausible, na.rm = TRUE)          # proportion of the non-missing trials\n\n[1] 0.25\n\n\n\nrt2[rt2 &gt; 200]     # NA &gt; 200 is NA, so each NA trial returns an NA\n\n[1]  523   NA  487  601  455 2310   NA  512  498\n\nrt2_ok &lt;- rt2[!is.na(rt2) & rt2 &gt;= 200 & rt2 &lt;= 1500]\nrt2_ok\n\n[1] 523 487 601 455 512 498"
   },
   {
-    "objectID": "resources.html#r-data-and-quarto",
-    "href": "resources.html#r-data-and-quarto",
-    "title": "Resources",
-    "section": "R, data and Quarto",
-    "text": "R, data and Quarto\n\nWickham et al., R for Data Science (2e)\nGrolemund, Hands-On Programming with R\nPsyTeachR, Data Skills for Reproducible Research\nPosit cheatsheets (dplyr, ggplot2, purrr, Quarto)\nQuarto documentation\nBryan, Happy Git and GitHub for the useR\nStuck? Posit Community, with a minimal reproducible example",
-    "crumbs": [
-      "Resources"
-    ]
+    "objectID": "sessions/01-reproducibility/solutions.html#spot-the-bugs",
+    "href": "sessions/01-reproducibility/solutions.html#spot-the-bugs",
+    "title": "Session 1: Solutions",
+    "section": "",
+    "text": "scores &lt;- c(12, 15, 9, 20, 17)\ngroup &lt;- c(\"a\", \"b\", \"a\", \"b\", \"a\")\nmean(scores[group == \"a\"])   # = instead of ==, and a missing )\n\n[1] 12.66667\n\nmean(scores[group == \"b\"])   # maen\n\n[1] 17.5\n\nmean(scores)                 # Mean: R is case-sensitive\n\n[1] 14.6\n\nsummary(scores)              # Scores\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n    9.0    12.0    15.0    14.6    17.0    20.0 \n\n\nThe silent one is = instead of ==. Inside [ ], group = \"a\" does not compare anything: R reads it as scores[\"a\"], the element named \"a\". There is none, so you get NA and no error."
   },
   {
-    "objectID": "resources.html#visualisation",
-    "href": "resources.html#visualisation",
-    "title": "Resources",
-    "section": "Visualisation",
-    "text": "Visualisation\n\nFrom Data to Viz; R Graph Gallery\nWickham et al., ggplot2; Wilke, Fundamentals of Data Visualization\nColour-blind safe palettes: viridis, ColorBrewer",
-    "crumbs": [
-      "Resources"
-    ]
+    "objectID": "sessions/01-reproducibility/solutions.html#a-likert-item",
+    "href": "sessions/01-reproducibility/solutions.html#a-likert-item",
+    "title": "Session 1: Solutions",
+    "section": "",
+    "text": "answers &lt;- c(\"often\", \"never\", \"sometimes\", \"always\", \"often\", \"rarely\",\n             \"sometimes\", \"often\", \"never\", \"always\", \"sometimes\", \"often\")\ntable(answers)     # alphabetical: \"always\" comes first\n\nanswers\n   always     never     often    rarely sometimes \n        2         2         4         1         3 \n\nlev &lt;- c(\"never\", \"rarely\", \"sometimes\", \"often\", \"always\")\nanswers_f &lt;- factor(answers, levels = lev, ordered = TRUE)\ntable(answers_f)\n\nanswers_f\n    never    rarely sometimes     often    always \n        2         1         3         4         2 \n\nscore &lt;- as.numeric(answers_f)\nmean(score)\n\n[1] 3.25\n\n\n\nfactor(c(answers, \"Often\"), levels = lev, ordered = TRUE)\n\n [1] often     never     sometimes always    often     rarely    sometimes\n [8] often     never     always    sometimes often     &lt;NA&gt;     \nLevels: never &lt; rarely &lt; sometimes &lt; often &lt; always\n\n\n\"Often\" is not one of the levels (case-sensitive), so it becomes NA, silently. Check with sum(is.na(...)) after building a factor."
   },
   {
-    "objectID": "resources.html#beyond-this-course",
-    "href": "resources.html#beyond-this-course",
-    "title": "Resources",
-    "section": "Beyond this course",
-    "text": "Beyond this course\n\nRepeated measures (trials, sessions, recordings per subject) are not independent. Here we average or pair; the proper tool is a mixed model: lme4; Yu et al. (2022), Beyond t test and ANOVA, Neuron.\nNeuro data in R: Neuroconductor, eegUtils, eeguana, ggseg. Open data: OpenNeuro, OSF …",
-    "crumbs": [
-      "Resources"
-    ]
+    "objectID": "sessions/01-reproducibility/solutions.html#a-data-frame-by-hand",
+    "href": "sessions/01-reproducibility/solutions.html#a-data-frame-by-hand",
+    "title": "Session 1: Solutions",
+    "section": "",
+    "text": "participants &lt;- data.frame(\n  id    = c(\"P01\", \"P02\", \"P03\", \"P04\", \"P05\", \"P06\"),\n  group = factor(c(\"patient\", \"control\", \"patient\", \"control\", \"patient\", \"control\")),\n  age   = c(72, 65, 68, 70, 61, 74),\n  score = c(21, 29, 23, 28, 25, 27)\n)\nstr(participants)\n\n'data.frame':   6 obs. of  4 variables:\n $ id   : chr  \"P01\" \"P02\" \"P03\" \"P04\" ...\n $ group: Factor w/ 2 levels \"control\",\"patient\": 2 1 2 1 2 1\n $ age  : num  72 65 68 70 61 74\n $ score: num  21 29 23 28 25 27\n\nparticipants$low_score &lt;- participants$score &lt; 24\nparticipants[participants$group == \"patient\" & participants$age &gt; 65, ]\n\n   id   group age score low_score\n1 P01 patient  72    21      TRUE\n3 P03 patient  68    23      TRUE\n\nmean(participants$score[participants$group == \"patient\"])\n\n[1] 23\n\nmean(participants$score[participants$group == \"control\"])\n\n[1] 28\n\nparticipants[order(participants$age), ]\n\n   id   group age score low_score\n5 P05 patient  61    25     FALSE\n2 P02 control  65    29     FALSE\n3 P03 patient  68    23      TRUE\n4 P04 control  70    28     FALSE\n1 P01 patient  72    21      TRUE\n6 P06 control  74    27     FALSE"
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#from-a-sample-to-general-conclusions",
-    "href": "sessions/01-reproducibility/slides.html#from-a-sample-to-general-conclusions",
-    "title": "Introduction",
-    "section": "From a sample to general conclusions",
-    "text": "From a sample to general conclusions\nWe observe a tiny portion of the world, e.g. a few subjects, sessions, trials.\nWe want conclusions that hold in general.\n\nStatistics quantifies how much we can generalise despite\n\nmeasurement noise (instruments, questionnaires);\nvariability between and within subjects;\nfactors we did not measure."
+    "objectID": "sessions/01-reproducibility/solutions.html#your-first-functions",
+    "href": "sessions/01-reproducibility/solutions.html#your-first-functions",
+    "title": "Session 1: Solutions",
+    "section": "",
+    "text": "se &lt;- function(x) {\n  sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)))   # length() would count the NA\n}\nse(rt_clean)\n\n[1] 16.22241\n\nse(rt2)\n\n[1] 235.9161\n\nn_outliers &lt;- function(x, low = 200, high = 1500) {\n  sum(x &lt; low | x &gt; high, na.rm = TRUE)\n}\nn_outliers(rt2)\n\n[1] 2\n\nn_outliers(rt2, high = 600)   # 601 now counts too\n\n[1] 3"
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#aims",
-    "href": "sessions/01-reproducibility/slides.html#aims",
-    "title": "Introduction",
-    "section": "Aims",
-    "text": "Aims\nStudy of populations\n\n100 subjects scanned once: population across individuals.\n1 subject scanned daily for a year: population across time.\n\n\nStudy of variation\n\nVariability between subjects, across time, across space.\n\n\n\nData reduction\n\nFrom millions of numbers per subject to summaries (means, components, features).\n\nFisher (1925), Statistical Methods for Research Workers, ch. 1"
+    "objectID": "sessions/01-reproducibility/solutions.html#a-drug-trial-sleep",
+    "href": "sessions/01-reproducibility/solutions.html#a-drug-trial-sleep",
+    "title": "Session 1: Solutions",
+    "section": "",
+    "text": "str(sleep)        # 20 rows, 3 columns: each patient appears twice\n\n'data.frame':   20 obs. of  3 variables:\n $ extra: num  0.7 -1.6 -0.2 -1.2 -0.1 3.4 3.7 0.8 0 2 ...\n $ group: Factor w/ 2 levels \"1\",\"2\": 1 1 1 1 1 1 1 1 1 1 ...\n $ ID   : Factor w/ 10 levels \"1\",\"2\",\"3\",\"4\",..: 1 2 3 4 5 6 7 8 9 10 ...\n\nhead(sleep)\n\n  extra group ID\n1   0.7     1  1\n2  -1.6     1  2\n3  -0.2     1  3\n4  -1.2     1  4\n5  -0.1     1  5\n6   3.4     1  6\n\nsummary(sleep)\n\n     extra        group        ID   \n Min.   :-1.600   1:10   1      :2  \n 1st Qu.:-0.025   2:10   2      :2  \n Median : 0.950          3      :2  \n Mean   : 1.540          4      :2  \n 3rd Qu.: 3.400          5      :2  \n Max.   : 5.500          6      :2  \n                         (Other):8  \n\nmean(sleep$extra[sleep$group == \"1\"])\n\n[1] 0.75\n\nmean(sleep$extra[sleep$group == \"2\"])\n\n[1] 2.33\n\n# both groups list the patients in the same ID order (check sleep$ID), so we can subtract\nd21 &lt;- sleep$extra[sleep$group == \"2\"] - sleep$extra[sleep$group == \"1\"]\nsum(d21 &gt; 0)\n\n[1] 9"
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#pay-attention",
-    "href": "sessions/01-reproducibility/slides.html#pay-attention",
-    "title": "Introduction",
-    "section": "Pay attention!",
-    "text": "Pay attention!\nClassical tools (t-test, ANOVA, regression) assume independent observations.\n\nNeuroscience data often are not:\n\n10 trials from one subject are more similar than 10 trials from 10 subjects;\nthe same questionnaire filled in 6 times by one participant gives correlated scores.\n\n\n\nIgnoring this leads to overconfidence (underestimation of uncertainty)\nA standard tool to deal with correlated responses is mixed models, but we will not cover them in this course."
+    "objectID": "sessions/01-reproducibility/solutions.html#sleep-deprivation-sleepstudy",
+    "href": "sessions/01-reproducibility/solutions.html#sleep-deprivation-sleepstudy",
+    "title": "Session 1: Solutions",
+    "section": "",
+    "text": "sleepstudy &lt;- read.csv(here::here(\"data\", \"sleepstudy.csv\"))\nlength(unique(sleepstudy$Subject))\n\n[1] 18\n\nrt_base &lt;- mean(sleepstudy$Reaction[sleepstudy$Days == 2])\nrt9 &lt;- mean(sleepstudy$Reaction[sleepstudy$Days == 9])\nc(rt_base, rt9)\n\n[1] 265.3619 350.8512\n\n\n\nbase &lt;- sleepstudy[sleepstudy$Days == 2, ]\nday9 &lt;- sleepstudy[sleepstudy$Days == 9, ]\nall(base$Subject == day9$Subject)    # same order: safe to subtract\n\n[1] TRUE\n\nchange &lt;- day9$Reaction - base$Reaction\nsum(change &gt; 0)\n\n[1] 16\n\nbase$Subject[which.max(change)]\n\n[1] 308\n\nhist(change)"
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#the-reproducibility-crisis",
-    "href": "sessions/01-reproducibility/slides.html#the-reproducibility-crisis",
-    "title": "Introduction",
-    "section": "The reproducibility crisis",
-    "text": "The reproducibility crisis\n\nReproducibility: same data and same analysis give the same results.\nReplication: new data on the same question give consistent results.\n\n\n\nNature survey of 1,576 researchers: more than 70% had tried and failed to replicate another scientist’s experiments, more than half their own (Baker, 2016).\n70 teams analysed the same brain-imaging data to test the same 9 hypotheses. No two teams used the same workflow, and their results varied considerably (Botvinik-Nezer et al., 2020).\n\n\n\nCommon threats: low statistical power, trying analyses until something is significant (p-hacking), hypotheses made up after seeing the results, unpublished null results, no shared data or code (Munafò et al., 2017)."
+    "objectID": "sessions/01-reproducibility/solutions.html#your-first-report",
+    "href": "sessions/01-reproducibility/solutions.html#your-first-report",
+    "title": "Session 1: Solutions",
+    "section": "9. Your first report",
+    "text": "9. Your first report\nA table of contents appears in a left sidebar. All HTML options: https://quarto.org/docs/reference/formats/html.html.\n### My project\n\nI study **sleep** in *university students* using:\n\n- questionnaires\n- a sleep diary\n- reaction times\n\nMore on the [Quarto website](https://quarto.org)."
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#a-starting-point",
-    "href": "sessions/01-reproducibility/slides.html#a-starting-point",
-    "title": "Introduction",
-    "section": "A starting point",
-    "text": "A starting point\n\nState the hypothesis before looking at the data.\nShare raw data and code. Every number in the paper generated automatically.\nWrite reports where text, code and results live together.\n\n\n\nThis is why we analyse data with code."
+    "objectID": "sessions/01-reproducibility/solutions.html#bring-in-your-analysis",
+    "href": "sessions/01-reproducibility/solutions.html#bring-in-your-analysis",
+    "title": "Session 1: Solutions",
+    "section": "10. Bring in your analysis",
+    "text": "10. Bring in your analysis\n```{r}\n#| echo: false\nsleepstudy &lt;- read.csv(here::here(\"data\", \"sleepstudy.csv\"))\n```\n\n```{r}\nbase &lt;- sleepstudy[sleepstudy$Days == 2, ]\nday9 &lt;- sleepstudy[sleepstudy$Days == 9, ]\nchange &lt;- day9$Reaction - base$Reaction\n```\n\n```{r}\n#| label: fig-change\n#| fig-cap: \"Change in reaction time from baseline (day 2) to day 9, one value per subject.\"\nhist(change, xlab = \"Change in reaction time (ms)\", main = NULL)\n```\n\n\n\n\n\n\n\n\nFigure 1: Change in reaction time from baseline (day 2) to day 9, one value per subject.\n\n\n\n\n\n@fig-change becomes a numbered, clickable “Figure 1”. With echo: false the chunk still runs, but its code is hidden. This chunk prints nothing, so it disappears from the report."
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#the-data-analysis-pipeline",
-    "href": "sessions/01-reproducibility/slides.html#the-data-analysis-pipeline",
-    "title": "Introduction",
-    "section": "The data analysis pipeline",
-    "text": "The data analysis pipeline\n\nFigure from Wickham, Çetinkaya-Rundel and Grolemund, R for Data Science, 2nd ed."
+    "objectID": "sessions/01-reproducibility/solutions.html#numbers-in-the-text",
+    "href": "sessions/01-reproducibility/solutions.html#numbers-in-the-text",
+    "title": "Session 1: Solutions",
+    "section": "11. Numbers in the text",
+    "text": "11. Numbers in the text\nAfter 7 nights with 3 hours in bed, reaction time increased by `{r} round(mean(change))` ms\non average; `{r} sum(change &gt; 0)` of `{r} length(change)` subjects slowed down (@fig-change).\n\nAfter 7 nights with 3 hours in bed, reaction time increased by 85 ms on average; 16 of 18 subjects slowed down (Figure 1).\n\nOn average, patients slept `{r} round(mean(d21), 2)` hours more with drug 2 than with drug 1,\nand `{r} sum(d21 &gt; 0)` out of 10 slept more with drug 2.\n\nOn average, patients slept 1.58 hours more with drug 2 than with drug 1, and 9 out of 10 slept more with drug 2."
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#rstudio",
-    "href": "sessions/01-reproducibility/slides.html#rstudio",
-    "title": "Introduction",
-    "section": "RStudio",
-    "text": "RStudio"
+    "objectID": "sessions/01-reproducibility/solutions.html#does-it-render-from-scratch",
+    "href": "sessions/01-reproducibility/solutions.html#does-it-render-from-scratch",
+    "title": "Session 1: Solutions",
+    "section": "12. Does it render from scratch?",
+    "text": "12. Does it render from scratch?\nRender fails: object 'x' not found. Rendering starts a fresh R session that never saw the console. Everything the document needs must be created inside it. After Restart R the document still renders: it is self-contained.\n\nsessionInfo()\n\nR version 4.6.1 (2026-06-24)\nPlatform: aarch64-apple-darwin23\nRunning under: macOS Golden Gate 27.0.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] C.UTF-8/C.UTF-8/C.UTF-8/C/C.UTF-8/C.UTF-8\n\ntime zone: Europe/Rome\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.6.1    here_1.0.2        fastmap_1.2.0    \n [5] rprojroot_2.1.1   cli_3.6.6         tools_4.6.1       htmltools_0.5.9  \n [9] otel_0.2.0        yaml_2.3.12       rmarkdown_2.31    knitr_1.51       \n[13] jsonlite_2.0.0    xfun_0.60         digest_0.6.39     rlang_1.3.0      \n[17] evaluate_1.0.5"
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#basic-r-grammar",
-    "href": "sessions/01-reproducibility/slides.html#basic-r-grammar",
-    "title": "Introduction",
-    "section": "Basic R grammar",
-    "text": "Basic R grammar\nRun a line: Ctrl+Enter (Windows) / Cmd+Enter (Mac).\n\na &lt;- 1                    # assign 1 to a (numeric value)\nb &lt;- 2\nlabel &lt;- \"control\"        # character value\na + b\n\n[1] 3\n\n\n\nVectors:\n\nrt &lt;- c(512, 430, 601, 488, 550)  # reaction times (ms)\ntrials &lt;- 1:5                     # sequence 1 to 5\nseq(0, 1, by = 0.25)              # regular sequence\n\n[1] 0.00 0.25 0.50 0.75 1.00"
+    "objectID": "sessions/01-reproducibility/solutions.html#bonus",
+    "href": "sessions/01-reproducibility/solutions.html#bonus",
+    "title": "Session 1: Solutions",
+    "section": "Bonus",
+    "text": "Bonus\nSame text, figure and numbers in all three: one source, three outputs. The PDF and the Word file have no table of contents, because toc sits under html: only. The Word file can be edited, e.g. by a co-author, but edits there are lost at the next render: change the .qmd instead."
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#working-with-vectors",
-    "href": "sessions/01-reproducibility/slides.html#working-with-vectors",
-    "title": "Introduction",
-    "section": "Working with vectors",
-    "text": "Working with vectors\n\nrt[1]            # first element\n\n[1] 512\n\nrt[2:4]          # elements 2 to 4\n\n[1] 430 601 488\n\nrt[c(1, 5)]      # elements 1 and 5\n\n[1] 512 550\n\n\n\nOperations are element-wise:\n\nrt / 1000        # convert to seconds\n\n[1] 0.512 0.430 0.601 0.488 0.550\n\nrt - mean(rt)    # centre around the mean\n\n[1]  -4.2 -86.2  84.8 -28.2  33.8\n\n\n\n\n\nmean(rt); sd(rt); length(rt); range(rt)\n\n[1] 516.2\n\n\n[1] 64.37546\n\n\n[1] 5\n\n\n[1] 430 601"
+    "objectID": "sessions/02-data-wrangling/slides.html#today",
+    "href": "sessions/02-data-wrangling/slides.html#today",
+    "title": "Data manipulation",
+    "section": "Today",
+    "text": "Today\n\nFunctions to manipulate a data frame;\nSummaries by group;\nImport and clean;\nCombining tables, wide and long format."
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#rstudio-tips-and-help",
-    "href": "sessions/01-reproducibility/slides.html#rstudio-tips-and-help",
-    "title": "Introduction",
-    "section": "RStudio tips and help",
-    "text": "RStudio tips and help\n\nTab: autocomplete names.\nAlt + - / Option + -: insert &lt;-.\nEnvironment pane: the objects you created.\nWrite code in a file, not the console.\n\n\n\n?mean\n\nRead Arguments and Examples. E.g. to ignore NAs in mean(), use na.rm = TRUE."
-  },
-  {
-    "objectID": "sessions/01-reproducibility/slides.html#missing-values",
-    "href": "sessions/01-reproducibility/slides.html#missing-values",
-    "title": "Introduction",
-    "section": "Missing values",
-    "text": "Missing values\nNo response on a trial: NA.\n\nrt &lt;- c(512, 430, NA, 488, 550)\nmean(rt)\n\n[1] NA\n\nmean(rt, na.rm = TRUE)\n\n[1] 495\n\n\n\n\nis.na(rt)\n\n[1] FALSE FALSE  TRUE FALSE FALSE\n\nsum(is.na(rt))\n\n[1] 1\n\nwhich(is.na(rt))\n\n[1] 3"
-  },
-  {
-    "objectID": "sessions/01-reproducibility/slides.html#common-mistakes",
-    "href": "sessions/01-reproducibility/slides.html#common-mistakes",
-    "title": "Introduction",
-    "section": "Common mistakes",
-    "text": "Common mistakes\nR is case-sensitive: RT and rt are different objects. Pick one style (snake_case: mean_rt).\n\n\nmean(c(1, 2, 3)\n\nMissing ): R shows + and waits. Press Esc.\n\n\n\nmaen(rt)\n\nError in maen(rt) : could not find function \"maen\"\n\n\n\nRT\n\nError: object 'RT' not found"
-  },
-  {
-    "objectID": "sessions/01-reproducibility/slides.html#logical-values-and-comparisons",
-    "href": "sessions/01-reproducibility/slides.html#logical-values-and-comparisons",
-    "title": "Introduction",
-    "section": "Logical values and comparisons",
-    "text": "Logical values and comparisons\n\n\n\nOperator\nMeaning\nExample\n\n\n\n\n==, !=\nequal, not equal\n3 == 3 is TRUE\n\n\n&lt;, &gt;, &lt;=, &gt;=\ncomparisons\n5 &gt; 2 is TRUE\n\n\n%in%\nelement in a set\n\"a\" %in% c(\"a\",\"b\") is TRUE\n\n\n&, |, !\nand, or, not\nTRUE & FALSE is FALSE\n\n\n\n\n\nrt &lt;- c(512, 430, 1601, 488, 150)\ntoo_fast_or_slow &lt;- rt &lt; 200 | rt &gt; 1500   # flag implausible trials\nrt[!too_fast_or_slow]                       # keep valid trials\n\n[1] 512 430 488"
-  },
-  {
-    "objectID": "sessions/01-reproducibility/slides.html#factors",
-    "href": "sessions/01-reproducibility/slides.html#factors",
-    "title": "Introduction",
-    "section": "Factors",
-    "text": "Factors\nCategorical variables with fixed levels:\n\ngroup &lt;- factor(c(\"patient\", \"control\", \"control\", \"patient\", \"control\"))\nlevels(group)\n\n[1] \"control\" \"patient\"\n\ntable(group)\n\ngroup\ncontrol patient \n      3       2 \n\n\n\nOrdered categories (a Likert item):\n\nanswer &lt;- c(\"never\", \"always\", \"often\", \"never\")\nfactor(answer, levels = c(\"never\", \"often\", \"always\"), ordered = TRUE)\n\n[1] never  always often  never \nLevels: never &lt; often &lt; always"
-  },
-  {
-    "objectID": "sessions/01-reproducibility/slides.html#data-frames",
-    "href": "sessions/01-reproducibility/slides.html#data-frames",
-    "title": "Introduction",
-    "section": "Data frames",
-    "text": "Data frames\nOne row per observation, one column per variable. Columns can have different types.\n\nsubjects &lt;- data.frame(\n  id    = c(\"S01\", \"S02\", \"S03\", \"S04\"),\n  group = factor(c(\"patient\", \"control\", \"patient\", \"control\")),\n  age   = c(64, 58, 71, 60),\n  score = c(22, 29, 19, 28)\n)\nsubjects\n\n   id   group age score\n1 S01 patient  64    22\n2 S02 control  58    29\n3 S03 patient  71    19\n4 S04 control  60    28"
-  },
-  {
-    "objectID": "sessions/01-reproducibility/slides.html#data-frames-access",
-    "href": "sessions/01-reproducibility/slides.html#data-frames-access",
-    "title": "Introduction",
-    "section": "Data frames: access",
-    "text": "Data frames: access\n\ndim(subjects)\n\n[1] 4 4\n\nstr(subjects)\n\n'data.frame':   4 obs. of  4 variables:\n $ id   : chr  \"S01\" \"S02\" \"S03\" \"S04\"\n $ group: Factor w/ 2 levels \"control\",\"patient\": 2 1 2 1\n $ age  : num  64 58 71 60\n $ score: num  22 29 19 28\n\n\n\n\nsubjects$age                                       # a column\n\n[1] 64 58 71 60\n\nsubjects[2, ]                                      # a row\n\n   id   group age score\n2 S02 control  58    29\n\nsubjects[subjects$age &gt; 60 & subjects$score &lt; 24, ] # rows: over 60 and score below 24\n\n   id   group age score\n1 S01 patient  64    22\n3 S03 patient  71    19"
-  },
-  {
-    "objectID": "sessions/01-reproducibility/slides.html#functions",
-    "href": "sessions/01-reproducibility/slides.html#functions",
-    "title": "Introduction",
-    "section": "Functions",
-    "text": "Functions\n\nname &lt;- function(arg1, arg2 = default) {\n  # body\n  result          # last value is returned\n}\n\n\nThe standard error of the mean, \\(s / \\sqrt{n}\\):\n\nse &lt;- function(x) {\n  sd(x) / sqrt(length(x))\n}\nse(c(512, 430, 601, 488, 550))\n\n[1] 28.78958"
-  },
-  {
-    "objectID": "sessions/01-reproducibility/slides.html#packages",
-    "href": "sessions/01-reproducibility/slides.html#packages",
-    "title": "Introduction",
+    "objectID": "sessions/02-data-wrangling/slides.html#packages",
+    "href": "sessions/02-data-wrangling/slides.html#packages",
+    "title": "Data manipulation",
     "section": "Packages",
-    "text": "Packages\n\ninstall.packages(\"tidyverse\")   # once, in the console\nlibrary(tidyverse)              # at the top of every file that uses it\nhere::here(\"data\")              # package::function(): one function, no library()\n\n\nEnd every report with sessionInfo(): R and package versions."
+    "text": "Packages\nThe tidyverse is a set of packages that share one style. Install it once, load it in every file:\n\ninstall.packages(\"tidyverse\")   # once, in the console\nlibrary(tidyverse)              # at the top of every document\n\n\nTidy data:\n\neach row is an observation;\neach column is a variable;\neach cell is a single value."
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#why-reports-from-code",
-    "href": "sessions/01-reproducibility/slides.html#why-reports-from-code",
-    "title": "Introduction",
-    "section": "Why reports from code?",
-    "text": "Why reports from code?\nThe copy-paste workflow:\n\nrun the script;\ncopy numbers into Word, paste plots;\na reviewer asks to exclude 3 subjects… redo it all by hand.\n\n\nA Quarto document (.qmd) holds text, code and (after rendering) results:\n\nevery number is computed when the document is created;\nnew data? Click Render and everything updates."
+    "objectID": "sessions/02-data-wrangling/slides.html#our-example-penguins",
+    "href": "sessions/02-data-wrangling/slides.html#our-example-penguins",
+    "title": "Data manipulation",
+    "section": "Our example: penguins",
+    "text": "Our example: penguins\nBuilt into R (version 4.5 or later): 344 penguins, 3 species, 3 islands.\n\npenguins\n\n# A tibble: 344 × 8\n  species island   bill_len bill_dep flipper_len body_mass sex    year\n  &lt;fct&gt;   &lt;fct&gt;       &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt; &lt;int&gt;\n1 Adelie  Torgers…     39.1     18.7         181      3750 male   2007\n2 Adelie  Torgers…     39.5     17.4         186      3800 fema…  2007\n3 Adelie  Torgers…     40.3     18           195      3250 fema…  2007\n4 Adelie  Torgers…     NA       NA            NA        NA &lt;NA&gt;   2007\n5 Adelie  Torgers…     36.7     19.3         193      3450 fema…  2007\n# ℹ 339 more rows\n\n\nA tibble is a data frame that prints more nicely: size, column types, first rows."
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#anatomy-of-a-.qmd-file",
-    "href": "sessions/01-reproducibility/slides.html#anatomy-of-a-.qmd-file",
-    "title": "Introduction",
-    "section": "Anatomy of a .qmd file",
-    "text": "Anatomy of a .qmd file\n---\ntitle: \"Sleep deprivation: first look\"\nauthor: \"Your Name\"\nformat: html\n---\n\n## Data\n\n```{r}\n#| echo: false\nsleepstudy &lt;- read.csv(here::here(\"data\", \"sleepstudy.csv\"))\n```\n\nThe dataset contains `{r} nrow(sleepstudy)` measurements.\n\nYAML header between ---: title, author, format (html, pdf, docx).\nMarkdown text: ## Section, **bold**, *italic*, - lists, $\\bar x$.\nCode chunks: run at render; options start with #|.\nInline code: numbers inside sentences, never typed by hand."
+    "objectID": "sessions/02-data-wrangling/slides.html#select-columns",
+    "href": "sessions/02-data-wrangling/slides.html#select-columns",
+    "title": "Data manipulation",
+    "section": "select() columns",
+    "text": "select() columns\n\nselect(penguins, species, sex, body_mass)\n\n# A tibble: 344 × 3\n  species sex    body_mass\n  &lt;fct&gt;   &lt;fct&gt;      &lt;int&gt;\n1 Adelie  male        3750\n2 Adelie  female      3800\n3 Adelie  female      3250\n4 Adelie  &lt;NA&gt;          NA\n5 Adelie  female      3450\n# ℹ 339 more rows\n\n\nIn session 1: penguins[, c(\"species\", \"sex\", \"body_mass\")]."
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#rendering-and-chunk-options",
-    "href": "sessions/01-reproducibility/slides.html#rendering-and-chunk-options",
-    "title": "Introduction",
-    "section": "Rendering and chunk options",
-    "text": "Rendering and chunk options\nRender: Ctrl/Cmd + Shift + K. The file runs from scratch: it must load its own packages and data.\n\n\n\n\n\n\n\n\nOption\nEffect\n\n\n\n\n#| echo: false\nhide code, show results\n\n\n#| eval: false\nshow code, don’t run it\n\n\n#| include: false\nrun, show nothing\n\n\n#| label: fig-rt and #| fig-cap: \"...\"\nnumbered figure, cite with @fig-rt"
+    "objectID": "sessions/02-data-wrangling/slides.html#filter-rows",
+    "href": "sessions/02-data-wrangling/slides.html#filter-rows",
+    "title": "Data manipulation",
+    "section": "filter() rows",
+    "text": "filter() rows\n\nfilter(penguins, sex == \"female\", island == \"Biscoe\")\n\n# A tibble: 80 × 8\n  species island bill_len bill_dep flipper_len body_mass sex     year\n  &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;\n1 Adelie  Biscoe     37.8     18.3         174      3400 female  2007\n2 Adelie  Biscoe     35.9     19.2         189      3800 female  2007\n3 Adelie  Biscoe     35.3     18.9         187      3800 female  2007\n4 Adelie  Biscoe     40.5     17.9         187      3200 female  2007\n5 Adelie  Biscoe     37.9     18.6         172      3150 female  2007\n# ℹ 75 more rows\n\n\nA comma means and. In session 1: penguins[penguins$sex == \"female\" & penguins$island == \"Biscoe\", ]."
   },
   {
-    "objectID": "sessions/01-reproducibility/slides.html#practice",
-    "href": "sessions/01-reproducibility/slides.html#practice",
-    "title": "Introduction",
+    "objectID": "sessions/02-data-wrangling/slides.html#mutate",
+    "href": "sessions/02-data-wrangling/slides.html#mutate",
+    "title": "Data manipulation",
+    "section": "mutate()",
+    "text": "mutate()\nmutate() adds or changes a column:\n\nmutate(penguins, body_mass_kg = body_mass / 1000)\n\n# A tibble: 344 × 9\n  species island   bill_len bill_dep flipper_len body_mass sex    year\n  &lt;fct&gt;   &lt;fct&gt;       &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt; &lt;int&gt;\n1 Adelie  Torgers…     39.1     18.7         181      3750 male   2007\n2 Adelie  Torgers…     39.5     17.4         186      3800 fema…  2007\n3 Adelie  Torgers…     40.3     18           195      3250 fema…  2007\n4 Adelie  Torgers…     NA       NA            NA        NA &lt;NA&gt;   2007\n5 Adelie  Torgers…     36.7     19.3         193      3450 fema…  2007\n# ℹ 339 more rows\n# ℹ 1 more variable: body_mass_kg &lt;dbl&gt;"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#arrange",
+    "href": "sessions/02-data-wrangling/slides.html#arrange",
+    "title": "Data manipulation",
+    "section": "arrange()",
+    "text": "arrange()\narrange() sorts the rows, desc() from largest to smallest:\n\narrange(penguins, desc(body_mass))\n\n# A tibble: 344 × 8\n  species island bill_len bill_dep flipper_len body_mass sex    year\n  &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;     &lt;int&gt; &lt;fct&gt; &lt;int&gt;\n1 Gentoo  Biscoe     49.2     15.2         221      6300 male   2007\n2 Gentoo  Biscoe     59.6     17           230      6050 male   2007\n3 Gentoo  Biscoe     51.1     16.3         220      6000 male   2008\n4 Gentoo  Biscoe     48.8     16.2         222      6000 male   2009\n5 Gentoo  Biscoe     45.2     16.4         223      5950 male   2008\n# ℹ 339 more rows"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#the-pipe",
+    "href": "sessions/02-data-wrangling/slides.html#the-pipe",
+    "title": "Data manipulation",
+    "section": "The pipe |>",
+    "text": "The pipe |&gt;\nRead |&gt; as “and then”. Shortcut: Ctrl/Cmd + Shift + M.\n\npenguins |&gt;\n  filter(sex == \"female\") |&gt;\n  select(species, body_mass) |&gt;\n  mutate(body_mass_kg = body_mass / 1000) |&gt;\n  arrange(body_mass_kg)\n\n# A tibble: 165 × 3\n  species   body_mass body_mass_kg\n  &lt;fct&gt;         &lt;int&gt;        &lt;dbl&gt;\n1 Chinstrap      2700         2.7 \n2 Adelie         2850         2.85\n3 Adelie         2850         2.85\n4 Adelie         2900         2.9 \n5 Adelie         2900         2.9 \n# ℹ 160 more rows\n\n\nx |&gt; f() is the same as f(x). Older code uses %&gt;%: same thing."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#summaries-by-group",
+    "href": "sessions/02-data-wrangling/slides.html#summaries-by-group",
+    "title": "Data manipulation",
+    "section": "Summaries by group",
+    "text": "Summaries by group\nIn session 1 we computed a mean for each group, one group at a time. group_by() and summarise() do all groups at once:\n\npenguins |&gt;\n  group_by(species) |&gt;\n  summarise(\n    n         = n(),\n    mean_mass = mean(body_mass, na.rm = TRUE),\n    sd_mass   = sd(body_mass, na.rm = TRUE)\n  )\n\n# A tibble: 3 × 4\n  species       n mean_mass sd_mass\n  &lt;fct&gt;     &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1 Adelie      152     3701.    459.\n2 Chinstrap    68     3733.    384.\n3 Gentoo      124     5076.    504."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#counting-rows",
+    "href": "sessions/02-data-wrangling/slides.html#counting-rows",
+    "title": "Data manipulation",
+    "section": "Counting rows",
+    "text": "Counting rows\nHow many rows per group: count().\n\ncount(penguins, species, island)\n\n# A tibble: 5 × 3\n  species   island        n\n  &lt;fct&gt;     &lt;fct&gt;     &lt;int&gt;\n1 Adelie    Biscoe       44\n2 Adelie    Dream        56\n3 Adelie    Torgersen    52\n4 Chinstrap Dream        68\n5 Gentoo    Biscoe      124"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#describing-a-numeric-variable-centre",
+    "href": "sessions/02-data-wrangling/slides.html#describing-a-numeric-variable-centre",
+    "title": "Data manipulation",
+    "section": "Describing a numeric variable: centre",
+    "text": "Describing a numeric variable: centre\n\n\n\n\n\n\n\n\nSummary\nWhat it says\nR\n\n\n\n\nmean\nthe average: the sum divided by \\(n\\)\nmean(x)\n\n\nmedian\nthe middle value: half below, half above\nmedian(x)\n\n\npercentile\nthe 25th percentile has 25% of the values below it\nquantile(x, 0.25)\n\n\n\n\nThe median is the 50th percentile. The 25th and 75th are the quartiles.\nMissing values? Add na.rm = TRUE, as before."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#describing-a-numeric-variable-spread",
+    "href": "sessions/02-data-wrangling/slides.html#describing-a-numeric-variable-spread",
+    "title": "Data manipulation",
+    "section": "Describing a numeric variable: spread",
+    "text": "Describing a numeric variable: spread\n\n\n\n\n\n\n\n\nSummary\nWhat it says\nR\n\n\n\n\nrange\nfrom the smallest to the largest value\nmin(x), max(x)\n\n\nmiddle half\nfrom the 25th to the 75th percentile\nquantile(x, c(0.25, 0.75))\n\n\nvariance\nthe average squared distance from the mean\nvar(x)\n\n\nstandard deviation\nthe square root of the variance, in the units of the data\nsd(x)\n\n\n\nThe more the values differ from each other, the larger all four."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#seeing-them",
+    "href": "sessions/02-data-wrangling/slides.html#seeing-them",
+    "title": "Data manipulation",
+    "section": "Seeing them",
+    "text": "Seeing them\n\nBody mass is right-skewed: a tail of heavy penguins pulls the mean above the median."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#summaries-by-group-all-together",
+    "href": "sessions/02-data-wrangling/slides.html#summaries-by-group-all-together",
+    "title": "Data manipulation",
+    "section": "Summaries by group, all together",
+    "text": "Summaries by group, all together\n\npenguins |&gt;\n  group_by(species) |&gt;\n  summarise(\n    mean   = mean(body_mass, na.rm = TRUE),\n    median = median(body_mass, na.rm = TRUE),\n    p25    = quantile(body_mass, 0.25, na.rm = TRUE),\n    p75    = quantile(body_mass, 0.75, na.rm = TRUE),\n    min    = min(body_mass, na.rm = TRUE),\n    max    = max(body_mass, na.rm = TRUE),\n    sd     = sd(body_mass, na.rm = TRUE)\n  )\n\n# A tibble: 3 × 8\n  species    mean median   p25   p75   min   max    sd\n  &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;\n1 Adelie    3701.   3700 3350   4000  2850  4775  459.\n2 Chinstrap 3733.   3700 3488.  3950  2700  4800  384.\n3 Gentoo    5076.   5000 4700   5500  3950  6300  504.\n\n\nThe variance is sd^2: in squared grams, hard to read. Report the sd."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#work-inside-an-r-project",
+    "href": "sessions/02-data-wrangling/slides.html#work-inside-an-r-project",
+    "title": "Data manipulation",
+    "section": "Work inside an R Project",
+    "text": "Work inside an R Project\nBefore reading any data, organise your work in an RStudio Project: a folder that contains your scripts and your data.\n\nFile &gt; New Project... in RStudio creates the project folder.\nMove your data files inside that folder, for example in data/.\n\n\nThe here package builds file paths from the project folder: no C:/Users/... paths, no setwd(). The same code runs on any computer.\n\nlibrary(here)\nhere(\"data\", \"questionnaire.xlsx\")   # &lt;project&gt;/data/questionnaire.xlsx"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#reading-excel-files-read_xlsx",
+    "href": "sessions/02-data-wrangling/slides.html#reading-excel-files-read_xlsx",
+    "title": "Data manipulation",
+    "section": "Reading Excel files: read_xlsx()",
+    "text": "Reading Excel files: read_xlsx()\nExcel files (.xls, .xlsx) need the readxl package:\n\nlibrary(readxl)\nanswers &lt;- read_xlsx(here(\"data\", \"questionnaire.xlsx\"))\n\n\nAn Excel file can contain several sheets. Pick one with the sheet argument:\n\nanswers &lt;- read_xlsx(here(\"data\", \"questionnaire.xlsx\"), sheet = \"day_1\")\n\nFor .csv files: read_csv(), from the tidyverse."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#save-your-results",
+    "href": "sessions/02-data-wrangling/slides.html#save-your-results",
+    "title": "Data manipulation",
+    "section": "Save your results",
+    "text": "Save your results\nUse here() to write files into your project too. Take a result like:\n\nmy_res &lt;- penguins |&gt;\n  group_by(species) |&gt;\n  summarise(mean_bill = mean(bill_len, na.rm = TRUE))\nmy_res\n\n# A tibble: 3 × 2\n  species   mean_bill\n  &lt;fct&gt;         &lt;dbl&gt;\n1 Adelie         38.8\n2 Chinstrap      48.8\n3 Gentoo         47.5"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#save-to-a-file",
+    "href": "sessions/02-data-wrangling/slides.html#save-to-a-file",
+    "title": "Data manipulation",
+    "section": "Save to a file",
+    "text": "Save to a file\nAs an R file, to use again in R:\n\nwrite_rds(my_res, here(\"my_results.rds\"))   # save\nmy_res &lt;- read_rds(here(\"my_results.rds\"))  # load next time\n\nAs an Excel file:\n\nlibrary(writexl)\nwrite_xlsx(my_res, here(\"my_results.xlsx\"))"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#inconsistent-column-names",
+    "href": "sessions/02-data-wrangling/slides.html#inconsistent-column-names",
+    "title": "Data manipulation",
+    "section": "Inconsistent column names",
+    "text": "Inconsistent column names\nReal files rarely have tidy names: spaces, random capitals, dots…\n\nraw &lt;- data.frame(`Participant ID` = c(\"P01\", \"P02\"),\n                  `Age (years)` = c(23, 31),\n                  `Reaction.Time` = c(512, 430),\n                  check.names = FALSE)  # keep the messy names\nraw\n\n  Participant ID Age (years) Reaction.Time\n1            P01          23           512\n2            P02          31           430\n\n\n\nclean_names() from the janitor package makes them all lower case, with _ between words:\n\nlibrary(janitor)\nclean_names(raw)\n\n  participant_id age_years reaction_time\n1            P01        23           512\n2            P02        31           430"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#missing-values",
+    "href": "sessions/02-data-wrangling/slides.html#missing-values",
+    "title": "Data manipulation",
+    "section": "Missing values",
+    "text": "Missing values\nMissing entries are stored as NA:\n\nmy_df\n\n  id    group sleep_hours mood\n1  1  control         7.0    6\n2  2 exercise         6.5   NA\n3  3  control          NA    7\n4  4 exercise         8.0    8\n5  5  control         5.5    4\n\n\n\nFind them with is.na():\n\nis.na(my_df$sleep_hours)\n\n[1] FALSE FALSE  TRUE FALSE FALSE\n\n\nAny operation involving NA returns NA: pass na.rm = TRUE to summaries such as mean()."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#case-study",
+    "href": "sessions/02-data-wrangling/slides.html#case-study",
+    "title": "Data manipulation",
+    "section": "Case study",
+    "text": "Case study\nInformation about 10 women in science who changed the world, spread across three datasets:\n\nprofessions |&gt; select(name)\n\n# A tibble: 10 × 1\n   name              \n   &lt;chr&gt;             \n 1 Ada Lovelace      \n 2 Marie Curie       \n 3 Janaki Ammal      \n 4 Chien-Shiung Wu   \n 5 Katherine Johnson \n 6 Rosalind Franklin \n 7 Vera Rubin        \n 8 Gladys West       \n 9 Flossie Wong-Staal\n10 Jennifer Doudna"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#information-spread-across-three-datasets",
+    "href": "sessions/02-data-wrangling/slides.html#information-spread-across-three-datasets",
+    "title": "Data manipulation",
+    "section": "Information spread across three datasets",
+    "text": "Information spread across three datasets\n\nProfessionsDatesWorks\n\n\n\nprofessions\n\n# A tibble: 10 × 2\n   name               profession                        \n   &lt;chr&gt;              &lt;chr&gt;                             \n 1 Ada Lovelace       Mathematician                     \n 2 Marie Curie        Physicist and Chemist             \n 3 Janaki Ammal       Botanist                          \n 4 Chien-Shiung Wu    Physicist                         \n 5 Katherine Johnson  Mathematician                     \n 6 Rosalind Franklin  Chemist                           \n 7 Vera Rubin         Astronomer                        \n 8 Gladys West        Mathematician                     \n 9 Flossie Wong-Staal Virologist and Molecular Biologist\n10 Jennifer Doudna    Biochemist                        \n\n\n\n\n\ndates\n\n# A tibble: 8 × 3\n  name               birth_year death_year\n  &lt;chr&gt;                   &lt;dbl&gt;      &lt;dbl&gt;\n1 Janaki Ammal             1897       1984\n2 Chien-Shiung Wu          1912       1997\n3 Katherine Johnson        1918       2020\n4 Rosalind Franklin        1920       1958\n5 Vera Rubin               1928       2016\n6 Gladys West              1930         NA\n7 Flossie Wong-Staal       1947         NA\n8 Jennifer Doudna          1964         NA\n\n\n\n\n\nworks\n\n# A tibble: 9 × 2\n  name               known_for                                        \n  &lt;chr&gt;              &lt;chr&gt;                                            \n1 Ada Lovelace       first computer algorithm                         \n2 Marie Curie        theory of radioactivity,  discovery of elements …\n3 Janaki Ammal       hybrid species, biodiversity protection          \n4 Chien-Shiung Wu    confirm and refine theory of radioactive beta de…\n5 Katherine Johnson  calculations of orbital mechanics critical to se…\n6 Vera Rubin         existence of dark matter                         \n7 Gladys West        mathematical modeling of the shape of the Earth …\n8 Flossie Wong-Staal first scientist to clone HIV and create a map of…\n9 Jennifer Doudna    one of the primary developers of CRISPR, a groun…"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#desired-output",
+    "href": "sessions/02-data-wrangling/slides.html#desired-output",
+    "title": "Data manipulation",
+    "section": "Desired output",
+    "text": "Desired output\n\n\n# A tibble: 10 × 5\n   name               profession       birth_year death_year known_for\n   &lt;chr&gt;              &lt;chr&gt;                 &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    \n 1 Ada Lovelace       Mathematician            NA         NA first co…\n 2 Marie Curie        Physicist and C…         NA         NA theory o…\n 3 Janaki Ammal       Botanist               1897       1984 hybrid s…\n 4 Chien-Shiung Wu    Physicist              1912       1997 confirm …\n 5 Katherine Johnson  Mathematician          1918       2020 calculat…\n 6 Rosalind Franklin  Chemist                1920       1958 &lt;NA&gt;     \n 7 Vera Rubin         Astronomer             1928       2016 existenc…\n 8 Gladys West        Mathematician          1930         NA mathemat…\n 9 Flossie Wong-Staal Virologist and …       1947         NA first sc…\n10 Jennifer Doudna    Biochemist             1964         NA one of t…"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#joining-data-frames",
+    "href": "sessions/02-data-wrangling/slides.html#joining-data-frames",
+    "title": "Data manipulation",
+    "section": "Joining data frames",
+    "text": "Joining data frames\n\nleft_join(): all rows from x\nright_join(): all rows from y\nfull_join(): all rows from both x and y\ninner_join(): only rows with a match in both\nsemi_join(): rows from x with a match in y, keeping only x’s columns\nanti_join(): rows from x with no match in y\n\nAnimations on the next slides: tidyexplain, by Garrick Aden-Buie."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#example",
+    "href": "sessions/02-data-wrangling/slides.html#example",
+    "title": "Data manipulation",
+    "section": "Example",
+    "text": "Example\n\n\n\nx\n\n  id value_x\n1  1      x1\n2  2      x2\n3  3      x3\n\n\n\n\ny\n\n  id value_y\n1  1      y1\n2  2      y2\n3  4      y4"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#left_join",
+    "href": "sessions/02-data-wrangling/slides.html#left_join",
+    "title": "Data manipulation",
+    "section": "left_join()",
+    "text": "left_join()\n\n\n\n\n\nx |&gt;\n  left_join(y)\n\n  id value_x value_y\n1  1      x1      y1\n2  2      x2      y2\n3  3      x3    &lt;NA&gt;"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#right_join",
+    "href": "sessions/02-data-wrangling/slides.html#right_join",
+    "title": "Data manipulation",
+    "section": "right_join()",
+    "text": "right_join()\n\n\n\n\n\nx |&gt;\n  right_join(y)\n\n  id value_x value_y\n1  1      x1      y1\n2  2      x2      y2\n3  4    &lt;NA&gt;      y4"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#full_join",
+    "href": "sessions/02-data-wrangling/slides.html#full_join",
+    "title": "Data manipulation",
+    "section": "full_join()",
+    "text": "full_join()\n\n\n\n\n\nx |&gt;\n  full_join(y)\n\n  id value_x value_y\n1  1      x1      y1\n2  2      x2      y2\n3  3      x3    &lt;NA&gt;\n4  4    &lt;NA&gt;      y4"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#inner_join",
+    "href": "sessions/02-data-wrangling/slides.html#inner_join",
+    "title": "Data manipulation",
+    "section": "inner_join()",
+    "text": "inner_join()\n\n\n\n\n\nx |&gt;\n  inner_join(y)\n\n  id value_x value_y\n1  1      x1      y1\n2  2      x2      y2"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#semi_join",
+    "href": "sessions/02-data-wrangling/slides.html#semi_join",
+    "title": "Data manipulation",
+    "section": "semi_join()",
+    "text": "semi_join()\n\n\n\n\n\nx |&gt;\n  semi_join(y)\n\n  id value_x\n1  1      x1\n2  2      x2"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#anti_join",
+    "href": "sessions/02-data-wrangling/slides.html#anti_join",
+    "title": "Data manipulation",
+    "section": "anti_join()",
+    "text": "anti_join()\n\n\n\n\n\nx |&gt;\n  anti_join(y)\n\n  id value_x\n1  3      x3"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#back-to-the-data",
+    "href": "sessions/02-data-wrangling/slides.html#back-to-the-data",
+    "title": "Data manipulation",
+    "section": "Back to the data",
+    "text": "Back to the data\n\nprofessions |&gt;\n  left_join(dates) |&gt;  # join by name\n  left_join(works)     # join by name\n\n# A tibble: 10 × 5\n   name               profession       birth_year death_year known_for\n   &lt;chr&gt;              &lt;chr&gt;                 &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    \n 1 Ada Lovelace       Mathematician            NA         NA first co…\n 2 Marie Curie        Physicist and C…         NA         NA theory o…\n 3 Janaki Ammal       Botanist               1897       1984 hybrid s…\n 4 Chien-Shiung Wu    Physicist              1912       1997 confirm …\n 5 Katherine Johnson  Mathematician          1918       2020 calculat…\n 6 Rosalind Franklin  Chemist                1920       1958 &lt;NA&gt;     \n 7 Vera Rubin         Astronomer             1928       2016 existenc…\n 8 Gladys West        Mathematician          1930         NA mathemat…\n 9 Flossie Wong-Staal Virologist and …       1947         NA first sc…\n10 Jennifer Doudna    Biochemist             1964         NA one of t…"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#case-study-1",
+    "href": "sessions/02-data-wrangling/slides.html#case-study-1",
+    "title": "Data manipulation",
+    "section": "Case study",
+    "text": "Case study\nTwo people rated their mood from 1 to 10 on three days. Person 2 skipped day 3. A second table says which group each person was in.\n\n\n\nmoods\n\n# A tibble: 2 × 4\n     id day_1 day_2 day_3\n  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     1     6     7     8\n2     2     4     5    NA\n\n\n\n\ngroups\n\n# A tibble: 3 × 2\n     id group   \n  &lt;dbl&gt; &lt;chr&gt;   \n1     1 exercise\n2     2 control \n3     3 exercise"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#desired-output-1",
+    "href": "sessions/02-data-wrangling/slides.html#desired-output-1",
+    "title": "Data manipulation",
+    "section": "Desired output",
+    "text": "Desired output\nOne row per person and day, with the group:\n\n\n# A tibble: 6 × 4\n     id day    mood group   \n  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   \n1     1 day_1     6 exercise\n2     1 day_2     7 exercise\n3     1 day_3     8 exercise\n4     2 day_1     4 control \n5     2 day_2     5 control \n6     2 day_3    NA control"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#from-wide-to-long-pivot_longer",
+    "href": "sessions/02-data-wrangling/slides.html#from-wide-to-long-pivot_longer",
+    "title": "Data manipulation",
+    "section": "From wide to long: pivot_longer()",
+    "text": "From wide to long: pivot_longer()\n\n\n# A tibble: 2 × 4\n     id day_1 day_2 day_3\n  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     1     6     7     8\n2     2     4     5    NA\n\n\n\nratings &lt;- moods |&gt;\n  pivot_longer(\n    cols = c(day_1, day_2, day_3),  # columns to pivot\n    names_to = \"day\",               # their names go to day\n    values_to = \"mood\"              # their values go to mood\n  )\nratings\n\n# A tibble: 6 × 3\n     id day    mood\n  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;\n1     1 day_1     6\n2     1 day_2     7\n3     1 day_3     8\n4     2 day_1     4\n5     2 day_2     5\n6     2 day_3    NA"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#from-long-to-wide-pivot_wider",
+    "href": "sessions/02-data-wrangling/slides.html#from-long-to-wide-pivot_wider",
+    "title": "Data manipulation",
+    "section": "From long to wide: pivot_wider()",
+    "text": "From long to wide: pivot_wider()\nGoing back from ratings to moods:\n\nratings |&gt;\n  pivot_wider(\n    names_from = \"day\",    # column names\n    values_from = \"mood\"   # values in columns\n  )\n\n# A tibble: 2 × 4\n     id day_1 day_2 day_3\n  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     1     6     7     8\n2     2     4     5    NA"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#putting-it-together",
+    "href": "sessions/02-data-wrangling/slides.html#putting-it-together",
+    "title": "Data manipulation",
+    "section": "Putting it together",
+    "text": "Putting it together\n\nratings |&gt;\n  left_join(groups)\n\n# A tibble: 6 × 4\n     id day    mood group   \n  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   \n1     1 day_1     6 exercise\n2     1 day_2     7 exercise\n3     1 day_3     8 exercise\n4     2 day_1     4 control \n5     2 day_2     5 control \n6     2 day_3    NA control \n\n\nPerson 3 has no ratings, so left_join() leaves them out."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#summary-one-table",
+    "href": "sessions/02-data-wrangling/slides.html#summary-one-table",
+    "title": "Data manipulation",
+    "section": "Summary: one table",
+    "text": "Summary: one table\n\n\n\n\n\n\n\nTask\nFunction\n\n\n\n\nkeep columns (and rename them)\nselect()\n\n\nkeep rows\nfilter()\n\n\nadd or change a column\nmutate()\n\n\nsort rows\narrange()\n\n\nsummary per group\ngroup_by() and summarise(), count()\n\n\ncentre and spread\nmean(), median(), quantile(), min(), max(), var(), sd()"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#summary-files-and-cleaning",
+    "href": "sessions/02-data-wrangling/slides.html#summary-files-and-cleaning",
+    "title": "Data manipulation",
+    "section": "Summary: files and cleaning",
+    "text": "Summary: files and cleaning\n\n\n\nTask\nFunction\n\n\n\n\npaths from the project folder\nhere()\n\n\nread a file\nread_csv(), read_xlsx()\n\n\nsave a result\nwrite_rds(), write_xlsx()\n\n\ntidy column names\nclean_names()\n\n\nfind missing values\nis.na()"
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#summary-combining-and-reshaping",
+    "href": "sessions/02-data-wrangling/slides.html#summary-combining-and-reshaping",
+    "title": "Data manipulation",
+    "section": "Summary: combining and reshaping",
+    "text": "Summary: combining and reshaping\n\n\n\n\n\n\n\nTask\nFunction\n\n\n\n\ncombine two tables\nleft_join(), right_join(), full_join(), inner_join()\n\n\nkeep or drop rows by a match\nsemi_join(), anti_join()\n\n\nreshape\npivot_longer(), pivot_wider()\n\n\n\nCheatsheets: dplyr, tidyr."
+  },
+  {
+    "objectID": "sessions/02-data-wrangling/slides.html#practice",
+    "href": "sessions/02-data-wrangling/slides.html#practice",
+    "title": "Data manipulation",
     "section": "Practice",
-    "text": "Practice\n\nConnect to https://giuseppealfonzetti.github.io/s4ns-A/\nClick on the “Exercises” link corresponding to today class."
+    "text": "Practice\n\nConnect to https://giuseppealfonzetti.github.io/s4ns-A/\nClick on the “Exercises” link for today’s class."
   }
 ]
